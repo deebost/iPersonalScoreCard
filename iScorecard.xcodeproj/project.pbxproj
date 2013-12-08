@@ -21,6 +21,10 @@
 		91FC3AD918519F90000D0F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FC3ABB18519F90000D0F87 /* UIKit.framework */; };
 		91FC3AE118519F90000D0F87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3ADF18519F90000D0F87 /* InfoPlist.strings */; };
 		91FC3AE318519F90000D0F87 /* iScorecardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3AE218519F90000D0F87 /* iScorecardTests.m */; };
+		91FC3AEE1851A0F8000D0F87 /* DBMissLeftOrRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3AED1851A0F8000D0F87 /* DBMissLeftOrRightViewController.m */; };
+		91FC3AF11851A124000D0F87 /* DBFairwayHitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3AF01851A124000D0F87 /* DBFairwayHitViewController.m */; };
+		91FC3AF41851A13E000D0F87 /* DBGreenHitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3AF31851A13E000D0F87 /* DBGreenHitViewController.m */; };
+		91FC3AF71851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3AF61851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,14 @@
 		91FC3ADE18519F90000D0F87 /* iScorecardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iScorecardTests-Info.plist"; sourceTree = "<group>"; };
 		91FC3AE018519F90000D0F87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		91FC3AE218519F90000D0F87 /* iScorecardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iScorecardTests.m; sourceTree = "<group>"; };
+		91FC3AEC1851A0F8000D0F87 /* DBMissLeftOrRightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMissLeftOrRightViewController.h; sourceTree = "<group>"; };
+		91FC3AED1851A0F8000D0F87 /* DBMissLeftOrRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMissLeftOrRightViewController.m; sourceTree = "<group>"; };
+		91FC3AEF1851A124000D0F87 /* DBFairwayHitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBFairwayHitViewController.h; sourceTree = "<group>"; };
+		91FC3AF01851A124000D0F87 /* DBFairwayHitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBFairwayHitViewController.m; sourceTree = "<group>"; };
+		91FC3AF21851A13E000D0F87 /* DBGreenHitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBGreenHitViewController.h; sourceTree = "<group>"; };
+		91FC3AF31851A13E000D0F87 /* DBGreenHitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBGreenHitViewController.m; sourceTree = "<group>"; };
+		91FC3AF51851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOnPuttingSurfaceViewController.h; sourceTree = "<group>"; };
+		91FC3AF61851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOnPuttingSurfaceViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +127,14 @@
 				91FC3AC618519F90000D0F87 /* DBAppDelegate.h */,
 				91FC3AC718519F90000D0F87 /* DBAppDelegate.m */,
 				91FC3AC918519F90000D0F87 /* Main.storyboard */,
+				91FC3AF51851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.h */,
+				91FC3AF61851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.m */,
+				91FC3AEC1851A0F8000D0F87 /* DBMissLeftOrRightViewController.h */,
+				91FC3AED1851A0F8000D0F87 /* DBMissLeftOrRightViewController.m */,
+				91FC3AEF1851A124000D0F87 /* DBFairwayHitViewController.h */,
+				91FC3AF01851A124000D0F87 /* DBFairwayHitViewController.m */,
+				91FC3AF21851A13E000D0F87 /* DBGreenHitViewController.h */,
+				91FC3AF31851A13E000D0F87 /* DBGreenHitViewController.m */,
 				91FC3ACC18519F90000D0F87 /* DBViewController.h */,
 				91FC3ACD18519F90000D0F87 /* DBViewController.m */,
 				91FC3ACF18519F90000D0F87 /* Images.xcassets */,
@@ -251,8 +271,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				91FC3AC818519F90000D0F87 /* DBAppDelegate.m in Sources */,
+				91FC3AEE1851A0F8000D0F87 /* DBMissLeftOrRightViewController.m in Sources */,
+				91FC3AF11851A124000D0F87 /* DBFairwayHitViewController.m in Sources */,
 				91FC3ACE18519F90000D0F87 /* DBViewController.m in Sources */,
+				91FC3AF41851A13E000D0F87 /* DBGreenHitViewController.m in Sources */,
 				91FC3AC418519F90000D0F87 /* main.m in Sources */,
+				91FC3AF71851A3C5000D0F87 /* DBOnPuttingSurfaceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

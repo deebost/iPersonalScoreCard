@@ -8,7 +8,10 @@
 
 #import "DBViewController.h"
 
-@interface DBViewController ()
+@interface DBViewController () {
+    
+}
+- (IBAction)onTapStartRound:(id)sender;
 
 @end
 
@@ -20,10 +23,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onTapStartRound:(id)sender {
+}
 @end
