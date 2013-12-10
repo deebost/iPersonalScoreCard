@@ -21,10 +21,13 @@
 @property(nonatomic) BOOL finalMissLeft;
 @property(nonatomic) BOOL sandSavePossibility;
 @property(nonatomic) BOOL successfulSandSave;
-@property(nonatomic) BOOL scrambleOpportunity;
+@property(nonatomic) BOOL failedScramble;
+@property(nonatomic) BOOL successfulScramble;
 @property(nonatomic) int totalPutts;
 @property (nonatomic) int holeNumber;
 @property (strong, nonatomic) NSString *currentParOfHole;
+@property(nonatomic) BOOL failedBogeyScramble;
+@property(nonatomic) BOOL successfulBogeyScramble;
 
 
 

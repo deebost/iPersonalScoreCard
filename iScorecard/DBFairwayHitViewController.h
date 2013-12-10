@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DBOnPuttingSurfaceViewController.h"
 
-@interface DBFairwayHitViewController : UIViewController <UIAlertViewDelegate>
+@interface DBFairwayHitViewController : UIViewController <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property(nonatomic) int shotTotalForHole;
 @property(nonatomic) BOOL fairwayHit;
 @property(nonatomic) BOOL missRight;

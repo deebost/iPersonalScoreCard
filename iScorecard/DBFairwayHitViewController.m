@@ -11,6 +11,7 @@
 #import "DBMissLeftOrRightViewController.h"
 #import "DBOnPuttingSurfaceViewController.h"
 #import <Parse/Parse.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface DBFairwayHitViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *fairwayHitButton;
@@ -155,6 +156,30 @@ NSString *title;
 
 }
 
+- (void) videoCaptureStuff {
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage * image = [info objectForKey:UIImagePickerControllerEditedImage];
+
+    // You have the image. You can use this to present the image in the next view like you require in `#3`.
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)dismissAlert:(UIAlertView *)message {
+    [message dismissWithClickedButtonIndex:0 animated:YES];
+}
+
 - (IBAction)onTapHoleInOne:(id)sender {
     UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
                                                          message:@"Are you serious? Ace?"
@@ -162,6 +187,7 @@ NSString *title;
                                                otherButtonTitles:@"Hole in One!", nil];
 
     [areYouSure show];
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -174,6 +200,10 @@ NSString *title;
         _shotTotalForHole++;
         _holeNumber++;
         NSLog(@"hmmm %i",_shotTotalForHole);
+        UIAlertView *sayCheese = [[UIAlertView alloc] initWithTitle:@"Say Cheese!" message:@"Take a picture of your ball in the hole!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [sayCheese show];
+            [self performSelector:@selector(dismissAlert:) withObject:sayCheese afterDelay:3.5f];
+        [self videoCaptureStuff];
         _holeNumberLabel.text = [NSString stringWithFormat:@"%i",_holeNumber];
 
         // save hole in one to parse / plist update hole number;
