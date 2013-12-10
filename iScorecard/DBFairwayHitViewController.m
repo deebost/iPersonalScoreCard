@@ -10,76 +10,174 @@
 #import "DBGreenHitViewController.h"
 #import "DBMissLeftOrRightViewController.h"
 #import "DBOnPuttingSurfaceViewController.h"
+#import <Parse/Parse.h>
 
 @interface DBFairwayHitViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *fairwayHitButton;
 @property (weak, nonatomic) IBOutlet UIButton *missRightButton;
 @property (weak, nonatomic) IBOutlet UIButton *missLeftButton;
+@property (weak, nonatomic) IBOutlet UILabel *parLabel;
+@property (weak, nonatomic) IBOutlet UILabel *holeNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yourStrokesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *missShortButton;
+@property (weak, nonatomic) IBOutlet UIButton *holeInOneButton;
+- (IBAction)onTapHoleInOne:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *greenHitButton;
+
+
 
 
 @end
-
+NSString *title;
 
 @implementation DBFairwayHitViewController
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)sender {
     DBMissLeftOrRightViewController *missRightVC = (DBMissLeftOrRightViewController *) segue.destinationViewController;
-                DBGreenHitViewController *greenHitVC = (DBGreenHitViewController *) segue.destinationViewController;
+    DBGreenHitViewController *greenHitVC = (DBGreenHitViewController *) segue.destinationViewController;
+    DBOnPuttingSurfaceViewController *onFeltVc = (DBOnPuttingSurfaceViewController *) segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"greenHitSegue"]) {
 
-        if ([segue.identifier isEqualToString:@"driveToFairway"]) {
-            if (_isFirstSwing == YES) {
-                _fairwayHit = YES;
-                _shotTotalForHole++;
-                _isFirstSwing = NO;
-                
-            } else {
-                _shotTotalForHole++;
-            }
+        _fairwayHit = YES;
+        _shotTotalForHole++;
+        greenHitVC.gir = _greensInRegulation;
+        greenHitVC.totalShotsTaken = _shotTotalForHole;
+        greenHitVC.greenHitFairwayHit = _fairwayHit;
+        greenHitVC.holeNumber = _holeNumber;
+        greenHitVC.currentParOfHole = _currentParOfhole;
 
-            greenHitVC.gir = NO;
-            greenHitVC.totalShotsTaken = _shotTotalForHole;
-        } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
-            if (_isFirstSwing == YES) {
-                _missLeft = YES;
-                _shotTotalForHole++;
-                _isFirstSwing = NO;
-            } else {
-                _shotTotalForHole++;
-            }
+
+    } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
+
+
+            _missLeft = YES;
+            _shotTotalForHole++;
+
 
             missRightVC.totalShotsTaken = _shotTotalForHole;
             missRightVC.possibilityForSandSave = NO;
             missRightVC.numberOfPenaltyStrokes = 0;
             missRightVC.chanceToScramble = NO;
+            missRightVC.missLeftVCMissLeft = _missLeft;
+            missRightVC.missLeftVCFairwayHit = _fairwayHit;
+            missRightVC.holeNumber = _holeNumber;
+            missRightVC.currentParOfHole = _currentParOfhole;
 
         } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
-            if (_isFirstSwing == YES) {
-                _isFirstSwing = NO;
-                _missRight = YES;
-                _shotTotalForHole++;
-            } else {
-                _shotTotalForHole++;
-            }
+            _missRight = YES;
+            _shotTotalForHole++;
+
             missRightVC.totalShotsTaken = _shotTotalForHole;
             missRightVC.possibilityForSandSave = NO;
             missRightVC.numberOfPenaltyStrokes = 0;
             missRightVC.chanceToScramble = NO;
+            missRightVC.missLeftVCMissRight = _missRight;
+            missRightVC.missLeftVCFairwayHit = _fairwayHit;
+            missRightVC.holeNumber = _holeNumber;
+            missRightVC.currentParOfHole = _currentParOfhole;
+        } else if ([segue.identifier isEqualToString:@"onfeltVC"]) {
+
+            _shotTotalForHole++;
+            onFeltVc.gir = YES;
+            onFeltVc.holeNumber = _holeNumber;
+            onFeltVc.totalShotsTaken = _shotTotalForHole;
+            
         }
-        NSLog(@"total for hole = %i fairway hit = %hhd  miss right = %hhd miss left = %hhd", _shotTotalForHole, _fairwayHit, _missRight, _missLeft);
+        NSLog(@"total for hole = %i fairway hit = %hhd  miss right = %hhd miss left = %hhd hole number = %i par = %@", _shotTotalForHole, _fairwayHit, _missRight, _missLeft, _holeNumber, _currentParOfhole);
 }
+
 
 - (void)viewDidLoad
 {
+
+
     [super viewDidLoad];
-    _isFirstSwing = YES;
-    
+    _tempString = [NSString stringWithFormat:@"%i",_shotTotalForHole];
+    _missShortButton.hidden = YES;
+    _holeInOneButton.hidden = YES;
+        _holeNumber = 1;
+
+
+    _yourStrokesLabel.text = _tempString;
+    [self findHolePar];
+
+
+    }
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+
+    _fairwayHit = NO;
+        _shotTotalForHole = 0;
+
+    _holeNumberLabel.text = [NSString stringWithFormat:@"%i", _holeNumber];
+
+
 }
 
+- (void) parForHoleLogic {
+    if (_parLabel.text.integerValue == 3) {
+        _fairwayHitButton.hidden= YES;
+        _greenHitButton.hidden = NO;
+        _missShortButton.hidden = NO;
+        _holeInOneButton.hidden = NO;
+    } else {
+        _greenHitButton.hidden = YES;
+        _fairwayHitButton.hidden = NO;
+        _missShortButton.hidden = YES;
+        _holeInOneButton.hidden = YES;
+
+    }
+}
+
+- (void) findHolePar {
+
+    PFQuery *query = [PFQuery queryWithClassName:@"Golf_Course"];
+    PFObject *currentParOfHole = [query getObjectWithId:@"1PtbUKOuaU"];
+    _parLabel.text = [currentParOfHole objectForKey:@"parForHole"];
+    _currentParOfhole = _parLabel.text;
+    [self parForHoleLogic];
+
+
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)unwindToMainMenu:(UIStoryboardSegue*)segue {
+    DBOnPuttingSurfaceViewController *numberOfHole = segue.sourceViewController;
+    _holeNumber = numberOfHole.holeNumber;
+    _holeNumber++;
 
+}
+
+- (IBAction)onTapHoleInOne:(id)sender {
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                         message:@"Are you serious? Ace?"
+                                                        delegate:self cancelButtonTitle:@"No, I lied"
+                                               otherButtonTitles:@"Hole in One!", nil];
+
+    [areYouSure show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"No, I lied"]) {
+        _shotTotalForHole = 0;
+
+    } else if ([title isEqualToString:@"Hole in One!"]) {
+        _shotTotalForHole++;
+        _holeNumber++;
+        NSLog(@"hmmm %i",_shotTotalForHole);
+        _holeNumberLabel.text = [NSString stringWithFormat:@"%i",_holeNumber];
+
+        // save hole in one to parse / plist update hole number;
+
+    }
+}
 @end

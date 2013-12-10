@@ -16,23 +16,43 @@
 @property (weak, nonatomic) IBOutlet UIButton *missRightButton;
 @property (weak, nonatomic) IBOutlet UIButton *missLeftButton;
 @property (weak, nonatomic) IBOutlet UIButton *missShortButton;
+@property (weak, nonatomic) IBOutlet UILabel *shotTotalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *parLabel;
+@property (weak, nonatomic) IBOutlet UILabel *holeNumberLabel;
 
 
 @end
-
+NSString *tempString;
 @implementation DBGreenHitViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+        [_parLabel setText:_currentParOfHole];
 
 }
 
+
+
+- (void)viewWillAppear:(BOOL)animated{
+
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)holeParLogic {
+
+    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken == 1) {
+        _gir = YES;
+    }else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken == 2) {
+        _gir = YES;
+    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken == 3) {
+        _gir = YES;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -43,18 +63,45 @@
         _totalShotsTaken++;
 
         missHitVC.totalShotsTaken = _totalShotsTaken;
+        missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
+        missHitVC.missLeftVCMissLeft = _greenHitMissLeft;
+        missHitVC.missLeftVCMissRight = _greenHitMissRight;
+        missHitVC.holeNumber = _holeNumber;
+        missHitVC.currentParOfHole = _currentParOfHole;
+        missHitVC.possibilityForSandSave = _sandSaveOpportunity;
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
         _totalShotsTaken++;
         missHitVC.totalShotsTaken = _totalShotsTaken;
+        missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
+        missHitVC.missLeftVCMissLeft = _greenHitMissLeft;
+        missHitVC.missLeftVCMissRight = _greenHitMissRight;
+        missHitVC.holeNumber = _holeNumber;
+        missHitVC.currentParOfHole = _currentParOfHole;
+        missHitVC.possibilityForSandSave = _sandSaveOpportunity;
     } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
         _totalShotsTaken++;
         missHitVC.totalShotsTaken = _totalShotsTaken;
+        missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
+        missHitVC.missLeftVCMissLeft = _greenHitMissLeft;
+        missHitVC.missLeftVCMissRight = _greenHitMissRight;
+        missHitVC.holeNumber = _holeNumber;
+        missHitVC.possibilityForSandSave = _sandSaveOpportunity;
+        missHitVC.currentParOfHole = _currentParOfHole;
     } else if ([segue.identifier isEqualToString:@"greenHitSegue"]) {
-        _totalShotsTaken++;
-        _gir = YES;
+                _totalShotsTaken++;
+                [self holeParLogic];
+
+        feltVC.gir = _gir;
+        feltVC.totalPenaltyStrokes = _penaltyStrokes;
+        feltVC.sandSavePossibility = _sandSaveOpportunity;
         feltVC.totalShotsTaken = _totalShotsTaken;
+        feltVC.finalFairwayHit = _greenHitFairwayHit;
+        feltVC.finalMissLeft = _greenHitMissLeft;
+        feltVC.finalMissRight = _greenHitMissRight;
+        feltVC.holeNumber = _holeNumber;
+        feltVC.currentParOfHole = _currentParOfHole;
     }
-    NSLog(@"total shot = %i  gir = %hhd", _totalShotsTaken, _gir);
+    NSLog(@"total shot = %i  gir = %hhd fairway hit = %hhd par of hole = %@ hole number = %i", _totalShotsTaken, _gir, _greenHitFairwayHit, _currentParOfHole, _holeNumber);
 }
 
 @end

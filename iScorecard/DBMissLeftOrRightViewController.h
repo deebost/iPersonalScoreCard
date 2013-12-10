@@ -15,5 +15,11 @@
 @property (nonatomic) BOOL chanceToScramble;
 @property (nonatomic) int numberOfPenaltyStrokes;
 @property (nonatomic) BOOL missGIR;
+@property (nonatomic) BOOL missLeftVCMissRight;
+@property (nonatomic) BOOL missLeftVCMissLeft;
+@property (nonatomic) BOOL missLeftVCFairwayHit;
+@property (nonatomic) int holeNumber;
+@property (strong, nonatomic) NSString *currentParOfHole;
+
 
 @end

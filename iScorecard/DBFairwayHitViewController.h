@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBOnPuttingSurfaceViewController.h"
 
-@interface DBFairwayHitViewController : UIViewController
+@interface DBFairwayHitViewController : UIViewController <UIAlertViewDelegate>
 @property(nonatomic) int shotTotalForHole;
-@property(nonatomic) BOOL isFirstSwing;
 @property(nonatomic) BOOL fairwayHit;
 @property(nonatomic) BOOL missRight;
 @property(nonatomic) BOOL missLeft;
 @property(nonatomic) BOOL greensInRegulation;
+@property(nonatomic) int holeNumber;
+@property(nonatomic, strong) NSString *currentParOfhole;
+@property (strong, nonatomic) NSString *tempString;
+@property (strong, nonatomic) NSMutableArray *currentHoleInfos;
 
 @end
 

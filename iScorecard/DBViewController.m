@@ -7,7 +7,7 @@
 //
 
 #import "DBViewController.h"
-
+#import <Parse/Parse.h>
 @interface DBViewController () {
     
 }
@@ -21,8 +21,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-}
 
+}
 
 - (void)didReceiveMemoryWarning
 {

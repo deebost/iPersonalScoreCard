@@ -13,6 +13,14 @@
 @property (nonatomic) int totalShotsTaken;
 @property (nonatomic) BOOL gir;
 @property (nonatomic) BOOL sandSaveOpportunity;
+@property (nonatomic) BOOL greenHitFairwayHit;
+@property (nonatomic) BOOL greenHitMissLeft;
+@property (nonatomic) BOOL greenHitMissRight;
+@property (nonatomic) int holeNumber;
+@property (strong, nonatomic) NSString *currentParOfHole;
+@property (nonatomic) int penaltyStrokes;
+
+
 
 
 @end

@@ -38,9 +38,17 @@
     }
 
     greenHitVC.totalShotsTaken = _totalShotsTaken + _numberOfPenaltyStrokes;
+    greenHitVC.penaltyStrokes = _numberOfPenaltyStrokes;
     greenHitVC.gir = _missGIR;
     greenHitVC.sandSaveOpportunity = _possibilityForSandSave;
-    NSLog(@"shot takes =%i sand save = %hhd", _totalShotsTaken, _possibilityForSandSave);
+    greenHitVC.greenHitFairwayHit = _missLeftVCFairwayHit;
+    greenHitVC.greenHitMissLeft = _missLeftVCMissLeft;
+    greenHitVC.greenHitMissRight = _missLeftVCMissRight;
+    greenHitVC.currentParOfHole = _currentParOfHole;
+    greenHitVC.holeNumber = _holeNumber;
+
+
+    NSLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);
 }
 - (void)viewDidLoad
 {

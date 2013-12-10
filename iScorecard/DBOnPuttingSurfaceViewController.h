@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBOnPuttingSurfaceViewController : UIViewController
+
+
+@interface DBOnPuttingSurfaceViewController : UIViewController <UIAlertViewDelegate>
 
 @property (nonatomic) int totalShotsTaken;
 @property (nonatomic) BOOL gir;
-@property (nonatomic) BOOL sandSave;
 @property (nonatomic) BOOL scramble;
 @property (nonatomic) int totalPenaltyStrokes;
 @property(nonatomic) BOOL finalFairwayHit;
@@ -21,5 +22,10 @@
 @property(nonatomic) BOOL sandSavePossibility;
 @property(nonatomic) BOOL successfulSandSave;
 @property(nonatomic) BOOL scrambleOpportunity;
+@property(nonatomic) int totalPutts;
+@property (nonatomic) int holeNumber;
+@property (strong, nonatomic) NSString *currentParOfHole;
+
+
 
 @end
