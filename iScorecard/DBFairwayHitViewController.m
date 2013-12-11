@@ -134,14 +134,14 @@ NSString *title;
 }
 
 - (void) findHolePar {
-
     PFQuery *query = [PFQuery queryWithClassName:@"Golf_Course"];
-    PFObject *currentParOfHole = [query getObjectWithId:@"1PtbUKOuaU"];
-    _parLabel.text = [currentParOfHole objectForKey:@"parForHole"];
-    _currentParOfhole = _parLabel.text;
+    [query getObjectInBackgroundWithId:@"1PtbUKOuaU" block:^(PFObject *currentParOfHole, NSError *error) {
+        _parLabel.text = [currentParOfHole objectForKey:@"parForHole"];
+        _currentParOfhole = _parLabel.text;
+        // Do something with the returned PFObject in the gameScore variable.
+
+    }];
     [self parForHoleLogic];
-
-
 
 }
 - (void)didReceiveMemoryWarning
@@ -168,6 +168,7 @@ NSString *title;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = [info objectForKey:UIImagePickerControllerEditedImage];
 
@@ -181,6 +182,10 @@ NSString *title;
 }
 
 - (IBAction)onTapHoleInOne:(id)sender {
+
+/// need to save to parse! and update hole info just like onfeltvc
+
+    _greensInRegulation = YES;
     UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
                                                          message:@"Are you serious? Ace?"
                                                         delegate:self cancelButtonTitle:@"No, I lied"
@@ -195,6 +200,7 @@ NSString *title;
     title = [alertView buttonTitleAtIndex:buttonIndex];
     if ([title isEqualToString:@"No, I lied"]) {
         _shotTotalForHole = 0;
+        _greensInRegulation = NO;
 
     } else if ([title isEqualToString:@"Hole in One!"]) {
         _shotTotalForHole++;

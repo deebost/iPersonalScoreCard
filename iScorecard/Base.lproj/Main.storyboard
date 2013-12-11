@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oqv-8R-VrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1282" y="-1135"/>
+            <point key="canvasLocation" x="-1234" y="-1145"/>
         </scene>
         <!--On Putting Surface View Controller-->
         <scene sceneID="tsx-1a-E2c">
@@ -369,6 +369,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="9uM-LF-dEh"/>
         <segue reference="aeG-aI-zNM"/>
-        <segue reference="ekz-zk-d3p"/>
+        <segue reference="zi0-26-qCt"/>
     </inferredMetricsTieBreakers>
 </document>
