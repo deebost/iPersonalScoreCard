@@ -144,6 +144,7 @@ NSString *title;
     NSMutableDictionary *loadDict = [[NSMutableDictionary alloc] initWithDictionary:[loadParOfCurrentHole objectForKey:[NSString stringWithFormat:@"%@", currentCourseName]]];
     NSString *parString = [NSString stringWithFormat:@"%@", [loadDict objectForKey:[NSString stringWithFormat:@"hole%i", _holeNumber]]];
     _parLabel.text = parString;
+    _currentParOfhole = parString;
 
     [self parForHoleLogic];
 
@@ -169,6 +170,7 @@ NSString *title;
     if ([segue.identifier isEqualToString:@"Yes"]) {
         _holeNumber = numberHole.holeNumber;
         _holeNumber = numberOfHole.holeNumber;
+        
         _holeNumber++;
     } else if ([segue.identifier isEqualToString:@"No"]) {
         

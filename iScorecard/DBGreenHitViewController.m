@@ -10,6 +10,7 @@
 #import "DBMissLeftOrRightViewController.h"
 #import "DBFairwayHitViewController.h"
 #import "DBOnPuttingSurfaceViewController.h"
+#import "DBGolfLogic.h"
 
 @interface DBGreenHitViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *greenHitButton;
@@ -27,6 +28,8 @@
 NSString *tempString;
 NSString *title;
 UIAlertView *inTheHole ;
+DBGolfLogic *golfLogic;
+BOOL successSandSave;
 @implementation DBGreenHitViewController
 
 - (void)viewDidLoad
@@ -43,7 +46,10 @@ UIAlertView *inTheHole ;
 - (void)viewWillAppear:(BOOL)animated{
 
 
+
 }
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -60,6 +66,7 @@ UIAlertView *inTheHole ;
         _gir = YES;
     }
 }
+
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -112,17 +119,25 @@ UIAlertView *inTheHole ;
         feltVC.currentParOfHole = _currentParOfHole;
         feltVC.roundDate = _roundDate;
     }
-    NSLog(@"total shot = %i  gir = %hhd fairway hit = %hhd par of hole = %@ hole number = %i currentParOfHole = %@", _totalShotsTaken, _gir, _greenHitFairwayHit, _currentParOfHole, _holeNumber, _currentParOfHole);
+    NSLog(@"total shot = %i  gir = %hhd fairway hit = %hhd par of hole = %@ hole number = %i success sand save = %hhd", _totalShotsTaken, _gir, _greenHitFairwayHit, _currentParOfHole, _holeNumber, _successfulSandSaveWORKPLEASE);
 }
 
 - (void) saveHoleStatsToDictionary {
+
     NSNumber *totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
-    NSNumber *gir = [[NSNumber alloc] initWithBool:_gir];
-    NSNumber *fairwayHits = [[NSNumber alloc] initWithBool:_greenHitFairwayHit];
-    NSNumber *missLeft = [[NSNumber alloc] initWithBool:_greenHitMissLeft];
-    NSNumber *missRight = [[NSNumber alloc] initWithBool:_greenHitMissRight];
-    NSNumber *saveSandOpportunity = [[NSNumber alloc] initWithBool:_sandSaveOpportunity];
+    NSNumber *gir = [[NSNumber alloc] initWithInt:_gir];
+    NSNumber *fairwayHits = [[NSNumber alloc] initWithInt:_greenHitFairwayHit];
+    NSNumber *missLeft = [[NSNumber alloc] initWithInt:_greenHitMissLeft];
+    NSNumber *missRight = [[NSNumber alloc] initWithInt:_greenHitMissRight];
+    NSNumber *saveSandOpportunity = [[NSNumber alloc] initWithInt:_sandSaveOpportunity];
     NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
+    NSNumber *succesSandSave = [[NSNumber alloc] initWithInt:_successfulSandSaveWORKPLEASE];
+    NSNumber *puts = [[NSNumber alloc] initWithInt:_totalPutts];
+    NSNumber *scrambleYES = [[NSNumber alloc] initWithInt:_successScramble];
+        NSNumber *scrambleNO = [[NSNumber alloc] initWithInt:_failScramble];
+        NSNumber *bogeyScrambleYES = [[NSNumber alloc] initWithInt:_successBogeyScramble];
+        NSNumber *bogeyScrambleNO = [[NSNumber alloc] initWithInt:_failBogeyScrabmle];
+
 
 
     NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
@@ -133,6 +148,12 @@ UIAlertView *inTheHole ;
     [holeDict setObject:missRight forKey:@"missRight"];
     [holeDict setObject:missLeft forKey:@"missLeft"];
     [holeDict setObject:saveSandOpportunity forKey:@"saveSandOpportunity"];
+    [holeDict setObject:succesSandSave forKey:@"successSandSave"];
+    [holeDict setObject:puts forKey:@"totalPutts"];
+    [holeDict setObject:scrambleYES forKey:@"scrambleYes"];
+        [holeDict setObject:scrambleNO forKey:@"scrambleNo"];
+    [holeDict setObject:bogeyScrambleYES forKey:@"bogeyScrambleYes"];
+    [holeDict setObject:bogeyScrambleNO forKey:@"bogeyScrambleNo"];
 
 
 
@@ -149,19 +170,44 @@ UIAlertView *inTheHole ;
     
 }
 
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 
     title = [alertView buttonTitleAtIndex:buttonIndex];
 
     if ([title isEqualToString:@"No"]) {
-        
+        _totalShotsTaken--;
 
 
     } else if ([title isEqualToString:@"Yes"])  {
-        _gir = YES;
-        _totalShotsTaken++;
+
+        int par = _currentParOfHole.integerValue;
+
+        golfLogic = [[DBGolfLogic alloc] init];
+        NSNumber *tempShotsTake = [[NSNumber alloc] initWithInt:_totalShotsTaken];
+        NSNumber *tempPar = [[NSNumber alloc] initWithInt:par];
+
+//        _gir = YES;
+        _totalPutts = 0;
+        [golfLogic sandSaveLogicTwo:tempPar totalShotsTaken:tempShotsTake sandSaveIsPossible:_sandSaveOpportunity];
+        [golfLogic scrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+        [golfLogic failScrambleLogic:tempPar totalShots:tempShotsTake greenInreg:_gir];
+        [golfLogic bogeyscrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+        [golfLogic failedBogeyScrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+        [golfLogic totalShotsToFigureOutGir:tempShotsTake par:tempPar];
+        _gir = golfLogic.greenInRegulation;
+        _failBogeyScrabmle = golfLogic.bogeyScrambleNO;
+        _successBogeyScramble = golfLogic.bogeyScrambleYES;
+        _failScramble = golfLogic.scrambleNO;
+        _successfulSandSaveWORKPLEASE = golfLogic.successOnSandSave;
+        _successScramble = golfLogic.scrambleYES;
+    
+//        golfLogic.successOnSandSave = _successfulSandSaveWORKPLEASE;
+        NSLog(@"%hhd",_successfulSandSaveWORKPLEASE);
         [self saveHoleStatsToDictionary];
+
+        // save to plist
                 [self performSegueWithIdentifier:@"yesHoleExit" sender:self];
     }
 }
@@ -175,6 +221,7 @@ UIAlertView *inTheHole ;
                                                        delegate:self
                                               cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes", nil];
+            _totalShotsTaken++;
 
     [inTheHole show];
 

@@ -13,7 +13,7 @@
 @interface DBOnPuttingSurfaceViewController ()
 
 @end
-
+NSString *parOfHole;
 @implementation DBOnPuttingSurfaceViewController
 
 
@@ -33,6 +33,7 @@
         _successfulSandSave = YES;
     }
 }
+
 
 - (void) scramblingLogic {
     if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken <= 3) {
@@ -76,16 +77,16 @@
 
 - (void) saveHoleStatsToDictionary {
     NSNumber *totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
-    NSNumber *gir = [[NSNumber alloc] initWithBool:_gir];
-    NSNumber *fairwayHits = [[NSNumber alloc] initWithBool:_finalFairwayHit];
-    NSNumber *missLeft = [[NSNumber alloc] initWithBool:_finalMissLeft];
-    NSNumber *missRight = [[NSNumber alloc] initWithBool:_finalMissRight];
-    NSNumber *successfulSandSave = [[NSNumber alloc] initWithBool:_successfulSandSave];
-    NSNumber *sandSavePossibility = [[NSNumber alloc] initWithBool:_sandSavePossibility];
-    NSNumber *successfulScramble = [[NSNumber alloc] initWithBool:_successfulScramble];
-    NSNumber *failedScramble = [[NSNumber alloc] initWithBool:_failedScramble];
-    NSNumber *successfulBogeyScramble = [[NSNumber alloc] initWithBool:_successfulBogeyScramble];
-    NSNumber *failedBogeyScramble = [[NSNumber alloc] initWithBool:_failedBogeyScramble];
+    NSNumber *gir = [[NSNumber alloc] initWithInt:_gir];
+    NSNumber *fairwayHits = [[NSNumber alloc] initWithInt:_finalFairwayHit];
+    NSNumber *missLeft = [[NSNumber alloc] initWithInt:_finalMissLeft];
+    NSNumber *missRight = [[NSNumber alloc] initWithInt:_finalMissRight];
+    NSNumber *successfulSandSave = [[NSNumber alloc] initWithInt:_successfulSandSave];
+    NSNumber *sandSavePossibility = [[NSNumber alloc] initWithInt:_sandSavePossibility];
+    NSNumber *successfulScramble = [[NSNumber alloc] initWithInt:_successfulScramble];
+    NSNumber *failedScramble = [[NSNumber alloc] initWithInt:_failedScramble];
+    NSNumber *successfulBogeyScramble = [[NSNumber alloc] initWithInt:_successfulBogeyScramble];
+    NSNumber *failedBogeyScramble = [[NSNumber alloc] initWithInt:_failedBogeyScramble];
     NSString *currentPar = [NSString stringWithFormat:@"%@", _currentParOfHole];
     NSNumber *totalPenaltyStroke = [[NSNumber alloc] initWithInt:_totalPenaltyStrokes];
     NSNumber *totalPutts = [[NSNumber alloc] initWithInt:_totalPutts];
