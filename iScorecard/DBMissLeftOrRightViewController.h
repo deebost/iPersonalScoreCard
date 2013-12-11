@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL missLeftVCFairwayHit;
 @property (nonatomic) int holeNumber;
 @property (strong, nonatomic) NSString *currentParOfHole;
+@property (strong, nonatomic) NSString *roundDate;
 
 
 @end

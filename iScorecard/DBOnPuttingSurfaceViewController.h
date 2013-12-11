@@ -28,7 +28,7 @@
 @property (strong, nonatomic) NSString *currentParOfHole;
 @property(nonatomic) BOOL failedBogeyScramble;
 @property(nonatomic) BOOL successfulBogeyScramble;
-
+@property (strong, nonatomic) NSString *roundDate;
 
 
 @end

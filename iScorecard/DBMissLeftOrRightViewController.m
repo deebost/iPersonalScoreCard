@@ -46,6 +46,7 @@
     greenHitVC.greenHitMissRight = _missLeftVCMissRight;
     greenHitVC.currentParOfHole = _currentParOfHole;
     greenHitVC.holeNumber = _holeNumber;
+    greenHitVC.roundDate = _roundDate;
 
 
     NSLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);

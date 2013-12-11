@@ -24,12 +24,12 @@
 }
 
 - (void) sandSaveLogic {
-    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken == 3 && _sandSavePossibility == YES ) {
+    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken <= 3 && _sandSavePossibility == YES ) {
         _successfulSandSave = YES;
 
-    } else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken == 4 && _sandSavePossibility == YES ){
+    } else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken <= 4 && _sandSavePossibility == YES ){
         _successfulSandSave = YES;
-    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken == 5 && _sandSavePossibility == YES) {
+    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken <= 5 && _sandSavePossibility == YES) {
         _successfulSandSave = YES;
     }
 }
@@ -73,6 +73,49 @@
         _failedBogeyScramble = YES;
     }
 }
+
+- (void) saveHoleStatsToDictionary {
+    NSNumber *totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
+    NSNumber *gir = [[NSNumber alloc] initWithBool:_gir];
+    NSNumber *fairwayHits = [[NSNumber alloc] initWithBool:_finalFairwayHit];
+    NSNumber *missLeft = [[NSNumber alloc] initWithBool:_finalMissLeft];
+    NSNumber *missRight = [[NSNumber alloc] initWithBool:_finalMissRight];
+    NSNumber *successfulSandSave = [[NSNumber alloc] initWithBool:_successfulSandSave];
+    NSNumber *sandSavePossibility = [[NSNumber alloc] initWithBool:_sandSavePossibility];
+    NSNumber *successfulScramble = [[NSNumber alloc] initWithBool:_successfulScramble];
+    NSNumber *failedScramble = [[NSNumber alloc] initWithBool:_failedScramble];
+    NSNumber *successfulBogeyScramble = [[NSNumber alloc] initWithBool:_successfulBogeyScramble];
+    NSNumber *failedBogeyScramble = [[NSNumber alloc] initWithBool:_failedBogeyScramble];
+    NSString *currentPar = [NSString stringWithFormat:@"%@", _currentParOfHole];
+    NSNumber *totalPenaltyStroke = [[NSNumber alloc] initWithInt:_totalPenaltyStrokes];
+    NSNumber *totalPutts = [[NSNumber alloc] initWithInt:_totalPutts];
+    NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
+//    NSString *dateOfRound = _roundDate;
+
+
+    NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
+//    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
+    [holeDict setObject:gir forKey:@"gir"];
+    [holeDict setObject:totalShots forKey:@"totalShots"];
+    [holeDict setObject:fairwayHits forKey:@"fairwayHits"];
+    [holeDict setObject:missRight forKey:@"missRight"];
+    [holeDict setObject:missLeft forKey:@"missLeft"];
+    [holeDict setObject:successfulSandSave forKey:@"successfulSandSave"];
+    [holeDict setObject:sandSavePossibility forKey:@"sandSavePossivility"];
+    [holeDict setObject:successfulScramble forKey:@"successfulScramble"];
+    [holeDict setObject:failedScramble forKey:@"failedScramble"];
+    [holeDict setObject:successfulBogeyScramble forKey:@"successfulBogeyScramble"];
+    [holeDict setObject:failedBogeyScramble forKey:@"failedBogeyScramble"];
+    [holeDict setObject:currentPar forKey:@"currentPar"];
+    [holeDict setObject:totalPenaltyStroke forKey:@"totalPenaltyStrokes"];
+    [holeDict setObject:totalPutts forKey:@"totalPutts"];
+    [holeDict setObject:holeNumber forKey:@"holeNumber"];
+
+    NSUserDefaults *saveHole = [NSUserDefaults standardUserDefaults];
+    [saveHole setObject:holeDict forKey:[NSString stringWithFormat:@"hole%iInfo",_holeNumber]];
+    [saveHole synchronize];
+
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (_holeNumber <= 17) {
         _totalShotsTaken++;
@@ -91,7 +134,8 @@
                                                  cancelButtonTitle:nil
                                                  otherButtonTitles:@"save", nil];
     [holeFinished show];
-        [self saveToParse];
+        [self saveHoleStatsToDictionary];
+//        [self saveToParse];
     NSLog(@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility);
     }
      else if (_holeNumber == 18) {
@@ -136,9 +180,10 @@
 
     if (buttonIndex == 0) {
         /// save to parse / plist!
+        
 
     } else  {
-        [self saveToParse];
+//        [self saveToParse];
 
     }
 

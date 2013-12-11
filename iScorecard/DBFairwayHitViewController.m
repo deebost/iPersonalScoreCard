@@ -46,6 +46,7 @@ NSString *title;
         greenHitVC.greenHitFairwayHit = _fairwayHit;
         greenHitVC.holeNumber = _holeNumber;
         greenHitVC.currentParOfHole = _currentParOfhole;
+        greenHitVC.roundDate = _roundDate;
 
 
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
@@ -63,6 +64,7 @@ NSString *title;
             missRightVC.missLeftVCFairwayHit = _fairwayHit;
             missRightVC.holeNumber = _holeNumber;
             missRightVC.currentParOfHole = _currentParOfhole;
+        missRightVC.roundDate = _roundDate;
 
         } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
             _missRight = YES;
@@ -76,12 +78,14 @@ NSString *title;
             missRightVC.missLeftVCFairwayHit = _fairwayHit;
             missRightVC.holeNumber = _holeNumber;
             missRightVC.currentParOfHole = _currentParOfhole;
-        } else if ([segue.identifier isEqualToString:@"onfeltVC"]) {
-
+            missRightVC.roundDate = _roundDate;
+        } else if ([segue.identifier isEqualToString:@"onFeltVC"]) {
             _shotTotalForHole++;
             onFeltVc.gir = YES;
             onFeltVc.holeNumber = _holeNumber;
             onFeltVc.totalShotsTaken = _shotTotalForHole;
+            onFeltVc.currentParOfHole = _currentParOfhole;
+            onFeltVc.roundDate = _roundDate;
             
         }
         NSLog(@"total for hole = %i fairway hit = %hhd  miss right = %hhd miss left = %hhd hole number = %i par = %@", _shotTotalForHole, _fairwayHit, _missRight, _missLeft, _holeNumber, _currentParOfhole);
@@ -93,14 +97,14 @@ NSString *title;
 
 
     [super viewDidLoad];
-    _tempString = [NSString stringWithFormat:@"%i",_shotTotalForHole];
+
     _missShortButton.hidden = YES;
     _holeInOneButton.hidden = YES;
+    [self figureOutDateOfRoundStart];
         _holeNumber = 1;
 
 
-    _yourStrokesLabel.text = _tempString;
-    [self findHolePar];
+
 
 
     }
@@ -108,13 +112,12 @@ NSString *title;
 
 
 - (void)viewWillAppear:(BOOL)animated {
-
-
-    _fairwayHit = NO;
-        _shotTotalForHole = 0;
-
+                _shotTotalForHole = 0;
     _holeNumberLabel.text = [NSString stringWithFormat:@"%i", _holeNumber];
-
+    _tempString = [NSString stringWithFormat:@"%i",_shotTotalForHole];
+    _yourStrokesLabel.text = _tempString;
+    _fairwayHit = NO;
+        [self findHolePar];
 
 }
 
@@ -134,15 +137,26 @@ NSString *title;
 }
 
 - (void) findHolePar {
-    PFQuery *query = [PFQuery queryWithClassName:@"Golf_Course"];
-    [query getObjectInBackgroundWithId:@"1PtbUKOuaU" block:^(PFObject *currentParOfHole, NSError *error) {
-        _parLabel.text = [currentParOfHole objectForKey:@"parForHole"];
-        _currentParOfhole = _parLabel.text;
-        // Do something with the returned PFObject in the gameScore variable.
+    NSUserDefaults *loadParOfCurrentHole = [NSUserDefaults standardUserDefaults];
+    NSString *currentCourseName = [loadParOfCurrentHole objectForKey:@"courseName"];
 
-    }];
+
+    NSMutableDictionary *loadDict = [[NSMutableDictionary alloc] initWithDictionary:[loadParOfCurrentHole objectForKey:[NSString stringWithFormat:@"%@", currentCourseName]]];
+    NSString *parString = [NSString stringWithFormat:@"%@", [loadDict objectForKey:[NSString stringWithFormat:@"hole%i", _holeNumber]]];
+    _parLabel.text = parString;
+
     [self parForHoleLogic];
 
+}
+
+- (void) figureOutDateOfRoundStart {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/yyyy hh:mma"];
+    NSString *dateString = [dateFormat stringFromDate:today];
+
+    dateString = _roundDate;
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -151,8 +165,18 @@ NSString *title;
 }
 - (IBAction)unwindToMainMenu:(UIStoryboardSegue*)segue {
     DBOnPuttingSurfaceViewController *numberOfHole = segue.sourceViewController;
-    _holeNumber = numberOfHole.holeNumber;
-    _holeNumber++;
+    DBGreenHitViewController *numberHole = segue.sourceViewController;
+    if ([segue.identifier isEqualToString:@"Yes"]) {
+        _holeNumber = numberHole.holeNumber;
+        _holeNumber = numberOfHole.holeNumber;
+        _holeNumber++;
+    } else if ([segue.identifier isEqualToString:@"No"]) {
+        
+    } else {
+        _holeNumber = numberOfHole.holeNumber;
+        _holeNumber= numberHole.holeNumber;
+        _holeNumber++;
+    }
 
 }
 
@@ -168,6 +192,9 @@ NSString *title;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -206,7 +233,11 @@ NSString *title;
         _shotTotalForHole++;
         _holeNumber++;
         NSLog(@"hmmm %i",_shotTotalForHole);
-        UIAlertView *sayCheese = [[UIAlertView alloc] initWithTitle:@"Say Cheese!" message:@"Take a picture of your ball in the hole!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        UIAlertView *sayCheese = [[UIAlertView alloc] initWithTitle:@"Say Cheese!"
+                                                            message:@"Take a picture of your ball in the hole!"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:nil, nil];
         [sayCheese show];
             [self performSelector:@selector(dismissAlert:) withObject:sayCheese afterDelay:3.5f];
         [self videoCaptureStuff];

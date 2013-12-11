@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DBFairwayHitViewController.h"
 
-@interface DBGreenHitViewController : UIViewController
+@interface DBGreenHitViewController : UIViewController <UIAlertViewDelegate>
 @property (nonatomic) int totalShotsTaken;
 @property (nonatomic) BOOL gir;
 @property (nonatomic) BOOL sandSaveOpportunity;
@@ -19,6 +19,7 @@
 @property (nonatomic) int holeNumber;
 @property (strong, nonatomic) NSString *currentParOfHole;
 @property (nonatomic) int penaltyStrokes;
+@property (strong, nonatomic) NSString *roundDate;
 
 
 

@@ -69,6 +69,7 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
+            key = ""
             value = ""
             isEnabled = "NO">
          </EnvironmentVariable>
