@@ -140,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oqv-8R-VrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1234" y="-1145"/>
+            <point key="canvasLocation" x="-932" y="-809"/>
         </scene>
         <!--On Putting Surface View Controller-->
         <scene sceneID="tsx-1a-E2c">
@@ -625,6 +625,9 @@
                                 <state key="normal" title="Miss Short">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="yuS-Ne-oK0" kind="modal" identifier="missShort" modalTransitionStyle="coverVertical" id="dTu-bb-q7K"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jx4-lc-taE">
                                 <rect key="frame" x="123" y="55" width="85" height="30"/>
@@ -768,8 +771,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="T4r-wk-ZQL"/>
+        <segue reference="dTu-bb-q7K"/>
         <segue reference="ekz-zk-d3p"/>
-        <segue reference="LgP-8B-rOS"/>
-        <segue reference="twv-zD-FRv"/>
+        <segue reference="9uM-LF-dEh"/>
     </inferredMetricsTieBreakers>
 </document>

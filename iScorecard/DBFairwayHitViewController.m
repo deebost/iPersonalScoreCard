@@ -87,6 +87,18 @@ NSString *title;
             onFeltVc.currentParOfHole = _currentParOfhole;
             onFeltVc.roundDate = _roundDate;
             
+        } else if ([segue.identifier isEqualToString:@"missShort"]) {
+            _shotTotalForHole++;
+            missRightVC.totalShotsTaken = _shotTotalForHole;
+            missRightVC.possibilityForSandSave = NO;
+            missRightVC.numberOfPenaltyStrokes = 0;
+            missRightVC.chanceToScramble = NO;
+            missRightVC.missLeftVCMissRight = _missRight;
+            missRightVC.missLeftVCFairwayHit = _fairwayHit;
+            missRightVC.holeNumber = _holeNumber;
+            missRightVC.currentParOfHole = _currentParOfhole;
+            missRightVC.roundDate = _roundDate;
+
         }
         NSLog(@"total for hole = %i fairway hit = %hhd  miss right = %hhd miss left = %hhd hole number = %i par = %@", _shotTotalForHole, _fairwayHit, _missRight, _missLeft, _holeNumber, _currentParOfhole);
 }
