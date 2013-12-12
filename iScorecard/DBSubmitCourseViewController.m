@@ -7,6 +7,7 @@
 //
 
 #import "DBSubmitCourseViewController.h"
+#import <Parse/Parse.h>
 
 @interface DBSubmitCourseViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *courseNameTextField;
@@ -34,6 +35,27 @@
 
 @end
 
+NSString *courseName;
+NSString *totalParForCourse;
+NSString *holeOne;
+NSString *holeTwo;
+NSString *holeThree;
+NSString *holeFour;
+NSString *holeFive;
+NSString *holeSix;
+NSString *holeSeven;
+NSString *holeEight;
+NSString *holeNine;
+NSString *holeTen;
+NSString *holeEleven;
+NSString *holeTwelve;
+NSString *holeThirteen;
+NSString *holeFourteen;
+NSString *holeFifthteen;
+NSString *holeSixteen;
+NSString *holeSeventeen;
+NSString *holeEightteen;
+
 @implementation DBSubmitCourseViewController
 
 
@@ -48,31 +70,61 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void) saveToParse {
+    PFObject *myScore = [PFObject objectWithClassName:@"Courses"];
+    NSMutableArray *currentCourseInfo = [[NSMutableArray alloc] init];
+    [currentCourseInfo addObject:courseName];
+        [currentCourseInfo addObject:totalParForCourse];
+        [currentCourseInfo addObject:holeOne];
+    [currentCourseInfo addObject:holeTwo];
+        [currentCourseInfo addObject:holeThree];
+        [currentCourseInfo addObject:holeFour];
+        [currentCourseInfo addObject:holeFive];
+        [currentCourseInfo addObject:holeSix];
+    [currentCourseInfo addObject:holeSeven];
+        [currentCourseInfo addObject:holeEight];
+        [currentCourseInfo addObject:holeNine];
+        [currentCourseInfo addObject:holeTen];
+        [currentCourseInfo addObject:holeEleven];
+    [currentCourseInfo addObject:holeTwelve];
+        [currentCourseInfo addObject:holeThirteen];
+        [currentCourseInfo addObject:holeFourteen];
+        [currentCourseInfo addObject:holeFifthteen];
+        [currentCourseInfo addObject:holeSixteen];
+        [currentCourseInfo addObject:holeSeventeen];
+        [currentCourseInfo addObject:holeEightteen];
+    myScore[@"courseInfo"] = currentCourseInfo;
+    myScore[@"courseName"] = courseName;
+    myScore[@"coursePar"] = totalParForCourse;
+    [myScore saveInBackground];
+}
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
 }
 
+
 - (IBAction)onTouchSaveCourse:(id)sender {
-    NSString *courseName = _courseNameTextField.text;
-    NSString *totalParForCourse = _totalParTextField.text;
-    NSString *holeOne = _hole1TextField.text;
-    NSString *holeTwo = _hole2TextField.text;
-    NSString *holeThree = _hole3TextField.text;
-    NSString *holeFour = _hole4TextField.text;
-    NSString *holeFive = _hole5TextField.text;
-    NSString *holeSix = _hole6TextField.text;
-    NSString *holeSeven = _hole7TextField.text;
-    NSString *holeEight = _hole8TextField.text;
-    NSString *holeNine = _hole9TextField.text;
-    NSString *holeTen = _hole10TextField.text;
-    NSString *holeEleven = _hole11TextField.text;
-    NSString *holeTwelve = _hole12TextField.text;
-    NSString *holeThirteen = _hole13TextField.text;
-    NSString *holeFourteen = _hole14TextField.text;
-    NSString *holeFifthteen = _hole15TextField.text;
-    NSString *holeSixteen = _hole16TextField.text;
-    NSString *holeSeventeen = _hole17TextField.text;
-    NSString *holeEightteen = _hole18TextField.text;
+    courseName = _courseNameTextField.text;
+    totalParForCourse = _totalParTextField.text;
+    holeOne = _hole1TextField.text;
+    holeTwo = _hole2TextField.text;
+    holeThree = _hole3TextField.text;
+    holeFour = _hole4TextField.text;
+    holeFive = _hole5TextField.text;
+    holeSix = _hole6TextField.text;
+    holeSeven = _hole7TextField.text;
+    holeEight = _hole8TextField.text;
+    holeNine = _hole9TextField.text;
+    holeTen = _hole10TextField.text;
+    holeEleven = _hole11TextField.text;
+    holeTwelve = _hole12TextField.text;
+    holeThirteen = _hole13TextField.text;
+    holeFourteen = _hole14TextField.text;
+    holeFifthteen = _hole15TextField.text;
+    holeSixteen = _hole16TextField.text;
+    holeSeventeen = _hole17TextField.text;
+    holeEightteen = _hole18TextField.text;
     NSMutableDictionary *courseInfo = [[NSMutableDictionary alloc] init];
     [courseInfo setObject:holeOne forKey:@"hole1"];
     [courseInfo setObject:holeTwo forKey:@"hole2"];
@@ -95,9 +147,12 @@
     [courseInfo setObject:courseName forKey:@"courseName"];
     [courseInfo setObject:totalParForCourse forKey:@"totalParForCourse"];
 
+
     NSUserDefaults *saveCourseInfo = [NSUserDefaults standardUserDefaults];
     [saveCourseInfo setObject:courseInfo forKey:[NSString stringWithFormat:@"%@",courseName]];
     [saveCourseInfo setObject:courseName forKey:@"courseName"];
+    [self saveToParse];
+
 
     UIAlertView *startRoundAlert = [[UIAlertView alloc] initWithTitle:@"Start Round"
                                                               message:@"Round will begin! "
@@ -106,5 +161,6 @@
                                                     otherButtonTitles:@"Start Round", nil];
     [startRoundAlert show];
     [saveCourseInfo synchronize];
+    
 }
 @end

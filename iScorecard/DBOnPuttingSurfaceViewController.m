@@ -14,6 +14,25 @@
 
 @end
 NSString *parOfHole;
+NSNumber *totalShots;
+NSNumber *gir;
+NSNumber *fairwayHits;
+NSNumber *missLeft;
+NSNumber *missRight;
+NSNumber *successfulSandSave;
+NSNumber *sandSavePossibility;
+NSNumber *successfulScramble;
+NSNumber *failedScramble;
+NSNumber *successfulBogeyScramble;
+NSNumber *failedBogeyScramble;
+NSString *currentPar;
+NSNumber *totalPenaltyStroke;
+NSNumber *totalPutts;
+NSNumber *holeNumber;
+//    NSString *dateOfRound = _roundDate;
+
+
+NSMutableDictionary *holeDict;
 @implementation DBOnPuttingSurfaceViewController
 
 
@@ -21,6 +40,10 @@ NSString *parOfHole;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self allocAndInnitStats];
 }
 
 - (void) sandSaveLogic {
@@ -75,26 +98,30 @@ NSString *parOfHole;
     }
 }
 
+- (void)allocAndInnitStats {
+    totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
+    gir = [[NSNumber alloc] initWithInt:_gir];
+    fairwayHits = [[NSNumber alloc] initWithInt:_finalFairwayHit];
+    missLeft = [[NSNumber alloc] initWithInt:_finalMissLeft];
+    missRight = [[NSNumber alloc] initWithInt:_finalMissRight];
+    successfulSandSave = [[NSNumber alloc] initWithInt:_successfulSandSave];
+    sandSavePossibility = [[NSNumber alloc] initWithInt:_sandSavePossibility];
+    successfulScramble = [[NSNumber alloc] initWithInt:_successfulScramble];
+    failedScramble = [[NSNumber alloc] initWithInt:_failedScramble];
+    successfulBogeyScramble = [[NSNumber alloc] initWithInt:_successfulBogeyScramble];
+    failedBogeyScramble = [[NSNumber alloc] initWithInt:_failedBogeyScramble];
+    currentPar = [NSString stringWithFormat:@"%@", _currentParOfHole];
+    totalPenaltyStroke = [[NSNumber alloc] initWithInt:_totalPenaltyStrokes];
+    totalPutts = [[NSNumber alloc] initWithInt:_totalPutts];
+    holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
+    //    NSString *dateOfRound = _roundDate;
+
+
+    holeDict = [[NSMutableDictionary alloc] init];
+}
+
 - (void) saveHoleStatsToDictionary {
-    NSNumber *totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
-    NSNumber *gir = [[NSNumber alloc] initWithInt:_gir];
-    NSNumber *fairwayHits = [[NSNumber alloc] initWithInt:_finalFairwayHit];
-    NSNumber *missLeft = [[NSNumber alloc] initWithInt:_finalMissLeft];
-    NSNumber *missRight = [[NSNumber alloc] initWithInt:_finalMissRight];
-    NSNumber *successfulSandSave = [[NSNumber alloc] initWithInt:_successfulSandSave];
-    NSNumber *sandSavePossibility = [[NSNumber alloc] initWithInt:_sandSavePossibility];
-    NSNumber *successfulScramble = [[NSNumber alloc] initWithInt:_successfulScramble];
-    NSNumber *failedScramble = [[NSNumber alloc] initWithInt:_failedScramble];
-    NSNumber *successfulBogeyScramble = [[NSNumber alloc] initWithInt:_successfulBogeyScramble];
-    NSNumber *failedBogeyScramble = [[NSNumber alloc] initWithInt:_failedBogeyScramble];
-    NSString *currentPar = [NSString stringWithFormat:@"%@", _currentParOfHole];
-    NSNumber *totalPenaltyStroke = [[NSNumber alloc] initWithInt:_totalPenaltyStrokes];
-    NSNumber *totalPutts = [[NSNumber alloc] initWithInt:_totalPutts];
-    NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
-//    NSString *dateOfRound = _roundDate;
 
-
-    NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
 //    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
     [holeDict setObject:gir forKey:@"gir"];
     [holeDict setObject:totalShots forKey:@"totalShots"];
@@ -117,6 +144,7 @@ NSString *parOfHole;
     [saveHole synchronize];
 
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (_holeNumber <= 17) {
         _totalShotsTaken++;
@@ -159,6 +187,7 @@ NSString *parOfHole;
 
 - (void) saveToParse {
     PFObject *myScore = [PFObject objectWithClassName:@"MyScores"];
+    myScore[@"courseName"] =
     myScore[@"shotTotal"] = [NSString stringWithFormat:@"%i", _totalShotsTaken];
     myScore[@"totalScramble"] = [NSString stringWithFormat:@"%hhd", _successfulScramble];
     myScore[@"totalFailedScramble"] = [NSString stringWithFormat:@"%hhd", _failedScramble];

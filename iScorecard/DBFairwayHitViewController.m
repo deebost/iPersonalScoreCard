@@ -236,6 +236,31 @@ NSString *title;
 
 }
 
+- (void) saveHoleStatsToDictionary {
+    NSNumber *totalShots = [[NSNumber alloc] initWithInt:_shotTotalForHole];
+    NSNumber *gir = [[NSNumber alloc] initWithInt:_greensInRegulation];
+    NSNumber *fairwayHits = [[NSNumber alloc] initWithInt:_fairwayHit];
+    NSNumber *missLeft = [[NSNumber alloc] initWithInt:_missLeft];
+    NSNumber *missRight = [[NSNumber alloc] initWithInt:_missRight];
+    NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
+
+    NSNumber *puts = [[NSNumber alloc] initWithInt:_totalPutts];
+    NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
+    //    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
+    [holeDict setObject:gir forKey:@"gir"];
+    [holeDict setObject:totalShots forKey:@"totalShots"];
+    [holeDict setObject:fairwayHits forKey:@"fairwayHits"];
+    [holeDict setObject:missRight forKey:@"missRight"];
+    [holeDict setObject:missLeft forKey:@"missLeft"];
+    [holeDict setObject:puts forKey:@"totalPutts"];
+    [holeDict setObject:holeNumber forKey:@"holeNumber"];
+
+    NSUserDefaults *saveHole = [NSUserDefaults standardUserDefaults];
+    [saveHole setObject:holeDict forKey:[NSString stringWithFormat:@"hole%iInfo",_holeNumber]];
+    [saveHole synchronize];
+    
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     title = [alertView buttonTitleAtIndex:buttonIndex];
@@ -245,13 +270,16 @@ NSString *title;
 
     } else if ([title isEqualToString:@"Hole in One!"]) {
         _shotTotalForHole++;
+        _totalPutts = 0;
         _holeNumber++;
+        _greensInRegulation = YES;
         NSLog(@"hmmm %i",_shotTotalForHole);
         UIAlertView *sayCheese = [[UIAlertView alloc] initWithTitle:@"Say Cheese!"
                                                             message:@"Take a picture of your ball in the hole!"
                                                            delegate:self
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:nil, nil];
+        [self saveHoleStatsToDictionary];
         [sayCheese show];
             [self performSelector:@selector(dismissAlert:) withObject:sayCheese afterDelay:3.5f];
         [self videoCaptureStuff];

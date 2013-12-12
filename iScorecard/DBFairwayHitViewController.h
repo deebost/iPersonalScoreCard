@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSString *tempString;
 @property (strong, nonatomic) NSMutableArray *currentHoleInfos;
 @property (strong, nonatomic) NSString *roundDate;
+@property (nonatomic) int totalPutts;
 @end
 
