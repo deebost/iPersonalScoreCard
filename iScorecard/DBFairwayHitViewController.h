@@ -11,6 +11,7 @@
 
 @interface DBFairwayHitViewController : UIViewController <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property(strong, nonatomic) NSMutableDictionary *passedCourseInfoDict;
+@property(strong, nonatomic) NSString *passedCourseName;
 @property(nonatomic) int shotTotalForHole;
 @property(nonatomic) BOOL fairwayHit;
 @property(nonatomic) BOOL missRight;

@@ -58,7 +58,15 @@ BOOL savedCourse;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     savedCourse = YES;
-        [self queryForCourses];
+//    [self queryForCourses];
+    [self findCoursesOnPlist];
+}
+
+- (void)findCoursesOnPlist {
+    NSUserDefaults *loadCourseToPlist = [NSUserDefaults standardUserDefaults];
+    NSArray *allKeys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
+    NSLog(@"%@",allKeys);
+    [loadCourseToPlist synchronize];
 }
 
 - (void) queryForCourses {
@@ -74,6 +82,7 @@ BOOL savedCourse;
             NSString *parString = [tempDic objectForKey:@"coursePar"];
             NSString *cityString = [tempDic objectForKey:@"courseCity"];
             NSString *stateString = [tempDic objectForKey:@"courseState"];
+            NSString *user = [tempDic objectForKey:@"user"];
             [totalCourseNames addObject:nameString];
             [totalParsForCourse addObject:parString];
             [courseStates addObject:stateString];
@@ -91,9 +100,10 @@ BOOL savedCourse;
 
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSString *selectedCourse = [[[self.tableView cellForRowAtIndexPath: indexPath] textLabel] text];
     DBFairwayHitViewController *controller = segue.destinationViewController;
-    controller.passedCourseInfoDict = _infoForSelectedCourse;
+    controller.passedCourseName = [NSString stringWithFormat:@"%@", selectedCourse];
     controller.newCourseOrOldCourse = savedCourse;
 
 
@@ -138,8 +148,8 @@ BOOL savedCourse;
     NSString *stateValue = [courseStates objectAtIndex:indexPath.row];
     NSString *cityValue = [courseCitys objectAtIndex:indexPath.row];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", courseNameValue, cityValue];
-    cell.detailTextLabel.text = totalParValue;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", courseNameValue];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@ Total Par = %@", cityValue, stateValue, totalParValue];
 
 
     

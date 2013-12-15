@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DBSubmitCourseViewController : UIViewController <UIAlertViewDelegate>
+@property (strong, nonatomic) NSString *passCourseName;
 
 @end

@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *fairwayHitButton;
 @property (weak, nonatomic) IBOutlet UIButton *missRightButton;
 @property (weak, nonatomic) IBOutlet UIButton *missLeftButton;
-@property (weak, nonatomic) IBOutlet UILabel *parLabel;
+@property (strong, nonatomic) IBOutlet UILabel *parLabel;
 @property (weak, nonatomic) IBOutlet UILabel *holeNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yourStrokesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *missShortButton;
@@ -111,9 +111,11 @@ NSString *title;
     [super viewDidLoad];
 
     _missShortButton.hidden = YES;
+    _newCourseOrOldCourse = NO;
     _holeInOneButton.hidden = YES;
     [self figureOutDateOfRoundStart];
         _holeNumber = 1;
+
 
 
 
@@ -129,7 +131,8 @@ NSString *title;
     _tempString = [NSString stringWithFormat:@"%i",_shotTotalForHole];
     _yourStrokesLabel.text = _tempString;
     _fairwayHit = NO;
-    [self newCourseOrOldCourse];
+    [self findHolePar];
+//    [self newCourseOrOldCourse];
 
 }
 
@@ -149,15 +152,15 @@ NSString *title;
 }
 
 - (void)newCourseOrOldCourseLogic {
-    if (_newCourseOrOldCourse == YES) {
-        NSUserDefaults *getParFromSavedList = [NSUserDefaults standardUserDefaults];
-        [getParFromSavedList setObject:_passedCourseInfoDict forKey:@"oldCourseSavedInfo"];
-        NSLog(@"%@", _passedCourseInfoDict);
-        [getParFromSavedList synchronize];
-
-    } else {
-        [self findHolePar];
-    }
+//    if (_newCourseOrOldCourse == YES) {
+//        NSUserDefaults *getParFromSavedList = [NSUserDefaults standardUserDefaults];
+//        [getParFromSavedList setObject:_passedCourseInfoDict forKey:@"oldCourseSavedInfo"];
+//        NSLog(@"%@", _passedCourseInfoDict);
+//        [getParFromSavedList synchronize];
+//
+//    } else {
+//        [self findHolePar];
+//    }
 }
 
 - (void) findHolePar {
@@ -167,8 +170,10 @@ NSString *title;
 
     NSMutableDictionary *loadDict = [[NSMutableDictionary alloc] initWithDictionary:[loadParOfCurrentHole objectForKey:[NSString stringWithFormat:@"%@", currentCourseName]]];
     NSString *parString = [NSString stringWithFormat:@"%@", [loadDict objectForKey:[NSString stringWithFormat:@"hole%i", _holeNumber]]];
-    _parLabel.text = parString;
+
     _currentParOfhole = parString;
+
+    _parLabel.text = _currentParOfhole;
 
     [self parForHoleLogic];
 

@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *enterStateTextField;
 
 
+
 @end
 
 NSMutableArray *statesArray;
@@ -73,11 +74,13 @@ BOOL enteredValidState;
 }
 
 - (void) saveToParse {
+    PFUser *currentUser = [PFUser currentUser];
     PFObject *myScore = [PFObject objectWithClassName:@"Courses"];
 
 
 
     NSMutableArray *currentCourseInfo = [[NSMutableArray alloc] init];
+
 
     [currentCourseInfo addObject:courseName];
     [currentCourseInfo addObject:courseState];
@@ -101,6 +104,7 @@ BOOL enteredValidState;
     [currentCourseInfo addObject:holeSixteen];
     [currentCourseInfo addObject:holeSeventeen];
     [currentCourseInfo addObject:holeEightteen];
+    myScore[@"user"] = currentUser;
     myScore[@"courseInfo"] = currentCourseInfo;
     myScore[@"courseState"] = courseState;
     myScore[@"courseCity"] = courseCity;
@@ -153,13 +157,16 @@ BOOL enteredValidState;
     [courseInfo setObject:holeEightteen forKey:@"hole18"];
     [courseInfo setObject:courseName forKey:@"courseName"];
     [courseInfo setObject:totalParForCourse forKey:@"totalParForCourse"];
+    NSArray *tempArray = [[NSArray alloc] initWithObjects:courseInfo, nil];
 
 
     NSUserDefaults *saveCourseInfo = [NSUserDefaults standardUserDefaults];
+    [saveCourseInfo setObject:tempArray forKey:@"allCourses"];
     [saveCourseInfo setObject:courseInfo forKey:[NSString stringWithFormat:@"%@",courseName]];
     [saveCourseInfo setObject:courseName forKey:@"courseName"];
+    courseName = _passCourseName;
 
-    [self saveToParse];
+//    [self saveToParse];
 
 
     UIAlertView *startRoundAlert = [[UIAlertView alloc] initWithTitle:@"Start Round"
@@ -175,6 +182,8 @@ BOOL enteredValidState;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
         [self getTextOfTextFields];
+    DBFairwayHitViewController *fhVC = segue.destinationViewController;
+    fhVC.passedCourseName = _passCourseName;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
