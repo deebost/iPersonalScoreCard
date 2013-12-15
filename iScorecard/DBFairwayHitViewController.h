@@ -10,6 +10,7 @@
 #import "DBOnPuttingSurfaceViewController.h"
 
 @interface DBFairwayHitViewController : UIViewController <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property(strong, nonatomic) NSMutableDictionary *passedCourseInfoDict;
 @property(nonatomic) int shotTotalForHole;
 @property(nonatomic) BOOL fairwayHit;
 @property(nonatomic) BOOL missRight;
@@ -21,5 +22,6 @@
 @property (strong, nonatomic) NSMutableArray *currentHoleInfos;
 @property (strong, nonatomic) NSString *roundDate;
 @property (nonatomic) int totalPutts;
+@property (nonatomic) BOOL newCourseOrOldCourse;
 @end
 

@@ -129,7 +129,7 @@ NSString *title;
     _tempString = [NSString stringWithFormat:@"%i",_shotTotalForHole];
     _yourStrokesLabel.text = _tempString;
     _fairwayHit = NO;
-        [self findHolePar];
+    [self newCourseOrOldCourse];
 
 }
 
@@ -145,6 +145,18 @@ NSString *title;
         _missShortButton.hidden = YES;
         _holeInOneButton.hidden = YES;
 
+    }
+}
+
+- (void)newCourseOrOldCourseLogic {
+    if (_newCourseOrOldCourse == YES) {
+        NSUserDefaults *getParFromSavedList = [NSUserDefaults standardUserDefaults];
+        [getParFromSavedList setObject:_passedCourseInfoDict forKey:@"oldCourseSavedInfo"];
+        NSLog(@"%@", _passedCourseInfoDict);
+        [getParFromSavedList synchronize];
+
+    } else {
+        [self findHolePar];
     }
 }
 
@@ -185,6 +197,7 @@ NSString *title;
         
         _holeNumber++;
     } else if ([segue.identifier isEqualToString:@"No"]) {
+        
         
     } else {
         _holeNumber = numberOfHole.holeNumber;

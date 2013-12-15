@@ -7,6 +7,7 @@
 //
 
 #import "DBSubmitCourseViewController.h"
+#import "DBFairwayHitViewController.h"
 #import <Parse/Parse.h>
 
 @interface DBSubmitCourseViewController ()
@@ -31,12 +32,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *hole17TextField;
 @property (weak, nonatomic) IBOutlet UITextField *hole18TextField;
 @property (weak, nonatomic) IBOutlet UIButton *submitCourseButton;
-- (IBAction)onTouchSaveCourse:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *cityTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *enterStateTextField;
+
 
 @end
 
+NSMutableArray *statesArray;
+
 NSString *courseName;
 NSString *totalParForCourse;
+NSString *courseState;
+NSString *courseCity;
 NSString *holeOne;
 NSString *holeTwo;
 NSString *holeThree;
@@ -55,57 +62,57 @@ NSString *holeFifthteen;
 NSString *holeSixteen;
 NSString *holeSeventeen;
 NSString *holeEightteen;
+BOOL enteredValidState;
 
 @implementation DBSubmitCourseViewController
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    statesArray = [[NSMutableArray alloc] init];
+    [statesArray addObjectsFromArray:@[@"Alabama", @"Alaska",  @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Flordia", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon",@"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming"]];
 }
 
 - (void) saveToParse {
     PFObject *myScore = [PFObject objectWithClassName:@"Courses"];
+
+
+
     NSMutableArray *currentCourseInfo = [[NSMutableArray alloc] init];
+
     [currentCourseInfo addObject:courseName];
+    [currentCourseInfo addObject:courseState];
+    [currentCourseInfo addObject:courseCity];
         [currentCourseInfo addObject:totalParForCourse];
-        [currentCourseInfo addObject:holeOne];
+    [currentCourseInfo addObject:holeOne];
     [currentCourseInfo addObject:holeTwo];
-        [currentCourseInfo addObject:holeThree];
-        [currentCourseInfo addObject:holeFour];
-        [currentCourseInfo addObject:holeFive];
-        [currentCourseInfo addObject:holeSix];
+    [currentCourseInfo addObject:holeThree];
+    [currentCourseInfo addObject:holeFour];
+    [currentCourseInfo addObject:holeFive];
+    [currentCourseInfo addObject:holeSix];
     [currentCourseInfo addObject:holeSeven];
-        [currentCourseInfo addObject:holeEight];
-        [currentCourseInfo addObject:holeNine];
-        [currentCourseInfo addObject:holeTen];
-        [currentCourseInfo addObject:holeEleven];
+    [currentCourseInfo addObject:holeEight];
+    [currentCourseInfo addObject:holeNine];
+    [currentCourseInfo addObject:holeTen];
+    [currentCourseInfo addObject:holeEleven];
     [currentCourseInfo addObject:holeTwelve];
-        [currentCourseInfo addObject:holeThirteen];
-        [currentCourseInfo addObject:holeFourteen];
-        [currentCourseInfo addObject:holeFifthteen];
-        [currentCourseInfo addObject:holeSixteen];
-        [currentCourseInfo addObject:holeSeventeen];
-        [currentCourseInfo addObject:holeEightteen];
+    [currentCourseInfo addObject:holeThirteen];
+    [currentCourseInfo addObject:holeFourteen];
+    [currentCourseInfo addObject:holeFifthteen];
+    [currentCourseInfo addObject:holeSixteen];
+    [currentCourseInfo addObject:holeSeventeen];
+    [currentCourseInfo addObject:holeEightteen];
     myScore[@"courseInfo"] = currentCourseInfo;
+    myScore[@"courseState"] = courseState;
+    myScore[@"courseCity"] = courseCity;
     myScore[@"courseName"] = courseName;
     myScore[@"coursePar"] = totalParForCourse;
     [myScore saveInBackground];
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-}
 
-
-- (IBAction)onTouchSaveCourse:(id)sender {
+- (void) getTextOfTextFields {
     courseName = _courseNameTextField.text;
+    courseCity = _cityTextfield.text;
+    courseState = _enterStateTextField.text;
     totalParForCourse = _totalParTextField.text;
     holeOne = _hole1TextField.text;
     holeTwo = _hole2TextField.text;
@@ -151,6 +158,7 @@ NSString *holeEightteen;
     NSUserDefaults *saveCourseInfo = [NSUserDefaults standardUserDefaults];
     [saveCourseInfo setObject:courseInfo forKey:[NSString stringWithFormat:@"%@",courseName]];
     [saveCourseInfo setObject:courseName forKey:@"courseName"];
+
     [self saveToParse];
 
 
@@ -161,6 +169,21 @@ NSString *holeEightteen;
                                                     otherButtonTitles:@"Start Round", nil];
     [startRoundAlert show];
     [saveCourseInfo synchronize];
-    
+
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+        [self getTextOfTextFields];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
+}
+
+
+
+    
+
 @end

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9151EDE618586B16001FD095 /* DBSubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EDE518586B16001FD095 /* DBSubmitCourseViewController.m */; };
 		9151EDE91858DA74001FD095 /* DBGolfLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EDE81858DA74001FD095 /* DBGolfLogic.m */; };
-		9151EE311859217A001FD095 /* UIImage+ColorAtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EE301859217A001FD095 /* UIImage+ColorAtPixel.m */; };
-		9151EE3518592185001FD095 /* OBShapedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EE3418592185001FD095 /* OBShapedButton.m */; };
 		9151EE3818594750001FD095 /* DBSelectSavedCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EE3718594750001FD095 /* DBSelectSavedCoursesViewController.m */; };
 		919546F118570D1000BD4C68 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919546F018570D1000BD4C68 /* AVFoundation.framework */; };
 		91FC3AB818519F90000D0F87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FC3AB718519F90000D0F87 /* Foundation.framework */; };
@@ -58,10 +56,6 @@
 		9151EDE518586B16001FD095 /* DBSubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSubmitCourseViewController.m; sourceTree = "<group>"; };
 		9151EDE71858DA74001FD095 /* DBGolfLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBGolfLogic.h; sourceTree = "<group>"; };
 		9151EDE81858DA74001FD095 /* DBGolfLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBGolfLogic.m; sourceTree = "<group>"; };
-		9151EE2F1859217A001FD095 /* UIImage+ColorAtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorAtPixel.h"; sourceTree = "<group>"; };
-		9151EE301859217A001FD095 /* UIImage+ColorAtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorAtPixel.m"; sourceTree = "<group>"; };
-		9151EE3318592185001FD095 /* OBShapedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBShapedButton.h; sourceTree = "<group>"; };
-		9151EE3418592185001FD095 /* OBShapedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBShapedButton.m; sourceTree = "<group>"; };
 		9151EE3618594750001FD095 /* DBSelectSavedCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSelectSavedCoursesViewController.h; sourceTree = "<group>"; };
 		9151EE3718594750001FD095 /* DBSelectSavedCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSelectSavedCoursesViewController.m; sourceTree = "<group>"; };
 		919546F018570D1000BD4C68 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -139,24 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9151EE2E1859217A001FD095 /* UIImage+ColorAtPixel */ = {
-			isa = PBXGroup;
-			children = (
-				9151EE2F1859217A001FD095 /* UIImage+ColorAtPixel.h */,
-				9151EE301859217A001FD095 /* UIImage+ColorAtPixel.m */,
-			);
-			path = "UIImage+ColorAtPixel";
-			sourceTree = "<group>";
-		};
-		9151EE3218592185001FD095 /* OBShapedButton */ = {
-			isa = PBXGroup;
-			children = (
-				9151EE3318592185001FD095 /* OBShapedButton.h */,
-				9151EE3418592185001FD095 /* OBShapedButton.m */,
-			);
-			path = OBShapedButton;
-			sourceTree = "<group>";
-		};
 		91FC3AAB18519F90000D0F87 = {
 			isa = PBXGroup;
 			children = (
@@ -221,8 +197,6 @@
 				91FC3ACC18519F90000D0F87 /* DBViewController.h */,
 				91FC3ACD18519F90000D0F87 /* DBViewController.m */,
 				91FC3ACF18519F90000D0F87 /* Images.xcassets */,
-				9151EE3218592185001FD095 /* OBShapedButton */,
-				9151EE2E1859217A001FD095 /* UIImage+ColorAtPixel */,
 				91FC3ABE18519F90000D0F87 /* Supporting Files */,
 			);
 			path = iScorecard;
@@ -364,8 +338,6 @@
 				9151EE3818594750001FD095 /* DBSelectSavedCoursesViewController.m in Sources */,
 				9151EDE618586B16001FD095 /* DBSubmitCourseViewController.m in Sources */,
 				9151EDE91858DA74001FD095 /* DBGolfLogic.m in Sources */,
-				9151EE3518592185001FD095 /* OBShapedButton.m in Sources */,
-				9151EE311859217A001FD095 /* UIImage+ColorAtPixel.m in Sources */,
 				91FC3ACE18519F90000D0F87 /* DBViewController.m in Sources */,
 				91FC3AF41851A13E000D0F87 /* DBGreenHitViewController.m in Sources */,
 				91FC3AC418519F90000D0F87 /* main.m in Sources */,

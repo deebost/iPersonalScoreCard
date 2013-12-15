@@ -7,15 +7,26 @@
 //
 
 #import "DBSelectSavedCoursesViewController.h"
+#import "DBFairwayHitViewController.h"
 #import <Parse/Parse.h>
 
 @interface DBSelectSavedCoursesViewController ()
 
-
+@property (strong, nonatomic) NSString *courseNameFromParse;
+@property (strong, nonatomic) NSString *totalCourseParFromParse;
+@property (strong, nonatomic) NSMutableDictionary *infoForSelectedCourse;
 @end
 NSMutableArray *totalCourses;
-NSString *totalParTemp;
-NSString *nameTemp;
+NSMutableArray *totalCourseNames;
+NSMutableArray *totalParsForCourse;
+NSMutableArray *courseCitys;
+NSMutableArray *courseStates;
+NSMutableSet *courseStatesSet;
+NSMutableDictionary *stateDictionary;
+BOOL found;
+BOOL savedCourse;
+
+
 @implementation DBSelectSavedCoursesViewController
 
 
@@ -24,7 +35,14 @@ NSString *nameTemp;
 {
     [super viewDidLoad];
     totalCourses = [[NSMutableArray alloc] init];
-    totalParTemp = [[NSString alloc] init];
+    totalCourseNames  = [[NSMutableArray alloc] init];
+    totalParsForCourse = [[NSMutableArray alloc] init];
+    courseCitys = [[NSMutableArray alloc] init];
+    courseStates = [[NSMutableArray alloc] init];
+    courseStatesSet = [[NSMutableSet alloc] init];
+    _infoForSelectedCourse = [[NSMutableDictionary alloc] init];
+
+
 
 
 
@@ -34,46 +52,51 @@ NSString *nameTemp;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    savedCourse = YES;
         [self queryForCourses];
-
-
 }
-
-
-
 
 - (void) queryForCourses {
     PFQuery *query = [PFQuery queryWithClassName:@"Courses"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
         // iterate through the objects array, which contains PFObjects for each Student
+
         for (NSDictionary *tempDic in objects) {
-            [totalCourses addObject:[tempDic objectForKey:@"courseInfo"]];
-            [totalCourses addObject:[tempDic objectForKey:@"courseName"]];
-            NSString *nameString = [totalCourses objectAtIndex:1];
-            
-            nameTemp = nameString;
+
+            NSString *nameString = [tempDic objectForKey:@"courseName"];
+            NSString *parString = [tempDic objectForKey:@"coursePar"];
+            NSString *cityString = [tempDic objectForKey:@"courseCity"];
+            NSString *stateString = [tempDic objectForKey:@"courseState"];
+            [totalCourseNames addObject:nameString];
+            [totalParsForCourse addObject:parString];
+            [courseStates addObject:stateString];
+
+            [courseCitys addObject:cityString];
+            [courseStatesSet addObject:stateString];
             [self.tableView reloadData];
-
-
-            NSLog(@"%@",nameTemp);
-
-
         }
 
-
-
-
-        
-
     }];
+
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)saveSelectedCourseInfo {
+
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    DBFairwayHitViewController *controller = segue.destinationViewController;
+    controller.passedCourseInfoDict = _infoForSelectedCourse;
+    controller.newCourseOrOldCourse = savedCourse;
+
+
 }
 
 #pragma mark - Table view data source
@@ -88,15 +111,35 @@ NSString *nameTemp;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+
+    return totalCourseNames.count;
 }
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    for (NSString *states in courseStatesSet) {
+//        NSLog(@"%@",states);
+//        found = NO;
+//        for (NSString *activatedStates in courseStates) {
+//            NSLog(@" 2nd log = %@",activatedStates);
+//        }
+//    }
+//
+//
+//    NSArray *st = [courseStatesSet allObjects];
+//    return [st objectAtIndex:section];
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSString *courseNameValue = [totalCourseNames objectAtIndex:indexPath.row];
+    NSString *totalParValue = [totalParsForCourse objectAtIndex:indexPath.row];
+    NSString *stateValue = [courseStates objectAtIndex:indexPath.row];
+    NSString *cityValue = [courseCitys objectAtIndex:indexPath.row];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",nameTemp];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", courseNameValue, cityValue];
+    cell.detailTextLabel.text = totalParValue;
 
 
     
