@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBEndOfRoundResultsViewController : UITableViewController
+@interface DBEndOfRoundResultsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
