@@ -24,5 +24,26 @@
 @property (strong, nonatomic) NSString *roundDate;
 @property (nonatomic) int totalPutts;
 @property (nonatomic) BOOL newCourseOrOldCourse;
+
+// last hole stats to pass to ALL VC
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleShotsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHolePuttsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleGIRLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleFairwaysHitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleSandSaveLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleScrambleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleBogeyScrambleLabel;
+@property (weak, nonatomic) IBOutlet UIView *entireLastHoleView;
+
+@property (strong, nonatomic) NSString *lastHoleShotTotal;
+@property (strong, nonatomic) NSString *lastHolePuttTotal;
+@property (strong, nonatomic) NSString *lastHoleGIR;
+@property (strong, nonatomic) NSString *lastHoleFairwayHitorMiss;
+@property (strong, nonatomic) NSString *lastHoleSandSave;
+@property (strong, nonatomic) NSString *lastHoleScamble;
+@property (strong, nonatomic) NSString *lastHoleBogeyScramble;
+
+
+
 @end
 

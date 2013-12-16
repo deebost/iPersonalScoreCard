@@ -132,6 +132,7 @@ NSString *title;
     _yourStrokesLabel.text = _tempString;
     _fairwayHit = NO;
     [self findHolePar];
+    [self showLastHolesScore];
 //    [self newCourseOrOldCourse];
 
 }
@@ -306,5 +307,1109 @@ NSString *title;
         // save hole in one to parse / plist update hole number;
 
     }
+}
+
+- (void) showLastHolesScore {
+    NSUserDefaults *lastHoleInfo = [NSUserDefaults standardUserDefaults];
+
+    if (_holeNumber == 1) {
+        _entireLastHoleView.hidden = YES;
+
+    } else if (_holeNumber == 2) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole1Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 3) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole2Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    } else if (_holeNumber == 4) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole3Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    } else if (_holeNumber == 5) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole4Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 6) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole5Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0  && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 7) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole6Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 8) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole7Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 9) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole8Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    } else if (_holeNumber == 10) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole9Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 11) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole10Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 12) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole11Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 13) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole12Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+
+    } else if (_holeNumber == 14) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole13Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 15) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole14Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }
+    else if (_holeNumber == 16) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole15Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 17) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole16Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }else if (_holeNumber == 18) {
+        _entireLastHoleView.hidden = NO;
+        NSDictionary *lastHoleDict = [lastHoleInfo objectForKey:@"hole17Info"];
+        _lastHoleShotTotal = [lastHoleDict objectForKey:@"totalShots"];
+        _lastHoleShotsLabel.text = [NSString stringWithFormat:@"%i",_lastHoleShotTotal.integerValue];
+
+        _lastHolePuttTotal = [lastHoleDict objectForKey:@"totalPutts"];
+        _lastHolePuttsLabel.text = [NSString stringWithFormat:@"%i",_lastHolePuttTotal.integerValue];
+
+        _lastHoleGIR = [lastHoleDict objectForKey:@"gir"];
+        if (_lastHoleGIR.integerValue == 1) {
+            _lastHoleGIRLabel.text = @"YES";
+        } else {
+            _lastHoleGIRLabel.text = @"NO";
+        }
+
+        NSString *yesSandSave = [lastHoleDict objectForKey:@"successfulSandSave"];
+        NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
+        if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
+            _lastHoleSandSave = @"YES";
+        } else {
+            _lastHoleSandSave = @"NO";
+        }
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
+        NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
+        NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
+
+        if (yesScramble.integerValue == 1) {
+            _lastHoleScamble = @"YES";
+        } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
+            _lastHoleScamble = @"";
+
+        } else {
+            _lastHoleScamble = @"NO";
+        }
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+
+        NSString *yesBogeyScramble = [lastHoleDict objectForKey:@"successfulBogeyScramble"];
+        NSString *chanceToBogeyScamble = [lastHoleDict objectForKey:@"failedBogeyScramble"];
+
+        if (yesBogeyScramble.integerValue == 1) {
+            _lastHoleBogeyScramble = @"YES";
+        } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
+            _lastHoleBogeyScramble = @"";
+        } else {
+            _lastHoleBogeyScramble = @"NO";
+        }
+
+        NSString *fairwayHit = [lastHoleDict objectForKey:@"fairwayHits"];
+        NSString *missRight = [lastHoleDict objectForKey:@"missRight"];
+        NSString *missLeft = [lastHoleDict objectForKey:@"missLeft"];
+        
+        if (fairwayHit.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"HIT";
+        } else if (missLeft.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS L";
+        } else {
+            _lastHoleFairwayHitorMiss = @"ERROR";
+        }
+        
+        _lastHoleFairwaysHitLabel.text = _lastHoleFairwayHitorMiss;
+    }
+    
 }
 @end
