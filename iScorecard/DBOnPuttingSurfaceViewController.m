@@ -214,14 +214,19 @@ NSMutableDictionary *holeDict;
         [self failedToBogeyScramble];
         [self allocAndInnitStats];
 
+        NSLog(@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility);
+
+
         UIAlertView *roundFinished = [[UIAlertView alloc] initWithTitle:@"Round Complete!"
                                                                 message:@"Now saving your results!"
                                                                delegate:nil
                                                       cancelButtonTitle:nil
                                                       otherButtonTitles:@"Finish Round", nil];
         [self saveHoleStatsToDictionary];
+        [self saveCurrentHoleToPList];
         [self saveAllHolesDoneToPList];
         [roundFinished show];
+        [self deleteHoleInfoAfterRoundComplete];
     }
 }
 
@@ -276,6 +281,30 @@ NSMutableDictionary *holeDict;
     myScore[@"totalRoundScore"] = [[NSDictionary alloc] initWithDictionary:courseRoundStats];
 
 
+}
+
+- (void) deleteHoleInfoAfterRoundComplete {
+    NSUserDefaults *clearHoleInfo = [NSUserDefaults standardUserDefaults];
+    NSDictionary *emptyDict = [[NSDictionary alloc] init];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole1Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole2Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole3Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole4Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole5Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole6Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole7Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole8Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole9Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole10Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole11Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole12Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole13Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole14Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole15Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole16Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole17Info"];
+    [clearHoleInfo setObject:emptyDict forKey:@"hole18Info"];
+    [clearHoleInfo synchronize];
 }
 
 - (void) saveToParse {

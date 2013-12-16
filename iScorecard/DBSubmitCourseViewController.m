@@ -114,7 +114,7 @@ BOOL enteredValidState;
 }
 
 - (void) getTextOfTextFields {
-    courseName = _courseNameTextField.text;
+    courseName = [NSString stringWithFormat:@"ZZ%@",_courseNameTextField.text];
     courseCity = _cityTextfield.text;
     courseState = _enterStateTextField.text;
     totalParForCourse = _totalParTextField.text;
