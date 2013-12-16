@@ -191,7 +191,30 @@ BOOL enteredValidState;
 
 }
 
-
+- (IBAction)backGroundTouched:(id)sender {
+    [_courseNameTextField resignFirstResponder];
+    [_totalParTextField resignFirstResponder];
+    [_enterStateTextField resignFirstResponder];
+    [_cityTextfield resignFirstResponder];
+    [_hole1TextField resignFirstResponder];
+    [_hole2TextField resignFirstResponder];
+    [_hole3TextField resignFirstResponder];
+    [_hole4TextField resignFirstResponder];
+    [_hole5TextField resignFirstResponder];
+    [_hole6TextField resignFirstResponder];
+    [_hole7TextField resignFirstResponder];
+    [_hole8TextField resignFirstResponder];
+    [_hole9TextField resignFirstResponder];
+    [_hole10TextField resignFirstResponder];
+    [_hole11TextField resignFirstResponder];
+    [_hole12TextField resignFirstResponder];
+    [_hole13TextField resignFirstResponder];
+    [_hole14TextField resignFirstResponder];
+    [_hole15TextField resignFirstResponder];
+    [_hole16TextField resignFirstResponder];
+    [_hole17TextField resignFirstResponder];
+    [_hole18TextField resignFirstResponder];
+}
 
     
 

@@ -309,6 +309,11 @@ NSString *title;
     }
 }
 
+
+
+/// lol huge giant method, just realised how to fix, will fix later I can get rid of the entire if statement and in this line right here below change to it
+
+
 - (void) showLastHolesScore {
     NSUserDefaults *lastHoleInfo = [NSUserDefaults standardUserDefaults];
 
@@ -335,7 +340,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -399,10 +406,12 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
-        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+            _lastHoleSandSaveLabel.text = _lastHoleSandSave;
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -464,7 +473,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -528,7 +539,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -592,7 +605,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -656,7 +671,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -720,7 +737,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -784,10 +803,13 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -849,10 +871,13 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -914,7 +939,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -978,10 +1005,13 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -1042,7 +1072,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -1107,7 +1139,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -1171,10 +1205,13 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -1236,7 +1273,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
@@ -1300,10 +1339,13 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+
 
         NSString *yesScramble = [lastHoleDict objectForKey:@"successfulScramble"];
         NSString *chanceToScramble = [lastHoleDict objectForKey:@"failedScramble"];
@@ -1365,7 +1407,9 @@ NSString *title;
         NSString *chanceToSandSave = [lastHoleDict objectForKey:@"sandSavePossivility"];
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
-        } else {
+        } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
+            _lastHoleSandSave = @"";
+        }else {
             _lastHoleSandSave = @"NO";
         }
         _lastHoleSandSaveLabel.text = _lastHoleSandSave;

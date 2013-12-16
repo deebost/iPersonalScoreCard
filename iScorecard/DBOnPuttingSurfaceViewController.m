@@ -103,11 +103,11 @@ NSMutableDictionary *holeDict;
 }
 
 - (void) failedToBogeyScramble{
-    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken - _totalPutts == 3 && _gir == NO && _totalShotsTaken >= 5) {
+    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken >= 5) {
         _failedBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 4 && _totalShotsTaken - _totalPutts == 4 && _gir == NO && _totalShotsTaken >= 6) {
+    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken >= 6) {
         _failedBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 5 && _totalShotsTaken - _totalPutts == 5 && _gir == NO && _totalShotsTaken >= 7) {
+    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken >= 7) {
         _failedBogeyScramble = YES;
     }
 }

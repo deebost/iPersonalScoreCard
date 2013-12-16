@@ -189,10 +189,10 @@
             </objects>
             <point key="canvasLocation" x="132" y="-700"/>
         </scene>
-        <!--Table View Controller-->
+        <!--End Of Round Results View Controller-->
         <scene sceneID="dkY-LL-1Z2">
             <objects>
-                <tableViewController id="WDB-pW-Ch1" sceneMemberID="viewController">
+                <tableViewController id="WDB-pW-Ch1" customClass="DBEndOfRoundResultsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AJD-rk-ZYl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,7 +215,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BuR-pD-RlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="531" y="-728"/>
+            <point key="canvasLocation" x="540" y="-700"/>
         </scene>
         <!--Submit Course View Controller-->
         <scene sceneID="ZDG-NR-bE8">
@@ -957,7 +957,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="9uM-LF-dEh"/>
-        <segue reference="wFQ-fv-sk2"/>
+        <segue reference="T4r-wk-ZQL"/>
         <segue reference="dTu-bb-q7K"/>
         <segue reference="ekz-zk-d3p"/>
     </inferredMetricsTieBreakers>
