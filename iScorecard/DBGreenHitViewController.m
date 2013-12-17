@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *holeNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *holeButton;
 - (IBAction)onTapHole:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *mistakeButton;
+- (IBAction)onTapGoBackMistake:(id)sender;
 
 
 @end
@@ -202,7 +204,7 @@ BOOL successSandSave;
         _failScramble = golfLogic.scrambleNO;
         _successfulSandSaveWORKPLEASE = golfLogic.successOnSandSave;
         _successScramble = golfLogic.scrambleYES;
-    
+
 //        golfLogic.successOnSandSave = _successfulSandSaveWORKPLEASE;
         NSLog(@"%hhd",_successfulSandSaveWORKPLEASE);
         [self saveHoleStatsToDictionary];
@@ -226,5 +228,9 @@ BOOL successSandSave;
     [inTheHole show];
 
     
+}
+- (IBAction)onTapGoBackMistake:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
     @end

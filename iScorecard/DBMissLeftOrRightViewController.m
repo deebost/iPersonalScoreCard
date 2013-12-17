@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *sandButton;
 @property (weak, nonatomic) IBOutlet UIButton *waterButton;
 @property (weak, nonatomic) IBOutlet UIButton *obButton;
+@property (weak, nonatomic) IBOutlet UIButton *mistakeButton;
+- (IBAction)onTapGoBackMistake:(id)sender;
 
 @end
 
@@ -63,4 +65,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onTapGoBackMistake:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

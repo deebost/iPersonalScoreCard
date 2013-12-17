@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *missButton;
 @property (weak, nonatomic) IBOutlet UIButton *finalResultsButton;
 - (IBAction)finalResultsOnTouch:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *mistakeButton;
+- (IBAction)onTapGoBackMistake:(id)sender;
 
 @end
 NSString *parOfHole;
@@ -332,5 +334,8 @@ NSMutableDictionary *holeDict;
 }
 
 - (IBAction)finalResultsOnTouch:(id)sender {
+}
+- (IBAction)onTapGoBackMistake:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

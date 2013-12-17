@@ -115,11 +115,22 @@
                                     <segue destination="FmQ-nd-zJT" kind="modal" identifier="inFairwaySegue" modalTransitionStyle="crossDissolve" id="xzH-fk-1fv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pr1-Az-Csy">
+                                <rect key="frame" x="107" y="70" width="58" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mistake!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapGoBackMistake:" destination="yuS-Ne-oK0" eventType="touchUpInside" id="9Wt-5i-IvQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="nIa-HD-MP0"/>
                     <connections>
+                        <outlet property="mistakeButton" destination="pr1-Az-Csy" id="J7p-lR-7pG"/>
                         <outlet property="obButton" destination="tJE-Jd-JgR" id="GeQ-gb-5xL"/>
                         <outlet property="roughButton" destination="2Dc-Kz-JlX" id="xwr-Lv-m8J"/>
                         <outlet property="sandButton" destination="NsJ-sK-Nta" id="mzj-1F-oEn"/>
@@ -173,6 +184,16 @@
                                     <segue destination="WDB-pW-Ch1" kind="modal" identifier="finalResultsSegue" modalTransitionStyle="coverVertical" id="qtG-QX-pbn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9B-FK-4Ji">
+                                <rect key="frame" x="126" y="210" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mistake !">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapGoBackMistake:" destination="qwx-cK-Vns" eventType="touchUpInside" id="mDw-yx-4bp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -181,6 +202,7 @@
                         <outlet property="finalResultsButton" destination="DXM-n8-gf5" id="suZ-Fa-uQW"/>
                         <outlet property="holeButton" destination="M4r-qu-DjL" id="odg-af-q5R"/>
                         <outlet property="missButton" destination="Eqd-W8-P9e" id="adn-d5-vKR"/>
+                        <outlet property="mistakeButton" destination="j9B-FK-4Ji" id="3tO-gU-PI6"/>
                         <segue destination="8rd-5P-3O9" kind="unwind" identifier="passHoleNumber" unwindAction="unwindToMainMenu:" id="nto-el-fBm"/>
                     </connections>
                 </viewController>
@@ -947,6 +969,16 @@
                                     <action selector="onTapHole:" destination="FmQ-nd-zJT" eventType="touchUpInside" id="HPB-Jv-QGH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="III-3D-AZB">
+                                <rect key="frame" x="137" y="189" width="58" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Mistake!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapGoBackMistake:" destination="FmQ-nd-zJT" eventType="touchUpInside" id="ztL-gH-xQa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -958,6 +990,7 @@
                         <outlet property="missLeftButton" destination="1u7-o5-RzA" id="3yf-CI-K1j"/>
                         <outlet property="missRightButton" destination="0OD-QA-0fH" id="ZyY-NL-8Jh"/>
                         <outlet property="missShortButton" destination="1K1-mc-4HE" id="S8c-nQ-g8I"/>
+                        <outlet property="mistakeButton" destination="III-3D-AZB" id="4Hb-Rk-nnn"/>
                         <outlet property="parLabel" destination="RbD-aR-6EL" id="PvH-at-3FK"/>
                         <outlet property="shotTotalLabel" destination="9lB-KR-c3R" id="Ru9-Dw-QgJ"/>
                         <segue destination="F74-4h-KfB" kind="unwind" identifier="yesHoleExit" unwindAction="unwindToMainMenu:" id="Sr2-jz-F3C"/>
@@ -975,9 +1008,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9uM-LF-dEh"/>
         <segue reference="T4r-wk-ZQL"/>
+        <segue reference="9uM-LF-dEh"/>
         <segue reference="dTu-bb-q7K"/>
-        <segue reference="ekz-zk-d3p"/>
+        <segue reference="zi0-26-qCt"/>
     </inferredMetricsTieBreakers>
 </document>
