@@ -17,6 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *obButton;
 @property (weak, nonatomic) IBOutlet UIButton *mistakeButton;
 - (IBAction)onTapGoBackMistake:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *lastHoleView;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleShotsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHolePuttsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleGIRLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleFairwayhitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleSandSaveLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleScrambleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleBogeyScrambleLabel;
 
 @end
 
@@ -49,15 +57,37 @@
     greenHitVC.currentParOfHole = _currentParOfHole;
     greenHitVC.holeNumber = _holeNumber;
     greenHitVC.roundDate = _roundDate;
+    greenHitVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
+    greenHitVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
+    greenHitVC.lastHoleGIR = _lastHoleGIR;
+    greenHitVC.lastHolePuttTotal = _lastHolePuttTotal;
+    greenHitVC.lastHoleSandSave = _lastHoleSandSave;
+    greenHitVC.lastHoleShotTotal = _lastHoleShotTotal;
+    greenHitVC.lastHoleScamble = _lastHoleScamble;
 
 
     NSLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);
 }
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+- (void) lastHoleStatsView {
+    if (_holeNumber == 1) {
+        _lastHoleView.hidden = YES;
+    } else {
+        _lastHoleView.hidden = NO;
+        _lastHoleShotsLabel.text = _lastHoleShotTotal;
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+        _lastHolePuttsLabel.text = _lastHolePuttTotal;
+        _lastHoleGIRLabel.text = _lastHoleGIR;
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        _lastHoleFairwayhitLabel.text = _lastHoleFairwayHitorMiss;
+        _lastHoleSandSaveLabel.text = _lastHoleSandSave;
+    }
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self lastHoleStatsView];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

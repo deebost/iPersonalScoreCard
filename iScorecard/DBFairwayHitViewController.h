@@ -35,13 +35,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastHoleBogeyScrambleLabel;
 @property (weak, nonatomic) IBOutlet UIView *entireLastHoleView;
 
-@property (strong, nonatomic) NSString *lastHoleShotTotal;
-@property (strong, nonatomic) NSString *lastHolePuttTotal;
-@property (strong, nonatomic) NSString *lastHoleGIR;
-@property (strong, nonatomic) NSString *lastHoleFairwayHitorMiss;
-@property (strong, nonatomic) NSString *lastHoleSandSave;
-@property (strong, nonatomic) NSString *lastHoleScamble;
-@property (strong, nonatomic) NSString *lastHoleBogeyScramble;
+@property (weak, nonatomic) NSString *lastHoleShotTotal;
+@property (weak, nonatomic) NSString *lastHolePuttTotal;
+@property (weak, nonatomic) NSString *lastHoleGIR;
+@property (weak, nonatomic) NSString *lastHoleFairwayHitorMiss;
+@property (weak, nonatomic) NSString *lastHoleSandSave;
+@property (weak, nonatomic) NSString *lastHoleScamble;
+@property (weak, nonatomic) NSString *lastHoleBogeyScramble;
+
+@property (weak, nonatomic) NSString *passedLastHoleShotTotal;
+@property (weak, nonatomic) NSString *passedLastHolePuttTotal;
+@property (weak, nonatomic) NSString *passedLastHoleGIR;
+@property (weak, nonatomic) NSString *passedLastHoleFairwayHitorMiss;
+@property (weak, nonatomic) NSString *passedLastHoleSandSave;
+@property (weak, nonatomic) NSString *passedLastHoleScamble;
+@property (weak, nonatomic) NSString *passedLastHoleBogeyScramble;
 
 
 

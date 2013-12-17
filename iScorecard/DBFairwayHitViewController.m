@@ -47,6 +47,13 @@ NSString *title;
         greenHitVC.holeNumber = _holeNumber;
         greenHitVC.currentParOfHole = _currentParOfhole;
         greenHitVC.roundDate = _roundDate;
+        greenHitVC.lastHoleBogeyScramble = _passedLastHoleBogeyScramble;
+        greenHitVC.lastHoleFairwayHitorMiss = _passedLastHoleFairwayHitorMiss;
+        greenHitVC.lastHoleGIR = _passedLastHoleGIR;
+        greenHitVC.lastHolePuttTotal = _passedLastHolePuttTotal;
+        greenHitVC.lastHoleSandSave = _passedLastHoleSandSave;
+        greenHitVC.lastHoleShotTotal = _passedLastHoleShotTotal;
+        greenHitVC.lastHoleScamble = _passedLastHoleScamble;
 
 
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
@@ -65,6 +72,13 @@ NSString *title;
             missRightVC.holeNumber = _holeNumber;
             missRightVC.currentParOfHole = _currentParOfhole;
         missRightVC.roundDate = _roundDate;
+        missRightVC.lastHoleBogeyScramble = _passedLastHoleBogeyScramble;
+        missRightVC.lastHoleFairwayHitorMiss = _passedLastHoleFairwayHitorMiss;
+        missRightVC.lastHoleGIR = _passedLastHoleGIR;
+        missRightVC.lastHolePuttTotal = _passedLastHolePuttTotal;
+        missRightVC.lastHoleSandSave = _passedLastHoleSandSave;
+        missRightVC.lastHoleShotTotal = _passedLastHoleShotTotal;
+        missRightVC.lastHoleScamble = _passedLastHoleScamble;
 
         } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
             _missRight = YES;
@@ -79,6 +93,13 @@ NSString *title;
             missRightVC.holeNumber = _holeNumber;
             missRightVC.currentParOfHole = _currentParOfhole;
             missRightVC.roundDate = _roundDate;
+            missRightVC.lastHoleBogeyScramble = _passedLastHoleBogeyScramble;
+            missRightVC.lastHoleFairwayHitorMiss = _passedLastHoleFairwayHitorMiss;
+            missRightVC.lastHoleGIR = _passedLastHoleGIR;
+            missRightVC.lastHolePuttTotal = _passedLastHolePuttTotal;
+            missRightVC.lastHoleSandSave = _passedLastHoleSandSave;
+            missRightVC.lastHoleShotTotal = _passedLastHoleShotTotal;
+            missRightVC.lastHoleScamble = _passedLastHoleScamble;
         } else if ([segue.identifier isEqualToString:@"onFeltVC"]) {
             _shotTotalForHole++;
             onFeltVc.gir = YES;
@@ -86,6 +107,13 @@ NSString *title;
             onFeltVc.totalShotsTaken = _shotTotalForHole;
             onFeltVc.currentParOfHole = _currentParOfhole;
             onFeltVc.roundDate = _roundDate;
+            onFeltVc.lastHoleBogeyScramble = _passedLastHoleBogeyScramble;
+            onFeltVc.lastHoleFairwayHitorMiss = _passedLastHoleFairwayHitorMiss;
+            onFeltVc.lastHoleGIR = _passedLastHoleGIR;
+            onFeltVc.lastHolePuttTotal = _passedLastHolePuttTotal;
+            onFeltVc.lastHoleSandSave = _passedLastHoleSandSave;
+            onFeltVc.lastHoleShotTotal = _passedLastHoleShotTotal;
+            onFeltVc.lastHoleScamble = _passedLastHoleScamble;
             
         } else if ([segue.identifier isEqualToString:@"missShort"]) {
             _shotTotalForHole++;
@@ -97,7 +125,13 @@ NSString *title;
             missRightVC.missLeftVCFairwayHit = _fairwayHit;
             missRightVC.holeNumber = _holeNumber;
             missRightVC.currentParOfHole = _currentParOfhole;
-            missRightVC.roundDate = _roundDate;
+            missRightVC.lastHoleBogeyScramble = _passedLastHoleBogeyScramble;
+            missRightVC.lastHoleFairwayHitorMiss = _passedLastHoleFairwayHitorMiss;
+            missRightVC.lastHoleGIR = _passedLastHoleGIR;
+            missRightVC.lastHolePuttTotal = _passedLastHolePuttTotal;
+            missRightVC.lastHoleSandSave = _passedLastHoleSandSave;
+            missRightVC.lastHoleShotTotal = _passedLastHoleShotTotal;
+            missRightVC.lastHoleScamble = _passedLastHoleScamble;
 
         }
         NSLog(@"total for hole = %i fairway hit = %hhd  miss right = %hhd miss left = %hhd hole number = %i par = %@", _shotTotalForHole, _fairwayHit, _missRight, _missLeft, _holeNumber, _currentParOfhole);
@@ -133,7 +167,7 @@ NSString *title;
     _fairwayHit = NO;
     [self findHolePar];
     [self showLastHolesScore];
-//    [self newCourseOrOldCourse];
+    [self passedThings];
 
 }
 
@@ -152,6 +186,16 @@ NSString *title;
     }
 }
 
+- (void) passedThings {
+    _passedLastHoleBogeyScramble = _lastHoleBogeyScrambleLabel.text;
+    _passedLastHoleScamble = _lastHoleScrambleLabel.text;
+    _passedLastHoleGIR = _lastHoleGIRLabel.text;
+    _passedLastHolePuttTotal = _lastHolePuttsLabel.text;
+    _passedLastHoleShotTotal = _lastHoleShotsLabel.text;
+    _passedLastHoleSandSave = _lastHoleSandSaveLabel.text;
+    _passedLastHoleFairwayHitorMiss = _lastHoleFairwaysHitLabel.text;
+
+}
 - (void)newCourseOrOldCourseLogic {
 //    if (_newCourseOrOldCourse == YES) {
 //        NSUserDefaults *getParFromSavedList = [NSUserDefaults standardUserDefaults];
@@ -263,6 +307,7 @@ NSString *title;
     NSNumber *missRight = [[NSNumber alloc] initWithInt:_missRight];
     NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
 
+
     NSNumber *puts = [[NSNumber alloc] initWithInt:_totalPutts];
     NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
     //    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
@@ -300,15 +345,33 @@ NSString *title;
                                                   otherButtonTitles:nil, nil];
         [self saveHoleStatsToDictionary];
         [sayCheese show];
-            [self performSelector:@selector(dismissAlert:) withObject:sayCheese afterDelay:3.5f];
+            [self performSelector:@selector(dismissAlert:) withObject:sayCheese afterDelay:4.5f];
         [self videoCaptureStuff];
+        [self dismissViewControllerAnimated:YES completion:^{
+            DBFairwayHitViewController *fhVC = [DBFairwayHitViewController new];
+            [self presentViewController:fhVC animated:YES completion:nil];
+        }];
         _holeNumberLabel.text = [NSString stringWithFormat:@"%i",_holeNumber];
+        [self showLastHolesScore];
 
         // save hole in one to parse / plist update hole number;
 
     }
 }
 
+//- (void) lastHoleStatsView {
+//    if (_holeNumber == 1) {
+//        _entireLastHoleView.hidden = YES;
+//    } else {
+//        _lastHoleShotTotal = _lastHoleShotsLabel.text;
+//        _lastHoleScamble =_lastHoleScrambleLabel.text;
+//         _lastHolePuttTotal = _lastHolePuttsLabel.text;
+//         _lastHoleGIR = _lastHoleGIRLabel.text;
+//         _lastHoleBogeyScramble = _lastHoleBogeyScrambleLabel.text;
+//         _lastHoleFairwayHitorMiss =  _lastHoleFairwaysHitLabel.text;
+//         _lastHoleSandSave = _lastHoleSandSaveLabel.text;
+//    }
+//}
 
 
 /// lol huge giant method, just realised how to fix, will fix later I can get rid of the entire if statement and in this line right here below change to it
@@ -341,7 +404,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -353,7 +416,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -366,7 +429,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -407,7 +470,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -419,7 +482,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -432,7 +495,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -474,7 +537,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -486,7 +549,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -499,7 +562,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -540,7 +603,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -552,7 +615,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -565,7 +628,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -606,7 +669,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -618,7 +681,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -631,7 +694,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0  && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -672,7 +735,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -684,7 +747,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -697,7 +760,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -738,7 +801,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -750,7 +813,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -763,7 +826,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -804,7 +867,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -817,7 +880,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -830,7 +893,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -872,7 +935,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -885,7 +948,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -898,7 +961,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -940,7 +1003,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -952,7 +1015,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -965,7 +1028,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1006,7 +1069,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1019,7 +1082,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1032,7 +1095,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1073,7 +1136,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1085,7 +1148,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1098,7 +1161,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1140,7 +1203,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1152,7 +1215,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1165,7 +1228,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1206,7 +1269,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1219,7 +1282,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1232,7 +1295,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1274,7 +1337,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1286,7 +1349,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1299,7 +1362,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1340,7 +1403,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1353,7 +1416,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1366,7 +1429,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }
@@ -1408,7 +1471,7 @@ NSString *title;
         if (chanceToSandSave.integerValue == 1 && yesSandSave.integerValue == 1) {
             _lastHoleSandSave = @"YES";
         } else  if (chanceToSandSave.integerValue == 0 && yesSandSave.integerValue == 0){
-            _lastHoleSandSave = @"";
+            _lastHoleSandSave = @"N/A";
         }else {
             _lastHoleSandSave = @"NO";
         }
@@ -1420,7 +1483,7 @@ NSString *title;
         if (yesScramble.integerValue == 1) {
             _lastHoleScamble = @"YES";
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
-            _lastHoleScamble = @"";
+            _lastHoleScamble = @"N/A";
 
         } else {
             _lastHoleScamble = @"NO";
@@ -1433,7 +1496,7 @@ NSString *title;
         if (yesBogeyScramble.integerValue == 1) {
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
-            _lastHoleBogeyScramble = @"";
+            _lastHoleBogeyScramble = @"N/A";
         } else {
             _lastHoleBogeyScramble = @"NO";
         }

@@ -24,6 +24,14 @@
 - (IBAction)onTapHole:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *mistakeButton;
 - (IBAction)onTapGoBackMistake:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *lastHoleView;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleShotsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHolePuttsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleGIRLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleFairwayHitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleSandSavesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleScrambleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastHoleBogeyScrambleLabel;
 
 
 @end
@@ -39,19 +47,31 @@ BOOL successSandSave;
     [super viewDidLoad];
         [_parLabel setText:_currentParOfHole];
     
-    
 
 }
 
 
 
 - (void)viewWillAppear:(BOOL)animated{
-
-
+    [super viewWillAppear:animated];
+    [self lastHoleStatsView];
 
 }
 
-
+- (void) lastHoleStatsView {
+    if (_holeNumber == 1) {
+        _lastHoleView.hidden = YES;
+    } else {
+        _lastHoleView.hidden = NO;
+        _lastHoleShotsLabel.text = _lastHoleShotTotal;
+        _lastHoleScrambleLabel.text = _lastHoleScamble;
+        _lastHolePuttsLabel.text = _lastHolePuttTotal;
+        _lastHoleGIRLabel.text = _lastHoleGIR;
+        _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;
+        _lastHoleFairwayHitLabel.text = _lastHoleFairwayHitorMiss;
+        _lastHoleSandSavesLabel.text = _lastHoleSandSave;
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -86,6 +106,13 @@ BOOL successSandSave;
         missHitVC.currentParOfHole = _currentParOfHole;
         missHitVC.possibilityForSandSave = _sandSaveOpportunity;
         missHitVC.roundDate = _roundDate;
+        missHitVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
+        missHitVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
+        missHitVC.lastHoleGIR = _lastHoleGIR;
+        missHitVC.lastHolePuttTotal = _lastHolePuttTotal;
+        missHitVC.lastHoleSandSave = _lastHoleSandSave;
+        missHitVC.lastHoleShotTotal = _lastHoleShotTotal;
+        missHitVC.lastHoleScamble = _lastHoleScamble;
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
         _totalShotsTaken++;
         missHitVC.totalShotsTaken = _totalShotsTaken;
@@ -96,6 +123,13 @@ BOOL successSandSave;
         missHitVC.currentParOfHole = _currentParOfHole;
         missHitVC.possibilityForSandSave = _sandSaveOpportunity;
         missHitVC.roundDate = _roundDate;
+        missHitVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
+        missHitVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
+        missHitVC.lastHoleGIR = _lastHoleGIR;
+        missHitVC.lastHolePuttTotal = _lastHolePuttTotal;
+        missHitVC.lastHoleSandSave = _lastHoleSandSave;
+        missHitVC.lastHoleShotTotal = _lastHoleShotTotal;
+        missHitVC.lastHoleScamble = _lastHoleScamble;
     } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
         _totalShotsTaken++;
         missHitVC.totalShotsTaken = _totalShotsTaken;
@@ -106,6 +140,13 @@ BOOL successSandSave;
         missHitVC.possibilityForSandSave = _sandSaveOpportunity;
         missHitVC.currentParOfHole = _currentParOfHole;
         missHitVC.roundDate = _roundDate;
+        missHitVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
+        missHitVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
+        missHitVC.lastHoleGIR = _lastHoleGIR;
+        missHitVC.lastHolePuttTotal = _lastHolePuttTotal;
+        missHitVC.lastHoleSandSave = _lastHoleSandSave;
+        missHitVC.lastHoleShotTotal = _lastHoleShotTotal;
+        missHitVC.lastHoleScamble = _lastHoleScamble;
     } else if ([segue.identifier isEqualToString:@"greenHitSegue"]) {
                 _totalShotsTaken++;
                 [self holeParLogic];
@@ -120,6 +161,13 @@ BOOL successSandSave;
         feltVC.holeNumber = _holeNumber;
         feltVC.currentParOfHole = _currentParOfHole;
         feltVC.roundDate = _roundDate;
+        feltVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
+        feltVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
+        feltVC.lastHoleGIR = _lastHoleGIR;
+        feltVC.lastHolePuttTotal = _lastHolePuttTotal;
+        feltVC.lastHoleSandSave = _lastHoleSandSave;
+        feltVC.lastHoleShotTotal = _lastHoleShotTotal;
+        feltVC.lastHoleScamble = _lastHoleScamble;
     }
     NSLog(@"total shot = %i  gir = %hhd fairway hit = %hhd par of hole = %@ hole number = %i success sand save = %hhd", _totalShotsTaken, _gir, _greenHitFairwayHit, _currentParOfHole, _holeNumber, _successfulSandSaveWORKPLEASE);
 }
@@ -132,13 +180,15 @@ BOOL successSandSave;
     NSNumber *missLeft = [[NSNumber alloc] initWithInt:_greenHitMissLeft];
     NSNumber *missRight = [[NSNumber alloc] initWithInt:_greenHitMissRight];
     NSNumber *saveSandOpportunity = [[NSNumber alloc] initWithInt:_sandSaveOpportunity];
-    NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
     NSNumber *succesSandSave = [[NSNumber alloc] initWithInt:_successfulSandSaveWORKPLEASE];
     NSNumber *puts = [[NSNumber alloc] initWithInt:_totalPutts];
     NSNumber *scrambleYES = [[NSNumber alloc] initWithInt:_successScramble];
         NSNumber *scrambleNO = [[NSNumber alloc] initWithInt:_failScramble];
         NSNumber *bogeyScrambleYES = [[NSNumber alloc] initWithInt:_successBogeyScramble];
         NSNumber *bogeyScrambleNO = [[NSNumber alloc] initWithInt:_failBogeyScrabmle];
+    NSString *par = _currentParOfHole;
+    NSNumber *penalty = [[NSNumber alloc] initWithInt:_penaltyStrokes];
+    NSNumber *hole = [[NSNumber alloc] initWithInt:_holeNumber];
 
 
 
@@ -149,22 +199,16 @@ BOOL successSandSave;
     [holeDict setObject:fairwayHits forKey:@"fairwayHits"];
     [holeDict setObject:missRight forKey:@"missRight"];
     [holeDict setObject:missLeft forKey:@"missLeft"];
-    [holeDict setObject:saveSandOpportunity forKey:@"saveSandOpportunity"];
-    [holeDict setObject:succesSandSave forKey:@"successSandSave"];
+    [holeDict setObject:saveSandOpportunity forKey:@"sandSavePossivility"];
+    [holeDict setObject:succesSandSave forKey:@"successfulSandSave"];
     [holeDict setObject:puts forKey:@"totalPutts"];
-    [holeDict setObject:scrambleYES forKey:@"scrambleYes"];
-        [holeDict setObject:scrambleNO forKey:@"scrambleNo"];
-    [holeDict setObject:bogeyScrambleYES forKey:@"bogeyScrambleYes"];
-    [holeDict setObject:bogeyScrambleNO forKey:@"bogeyScrambleNo"];
-
-
-
-
-
-
-
-
-    [holeDict setObject:holeNumber forKey:@"holeNumber"];
+    [holeDict setObject:scrambleYES forKey:@"successfulScramble"];
+    [holeDict setObject:scrambleNO forKey:@"failedScramble"];
+    [holeDict setObject:bogeyScrambleYES forKey:@"successfulBogeyScramble"];
+    [holeDict setObject:bogeyScrambleNO forKey:@"failedBogeyScramble"];
+    [holeDict setObject:par forKey:@"currentPar"];
+    [holeDict setObject:penalty forKey:@"totalPenaltyStrokes"];
+    [holeDict setObject:hole forKey:@"holeNumber"];
 
     NSUserDefaults *saveHole = [NSUserDefaults standardUserDefaults];
     [saveHole setObject:holeDict forKey:[NSString stringWithFormat:@"hole%iInfo",_holeNumber]];

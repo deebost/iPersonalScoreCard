@@ -30,5 +30,13 @@
 @property(nonatomic) BOOL successfulBogeyScramble;
 @property (strong, nonatomic) NSString *roundDate;
 
+@property (weak, nonatomic) NSString *lastHoleShotTotal;
+@property (weak, nonatomic) NSString *lastHolePuttTotal;
+@property (weak, nonatomic) NSString *lastHoleGIR;
+@property (weak, nonatomic) NSString *lastHoleFairwayHitorMiss;
+@property (weak, nonatomic) NSString *lastHoleSandSave;
+@property (weak, nonatomic) NSString *lastHoleScamble;
+@property (weak, nonatomic) NSString *lastHoleBogeyScramble;
+
 
 @end
