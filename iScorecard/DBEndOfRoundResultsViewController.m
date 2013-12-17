@@ -17,6 +17,7 @@
 NSArray *hole1Array, *hole2Array, *hole3Array, *hole4Array, *hole5Array, *hole6Array, *hole7Array, *hole8Array, *hole9Array, *hole10Array, *hole11Array, *hole12Array, *hole13Array, *hole14Array, *hole15Array, *hole16Array, *hole17Array, *hole18Array;
 NSDictionary *hole1Dict, *hole2Dict, *hole3Dict, *hole4Dict, *hole5Dict, *hole6Dict, *hole6Dict, *hole7Dict, *hole8Dict, *hole9Dict, *hole10Dict, *hole11Dict, *hole12Dict, *hole13Dict, *hole14Dict, *hole15Dict, *hole16Dict, *hole17Dict, *hole18Dict;
 NSMutableArray *allHolesData;
+NSMutableArray *allHoleDetails;
 
 
 
@@ -27,8 +28,10 @@ NSMutableArray *allHolesData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    allHolesData = [[NSMutableArray alloc] init];
+    allHoleDetails = [[NSMutableArray alloc] init];
     [self loadIndividualHolesToDictionary];
-    [self getAllStatsOutOfDict];
+    [self getholeOneStatsOutOfDict];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -64,46 +67,25 @@ NSMutableArray *allHolesData;
 
     hole1Dict = [hole1Array objectAtIndex:0];
     hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    
-        [allHolesData addObject:hole1Dict];
-        [allHolesData addObject:hole2Dict];
-        [allHolesData addObject:hole3Dict];
-        [allHolesData addObject:hole4Dict];
-        [allHolesData addObject:hole5Dict];
-        [allHolesData addObject:hole6Dict];
-        [allHolesData addObject:hole7Dict];
-        [allHolesData addObject:hole8Dict];
-        [allHolesData addObject:hole9Dict];
-        [allHolesData addObject:hole10Dict];
-        [allHolesData addObject:hole11Dict];
-        [allHolesData addObject:hole12Dict];
-        [allHolesData addObject:hole13Dict];
-        [allHolesData addObject:hole14Dict];
-        [allHolesData addObject:hole15Dict];
-        [allHolesData addObject:hole16Dict];
-        [allHolesData addObject:hole17Dict];
-        [allHolesData addObject:hole18Dict];
-    NSLog(@"%@", hole1Dict);
-
+    hole3Dict = [hole3Array objectAtIndex:0];
+    hole4Dict = [hole4Array objectAtIndex:0];
+    hole5Dict = [hole5Array objectAtIndex:0];
+    hole6Dict = [hole6Array objectAtIndex:0];
+    hole7Dict = [hole7Array objectAtIndex:0];
+    hole8Dict = [hole8Array objectAtIndex:0];
+    hole9Dict = [hole9Array objectAtIndex:0];
+    hole10Dict = [hole10Array objectAtIndex:0];
+    hole11Dict = [hole11Array objectAtIndex:0];
+    hole12Dict = [hole12Array objectAtIndex:0];
+    hole13Dict = [hole13Array objectAtIndex:0];
+    hole14Dict = [hole14Array objectAtIndex:0];
+    hole15Dict = [hole15Array objectAtIndex:0];
+    hole16Dict = [hole16Array objectAtIndex:0];
+    hole17Dict = [hole17Array objectAtIndex:0];
+    hole18Dict = [hole18Array objectAtIndex:0];
 }
 
-- (void) getAllStatsOutOfDict {
+- (void) getholeOneStatsOutOfDict {
 
     NSString *firstHoleShots = [hole1Dict objectForKey:@"totalShots"];
     NSString *firstHolePar = [hole1Dict objectForKey:@"currentPar"];
@@ -160,8 +142,17 @@ NSMutableArray *allHolesData;
         successOrFailSandSave = @"N/A";
     }
 
-    _firstHole1stLine = [NSString stringWithFormat:@"Par: %@ Shots: %@ Fairwayhit: %@ GIR: %@", firstHolePar, firstHoleShots, hitOrMissFairWay, firstHoleGIR];
-    _firstHole2ndLine = [NSString stringWithFormat:@"Sand Save: %@ Scramble: %@ Bogey Scramble: %@", successOrFailSandSave, parScrambleYesOrNO, bogeyScrambleYesOrNO];
+    _firstHole1stLine = [NSString stringWithFormat:@"Par: %@ | Shots: %@ | Fairwayhit: %@ | GIR: %@", firstHolePar, firstHoleShots, hitOrMissFairWay, firstHoleGIR];
+    _firstHole2ndLine = [NSString stringWithFormat:@"Sand Save: %@ | Scramble: %@ | Bogey Scramble: %@", successOrFailSandSave, parScrambleYesOrNO, bogeyScrambleYesOrNO];
+
+    NSArray *firstHoleInfos = [[NSArray alloc] initWithObjects:_firstHole1stLine, nil];
+    NSArray *firstHoleDetail = [[NSArray alloc] initWithObjects:_firstHole2ndLine, nil];
+    NSDictionary *firstHoleDict = [NSDictionary dictionaryWithObject:firstHoleInfos forKey:@"hole"];
+    NSDictionary *firstHoleDetailDic = [NSDictionary dictionaryWithObject:firstHoleDetail forKey:@"hole"];
+
+    [allHolesData addObject:firstHoleDict];
+    [allHoleDetails addObject:firstHoleDetailDic];
+
 }
 
 #pragma mark - Table view data source
@@ -175,9 +166,10 @@ NSMutableArray *allHolesData;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    NSDictionary *dictionary = [allHolesData objectAtIndex:section];
+    NSArray *array = [dictionary objectForKey:@"hole"];
+    return [array count];
     // Return the number of rows in the section.
-    return 2;
 }
 
 
@@ -225,12 +217,24 @@ NSMutableArray *allHolesData;
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    NSDictionary *dictionary = [allHolesData objectAtIndex:indexPath.row];
+    NSArray *holes = [dictionary objectForKey:@"hole"];
+    NSString *holeI = [holes objectAtIndex:indexPath.row];
 
-    NSDictionary *dictionary = [allHolesData objectAtIndex:indexPath.section];
-    NSArray *array = [dictionary objectForKey:@""];
-    NSString *cellValue = [array objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellValue;
-    cell.textLabel.text = [hole1Dict objectForKey:@"currentPar"];
+    NSDictionary *detailDic = [allHoleDetails objectAtIndex:indexPath.row];
+    NSArray *detailHoles = [detailDic objectForKey:@"hole"];
+    NSString *holeD = [detailHoles objectAtIndex:indexPath.row];
+
+    cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+    cell.textLabel.text = holeI;
+
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:10.0];
+    cell.detailTextLabel.text = holeD;
+
+
 
     return cell;
 }
