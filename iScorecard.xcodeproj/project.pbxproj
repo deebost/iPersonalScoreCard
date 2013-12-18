@@ -12,6 +12,7 @@
 		9151EE3818594750001FD095 /* DBSelectSavedCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9151EE3718594750001FD095 /* DBSelectSavedCoursesViewController.m */; };
 		919546F118570D1000BD4C68 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919546F018570D1000BD4C68 /* AVFoundation.framework */; };
 		91A8827A185F39A700176C83 /* DBEndOfRoundResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A88279185F39A700176C83 /* DBEndOfRoundResultsViewController.m */; };
+		91F6230B1860F1020058488E /* NSString+split.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F6230A1860F1020058488E /* NSString+split.m */; };
 		91FC3AB818519F90000D0F87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FC3AB718519F90000D0F87 /* Foundation.framework */; };
 		91FC3ABA18519F90000D0F87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FC3AB918519F90000D0F87 /* CoreGraphics.framework */; };
 		91FC3ABC18519F90000D0F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FC3ABB18519F90000D0F87 /* UIKit.framework */; };
@@ -62,6 +63,8 @@
 		919546F018570D1000BD4C68 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		91A88278185F39A700176C83 /* DBEndOfRoundResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBEndOfRoundResultsViewController.h; sourceTree = "<group>"; };
 		91A88279185F39A700176C83 /* DBEndOfRoundResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBEndOfRoundResultsViewController.m; sourceTree = "<group>"; };
+		91F623091860F1020058488E /* NSString+split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+split.h"; sourceTree = "<group>"; };
+		91F6230A1860F1020058488E /* NSString+split.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+split.m"; sourceTree = "<group>"; };
 		91FC3AB418519F90000D0F87 /* iScorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iScorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91FC3AB718519F90000D0F87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		91FC3AB918519F90000D0F87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -185,6 +188,8 @@
 				91FC3AC918519F90000D0F87 /* Main.storyboard */,
 				91A88278185F39A700176C83 /* DBEndOfRoundResultsViewController.h */,
 				91A88279185F39A700176C83 /* DBEndOfRoundResultsViewController.m */,
+				91F623091860F1020058488E /* NSString+split.h */,
+				91F6230A1860F1020058488E /* NSString+split.m */,
 				9151EDE418586B16001FD095 /* DBSubmitCourseViewController.h */,
 				9151EDE518586B16001FD095 /* DBSubmitCourseViewController.m */,
 				9151EE3618594750001FD095 /* DBSelectSavedCoursesViewController.h */,
@@ -343,6 +348,7 @@
 				9151EE3818594750001FD095 /* DBSelectSavedCoursesViewController.m in Sources */,
 				9151EDE618586B16001FD095 /* DBSubmitCourseViewController.m in Sources */,
 				9151EDE91858DA74001FD095 /* DBGolfLogic.m in Sources */,
+				91F6230B1860F1020058488E /* NSString+split.m in Sources */,
 				91FC3ACE18519F90000D0F87 /* DBViewController.m in Sources */,
 				91FC3AF41851A13E000D0F87 /* DBGreenHitViewController.m in Sources */,
 				91A8827A185F39A700176C83 /* DBEndOfRoundResultsViewController.m in Sources */,

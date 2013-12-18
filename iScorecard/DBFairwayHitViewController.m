@@ -441,9 +441,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -508,9 +508,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -574,9 +574,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -640,9 +640,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -706,9 +706,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -772,9 +772,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -838,9 +838,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -906,9 +906,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -974,9 +974,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1040,9 +1040,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1107,9 +1107,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1173,9 +1173,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1240,9 +1240,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1307,9 +1307,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1374,9 +1374,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1442,9 +1442,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }
@@ -1508,9 +1508,9 @@ NSString *title;
         if (fairwayHit.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"HIT";
         } else if (missLeft.integerValue == 1) {
-            _lastHoleFairwayHitorMiss = @"MISS R";
-        } else if (missRight.integerValue == 1) {
             _lastHoleFairwayHitorMiss = @"MISS L";
+        } else if (missRight.integerValue == 1) {
+            _lastHoleFairwayHitorMiss = @"MISS R";
         } else {
             _lastHoleFairwayHitorMiss = @"ERROR";
         }

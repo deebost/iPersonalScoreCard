@@ -18,6 +18,8 @@ NSArray *hole1Array, *hole2Array, *hole3Array, *hole4Array, *hole5Array, *hole6A
 NSDictionary *hole1Dict, *hole2Dict, *hole3Dict, *hole4Dict, *hole5Dict, *hole6Dict, *hole6Dict, *hole7Dict, *hole8Dict, *hole9Dict, *hole10Dict, *hole11Dict, *hole12Dict, *hole13Dict, *hole14Dict, *hole15Dict, *hole16Dict, *hole17Dict, *hole18Dict;
 NSMutableArray *allHolesData;
 NSMutableArray *allHoleDetails;
+NSMutableArray *hmmTRY;
+NSMutableDictionary *lastTry;
 
 
 
@@ -31,7 +33,7 @@ NSMutableArray *allHoleDetails;
     allHolesData = [[NSMutableArray alloc] init];
     allHoleDetails = [[NSMutableArray alloc] init];
     [self loadIndividualHolesToDictionary];
-    [self getholeOneStatsOutOfDict];
+    [self getholeTwoStatsOutOfDict];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,6 +47,8 @@ NSMutableArray *allHoleDetails;
 
     NSString *courseName = [loadHole objectForKey:@"courseName"];
     NSDictionary *everyHoleDict= [loadHole objectForKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName]];
+
+
 
     hole1Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeOneFinal"]];
     hole2Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeTwoFinal"]];
@@ -65,95 +69,76 @@ NSMutableArray *allHoleDetails;
     hole17Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeSeventeenFinal"]];
     hole18Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeEightteenFinal"]];
 
-    hole1Dict = [hole1Array objectAtIndex:0];
-    hole2Dict = [hole2Array objectAtIndex:0];
-    hole3Dict = [hole3Array objectAtIndex:0];
-    hole4Dict = [hole4Array objectAtIndex:0];
-    hole5Dict = [hole5Array objectAtIndex:0];
-    hole6Dict = [hole6Array objectAtIndex:0];
-    hole7Dict = [hole7Array objectAtIndex:0];
-    hole8Dict = [hole8Array objectAtIndex:0];
-    hole9Dict = [hole9Array objectAtIndex:0];
-    hole10Dict = [hole10Array objectAtIndex:0];
-    hole11Dict = [hole11Array objectAtIndex:0];
-    hole12Dict = [hole12Array objectAtIndex:0];
-    hole13Dict = [hole13Array objectAtIndex:0];
-    hole14Dict = [hole14Array objectAtIndex:0];
-    hole15Dict = [hole15Array objectAtIndex:0];
-    hole16Dict = [hole16Array objectAtIndex:0];
-    hole17Dict = [hole17Array objectAtIndex:0];
-    hole18Dict = [hole18Array objectAtIndex:0];
-}
+    hole1Dict = [NSDictionary dictionaryWithObject:[hole1Array objectAtIndex:0] forKey:@"zoo"];
+    hole2Dict = [NSDictionary dictionaryWithObject:[hole2Array objectAtIndex:0] forKey:@"zoo"];
+    hole3Dict = [NSDictionary dictionaryWithObject:[hole3Array objectAtIndex:0] forKey:@"zoo"];
+    hole4Dict = [NSDictionary dictionaryWithObject:[hole4Array objectAtIndex:0] forKey:@"zoo"];
+    hole5Dict = [NSDictionary dictionaryWithObject:[hole5Array objectAtIndex:0] forKey:@"zoo"];
+    hole6Dict = [NSDictionary dictionaryWithObject:[hole6Array objectAtIndex:0] forKey:@"zoo"];
+    hole7Dict = [NSDictionary dictionaryWithObject:[hole7Array objectAtIndex:0] forKey:@"zoo"];
+    hole8Dict = [NSDictionary dictionaryWithObject:[hole8Array objectAtIndex:0] forKey:@"zoo"];
+    hole9Dict = [NSDictionary dictionaryWithObject:[hole9Array objectAtIndex:0] forKey:@"zoo"];
+    hole10Dict = [NSDictionary dictionaryWithObject:[hole10Array objectAtIndex:0] forKey:@"zoo"];
+    hole11Dict = [NSDictionary dictionaryWithObject:[hole11Array objectAtIndex:0] forKey:@"zoo"];
+    hole12Dict = [NSDictionary dictionaryWithObject:[hole12Array objectAtIndex:0] forKey:@"zoo"];
+    hole13Dict = [NSDictionary dictionaryWithObject:[hole13Array objectAtIndex:0] forKey:@"zoo"];
+    hole14Dict = [NSDictionary dictionaryWithObject:[hole14Array objectAtIndex:0] forKey:@"zoo"];
+    hole15Dict = [NSDictionary dictionaryWithObject:[hole15Array objectAtIndex:0] forKey:@"zoo"];
+    hole16Dict = [NSDictionary dictionaryWithObject:[hole15Array objectAtIndex:0] forKey:@"zoo"];
+    hole17Dict = [NSDictionary dictionaryWithObject:[hole17Array objectAtIndex:0] forKey:@"zoo"];
+    hole18Dict = [NSDictionary dictionaryWithObject:[hole18Array objectAtIndex:0] forKey:@"zoo"];
 
-- (void) getholeOneStatsOutOfDict {
+    hmmTRY = [[NSMutableArray alloc] initWithObjects: hole1Dict, hole2Dict, hole3Dict, hole4Dict, hole5Dict, hole6Dict, hole7Dict, hole8Dict, hole9Dict, hole10Dict, hole11Dict, hole12Dict, hole13Dict, hole14Dict, hole15Dict, hole16Dict, hole17Dict, hole18Dict, nil];
 
-    NSString *firstHoleShots = [hole1Dict objectForKey:@"totalShots"];
-    NSString *firstHolePar = [hole1Dict objectForKey:@"currentPar"];
-    NSString *firstHoleGIR = [hole1Dict objectForKey:@"gir"];
-
-    NSString *missRight = [hole1Dict objectForKey:@"missRight"];
-    NSString *missLeft = [hole1Dict objectForKey:@"missLeft"];
-    NSString *fairwayHit = [hole1Dict objectForKey:@"fairwayHits"];
-    NSString *hitOrMissFairWay;
-
-    if (fairwayHit.integerValue == 1) {
-        hitOrMissFairWay = @"YES";
-    } else if (fairwayHit.integerValue == 0 && missLeft.integerValue == 0 && missRight.integerValue == 1) {
-        hitOrMissFairWay = @"MISS R";
-    } else {
-        hitOrMissFairWay = @"MISS L";
-    }
-
-    NSString *parScrambleYES = [hole1Dict objectForKey:@"successfulScramble"];
-    NSString *failedParScramble = [hole1Dict objectForKey:@"failedScramble"];
-
-    NSString *parScrambleYesOrNO;
-
-    if (parScrambleYES.integerValue == 1 ) {
-        parScrambleYesOrNO = @"YES";
-    } else if (failedParScramble.integerValue == 1) {
-        parScrambleYesOrNO = @"NO";
-    } else {
-        parScrambleYesOrNO = @"N/A";
-    }
-
-    NSString *bogeyScrambleYES = [hole1Dict objectForKey:@"successfulBogeyScramble"];
-    NSString *failedBogeyScramble = [hole1Dict objectForKey:@"failedBogeyScramble"];
-
-    NSString *bogeyScrambleYesOrNO;
-
-    if (bogeyScrambleYES.integerValue == 1 ) {
-        bogeyScrambleYesOrNO = @"YES";
-    } else if (failedBogeyScramble.integerValue == 1) {
-        bogeyScrambleYesOrNO = @"NO";
-    } else {
-        bogeyScrambleYesOrNO = @"N/A";
-    }
-
-    NSString *successSandSave = [hole1Dict objectForKey:@"successfulSandSave"];
-    NSString *sandSavePossibility = [hole1Dict objectForKey:@"sandSavePossivility"];
-
-    NSString *successOrFailSandSave;
-    if (successSandSave.integerValue == 1) {
-        successOrFailSandSave = @"YES";
-    }else if (sandSavePossibility.integerValue == 1 && successSandSave.integerValue == 0) {
-        successOrFailSandSave = @"NO";
-    } else {
-        successOrFailSandSave = @"N/A";
-    }
-
-    _firstHole1stLine = [NSString stringWithFormat:@"Par: %@ | Shots: %@ | Fairwayhit: %@ | GIR: %@", firstHolePar, firstHoleShots, hitOrMissFairWay, firstHoleGIR];
-    _firstHole2ndLine = [NSString stringWithFormat:@"Sand Save: %@ | Scramble: %@ | Bogey Scramble: %@", successOrFailSandSave, parScrambleYesOrNO, bogeyScrambleYesOrNO];
-
-    NSArray *firstHoleInfos = [[NSArray alloc] initWithObjects:_firstHole1stLine, nil];
-    NSArray *firstHoleDetail = [[NSArray alloc] initWithObjects:_firstHole2ndLine, nil];
-    NSDictionary *firstHoleDict = [NSDictionary dictionaryWithObject:firstHoleInfos forKey:@"hole"];
-    NSDictionary *firstHoleDetailDic = [NSDictionary dictionaryWithObject:firstHoleDetail forKey:@"hole"];
-
-    [allHolesData addObject:firstHoleDict];
-    [allHoleDetails addObject:firstHoleDetailDic];
 
 }
+
+- (void) getholeTwoStatsOutOfDict {
+
+    NSUInteger index = 1;
+
+    for (NSDictionary *hopeless2 in hmmTRY) {
+        NSMutableDictionary *hopeless = [[NSMutableDictionary alloc] initWithDictionary:[hopeless2 objectForKey:@"zoo"]];
+
+        NSString *line1= [NSString stringWithFormat:@"|index %i|Par: %@| Shots: %@| Gir: %@|", index, [hopeless objectForKey:@"currentPar"], [hopeless objectForKey:@"totalShots"], [hopeless objectForKey:@"gir"]];
+
+        NSString *line2 = [NSString stringWithFormat:@"| MISS-R: %@| MISS-L: %@| Fairway-H: %@|", [hopeless objectForKey:@"missRight"], [hopeless objectForKey:@"missLeft"], [hopeless objectForKey:@"fairwayHits"]];
+
+        NSString *line3 = [NSString stringWithFormat:@"|Hole# %@|Putts: %@|SSp: %@|SSs: %@|", [hopeless objectForKey:@"holeNumber"], [hopeless objectForKey:@"totalPutts"], [hopeless objectForKey:@"sandSavePossivility"], [hopeless objectForKey:@"successfulSandSave"]];
+
+        NSString *line4 = [NSString stringWithFormat:@"|Scramble: %@|ScrambleFail: %@|BS: %@|BSf %@|", [hopeless objectForKey:@"successfulScramble"], [hopeless objectForKey:@"failedScramble"],[hopeless objectForKey:@"successfulBogeyScramble"] , [hopeless objectForKey:@"failedBogeyScramble"]];
+
+
+//        NSString *detail1 = @"";
+//        NSString *detail2 = @"";
+//        NSString *detail3 = @"|Sandsave possibility|SSs = successful Sandsave|";
+//        NSString *detail4 = @"|BS= bogey scramble | BSf= failed bogey scramble|";
+
+
+        NSArray *allHoles = [[NSArray alloc] initWithObjects:line1, line2 ,line3, line4, nil];
+//        NSArray *allHoleDetail = [[NSArray alloc] initWithObjects:detail1, detail2, detail3, detail4, nil];
+
+
+        NSDictionary *diction = [NSDictionary dictionaryWithObject:allHoles forKey:@"yum"];
+//        NSDictionary *detailDiction = [NSDictionary dictionaryWithObject:allHoleDetail forKey:@"mmm"];
+
+        [allHolesData addObject:diction];
+//        [allHoleDetails addObject:detailDiction];
+
+
+
+
+        index++;
+    }
+}
+
+
+
+
+
+
+
+
 
 #pragma mark - Table view data source
 
@@ -167,7 +152,7 @@ NSMutableArray *allHoleDetails;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSDictionary *dictionary = [allHolesData objectAtIndex:section];
-    NSArray *array = [dictionary objectForKey:@"hole"];
+    NSArray *array = [dictionary objectForKey:@"yum"];
     return [array count];
     // Return the number of rows in the section.
 }
@@ -220,22 +205,22 @@ NSMutableArray *allHoleDetails;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+
     NSDictionary *dictionary = [allHolesData objectAtIndex:indexPath.row];
-    NSArray *holes = [dictionary objectForKey:@"hole"];
-    NSString *holeI = [holes objectAtIndex:indexPath.row];
+    NSArray *holes = [dictionary objectForKey:@"yum"];
+    NSLog(@"!!!!!!!!!!! %@",holes);
+//    NSString *holeI = [holes objectAtIndex:indexPath.row];
+//    NSLog(@"iiiiiiiiiiiiiiiiii  %@",holeI);
 
-    NSDictionary *detailDic = [allHoleDetails objectAtIndex:indexPath.row];
-    NSArray *detailHoles = [detailDic objectForKey:@"hole"];
-    NSString *holeD = [detailHoles objectAtIndex:indexPath.row];
+//    NSDictionary *detailDict = [allHoleDetails objectAtIndex:indexPath.row];
+//    NSArray *detailHole = [detailDict objectForKey:@"mmm"];
+//    NSString *holeD = [detailHole objectAtIndex:indexPath.row];
 
-    cell.textLabel.font = [UIFont systemFontOfSize:12.0];
-    cell.textLabel.text = holeI;
-
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:10.0];
-    cell.detailTextLabel.text = holeD;
-
-
-
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    cell.textLabel.text = [holes objectAtIndex:indexPath.row];
+//
+//    cell.detailTextLabel.font = [UIFont italicSystemFontOfSize:10.0];
+//    cell.detailTextLabel.text = holeD;
     return cell;
 }
 
