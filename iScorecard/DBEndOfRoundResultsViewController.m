@@ -9,17 +9,17 @@
 #import "DBEndOfRoundResultsViewController.h"
 
 @interface DBEndOfRoundResultsViewController ()
-@property (strong, nonatomic) NSString *firstHole1stLine;
-@property (strong, nonatomic) NSString *firstHole2ndLine;
-@property (strong, nonatomic) NSString *firstHole3rdLine;
+@property (weak, nonatomic) NSString *firstHole1stLine;
+@property (weak, nonatomic) NSString *firstHole2ndLine;
+@property (weak, nonatomic) NSString *firstHole3rdLine;
 
 @end
-NSArray *hole1Array, *hole2Array, *hole3Array, *hole4Array, *hole5Array, *hole6Array, *hole7Array, *hole8Array, *hole9Array, *hole10Array, *hole11Array, *hole12Array, *hole13Array, *hole14Array, *hole15Array, *hole16Array, *hole17Array, *hole18Array;
-NSDictionary *hole1Dict, *hole2Dict, *hole3Dict, *hole4Dict, *hole5Dict, *hole6Dict, *hole6Dict, *hole7Dict, *hole8Dict, *hole9Dict, *hole10Dict, *hole11Dict, *hole12Dict, *hole13Dict, *hole14Dict, *hole15Dict, *hole16Dict, *hole17Dict, *hole18Dict;
+
 NSMutableArray *allHolesData;
 NSMutableArray *allHoleDetails;
 NSMutableArray *hmmTRY;
-NSMutableDictionary *lastTry;
+NSUInteger I;
+NSDictionary *allHoleFinalDict;
 
 
 
@@ -31,112 +31,77 @@ NSMutableDictionary *lastTry;
 {
     [super viewDidLoad];
     allHolesData = [[NSMutableArray alloc] init];
-    allHoleDetails = [[NSMutableArray alloc] init];
-    [self loadIndividualHolesToDictionary];
-    [self getholeTwoStatsOutOfDict];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self loadHoleFinalsFromDictionaryStuffInArray];
+
 }
 
-- (void)loadIndividualHolesToDictionary {
+- (void)loadHoleFinalsFromDictionaryStuffInArray {
     NSUserDefaults *loadHole = [NSUserDefaults standardUserDefaults];
 
     NSString *courseName = [loadHole objectForKey:@"courseName"];
-    NSDictionary *everyHoleDict= [loadHole objectForKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName]];
-
-
-
-    hole1Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeOneFinal"]];
-    hole2Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeTwoFinal"]];
-    hole3Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeThreeFinal"]];
-    hole4Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeFourFinal"]];
-    hole5Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeFiveFinal"]];
-    hole6Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeSixFinal"]];
-    hole7Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeSevenFinal"]];
-    hole8Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeEightFinal"]];
-    hole9Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeNineFinal"]];
-    hole10Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeTenFinal"]];
-    hole11Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeElevenFinal"]];
-    hole12Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeTwelveFinal"]];
-    hole13Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeThirteenFinal"]];
-    hole14Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeFourteenFinal"]];
-    hole15Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeFifthteenFinal"]];
-    hole16Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeSixthteenFinal"]];
-    hole17Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeSeventeenFinal"]];
-    hole18Array = [[NSArray alloc] initWithArray:[everyHoleDict objectForKey:@"holeEightteenFinal"]];
-
-    hole1Dict = [NSDictionary dictionaryWithObject:[hole1Array objectAtIndex:0] forKey:@"zoo"];
-    hole2Dict = [NSDictionary dictionaryWithObject:[hole2Array objectAtIndex:0] forKey:@"zoo"];
-    hole3Dict = [NSDictionary dictionaryWithObject:[hole3Array objectAtIndex:0] forKey:@"zoo"];
-    hole4Dict = [NSDictionary dictionaryWithObject:[hole4Array objectAtIndex:0] forKey:@"zoo"];
-    hole5Dict = [NSDictionary dictionaryWithObject:[hole5Array objectAtIndex:0] forKey:@"zoo"];
-    hole6Dict = [NSDictionary dictionaryWithObject:[hole6Array objectAtIndex:0] forKey:@"zoo"];
-    hole7Dict = [NSDictionary dictionaryWithObject:[hole7Array objectAtIndex:0] forKey:@"zoo"];
-    hole8Dict = [NSDictionary dictionaryWithObject:[hole8Array objectAtIndex:0] forKey:@"zoo"];
-    hole9Dict = [NSDictionary dictionaryWithObject:[hole9Array objectAtIndex:0] forKey:@"zoo"];
-    hole10Dict = [NSDictionary dictionaryWithObject:[hole10Array objectAtIndex:0] forKey:@"zoo"];
-    hole11Dict = [NSDictionary dictionaryWithObject:[hole11Array objectAtIndex:0] forKey:@"zoo"];
-    hole12Dict = [NSDictionary dictionaryWithObject:[hole12Array objectAtIndex:0] forKey:@"zoo"];
-    hole13Dict = [NSDictionary dictionaryWithObject:[hole13Array objectAtIndex:0] forKey:@"zoo"];
-    hole14Dict = [NSDictionary dictionaryWithObject:[hole14Array objectAtIndex:0] forKey:@"zoo"];
-    hole15Dict = [NSDictionary dictionaryWithObject:[hole15Array objectAtIndex:0] forKey:@"zoo"];
-    hole16Dict = [NSDictionary dictionaryWithObject:[hole15Array objectAtIndex:0] forKey:@"zoo"];
-    hole17Dict = [NSDictionary dictionaryWithObject:[hole17Array objectAtIndex:0] forKey:@"zoo"];
-    hole18Dict = [NSDictionary dictionaryWithObject:[hole18Array objectAtIndex:0] forKey:@"zoo"];
-
-    hmmTRY = [[NSMutableArray alloc] initWithObjects: hole1Dict, hole2Dict, hole3Dict, hole4Dict, hole5Dict, hole6Dict, hole7Dict, hole8Dict, hole9Dict, hole10Dict, hole11Dict, hole12Dict, hole13Dict, hole14Dict, hole15Dict, hole16Dict, hole17Dict, hole18Dict, nil];
-
-
-}
-
-- (void) getholeTwoStatsOutOfDict {
-
-    NSUInteger index = 1;
-
-    for (NSDictionary *hopeless2 in hmmTRY) {
-        NSMutableDictionary *hopeless = [[NSMutableDictionary alloc] initWithDictionary:[hopeless2 objectForKey:@"zoo"]];
-
-        NSString *line1= [NSString stringWithFormat:@"|index %i|Par: %@| Shots: %@| Gir: %@|", index, [hopeless objectForKey:@"currentPar"], [hopeless objectForKey:@"totalShots"], [hopeless objectForKey:@"gir"]];
-
-        NSString *line2 = [NSString stringWithFormat:@"| MISS-R: %@| MISS-L: %@| Fairway-H: %@|", [hopeless objectForKey:@"missRight"], [hopeless objectForKey:@"missLeft"], [hopeless objectForKey:@"fairwayHits"]];
-
-        NSString *line3 = [NSString stringWithFormat:@"|Hole# %@|Putts: %@|SSp: %@|SSs: %@|", [hopeless objectForKey:@"holeNumber"], [hopeless objectForKey:@"totalPutts"], [hopeless objectForKey:@"sandSavePossivility"], [hopeless objectForKey:@"successfulSandSave"]];
-
-        NSString *line4 = [NSString stringWithFormat:@"|Scramble: %@|ScrambleFail: %@|BS: %@|BSf %@|", [hopeless objectForKey:@"successfulScramble"], [hopeless objectForKey:@"failedScramble"],[hopeless objectForKey:@"successfulBogeyScramble"] , [hopeless objectForKey:@"failedBogeyScramble"]];
-
-
-//        NSString *detail1 = @"";
-//        NSString *detail2 = @"";
-//        NSString *detail3 = @"|Sandsave possibility|SSs = successful Sandsave|";
-//        NSString *detail4 = @"|BS= bogey scramble | BSf= failed bogey scramble|";
-
-
-        NSArray *allHoles = [[NSArray alloc] initWithObjects:line1, line2 ,line3, line4, nil];
-//        NSArray *allHoleDetail = [[NSArray alloc] initWithObjects:detail1, detail2, detail3, detail4, nil];
-
-
-        NSDictionary *diction = [NSDictionary dictionaryWithObject:allHoles forKey:@"yum"];
-//        NSDictionary *detailDiction = [NSDictionary dictionaryWithObject:allHoleDetail forKey:@"mmm"];
-
-        [allHolesData addObject:diction];
-//        [allHoleDetails addObject:detailDiction];
-
-
-
-
-        index++;
+    NSArray *holeData = [loadHole objectForKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName]];
+    NSMutableArray *holeNumber1 = [NSMutableArray array];
+    NSMutableArray *holeNumber2 = [NSMutableArray array];
+    NSMutableArray *holeNumber3 = [NSMutableArray array];
+    NSMutableArray *holeNumber4 = [NSMutableArray array];
+    NSMutableArray *holeNumber5 = [NSMutableArray array];
+    NSMutableArray *holeNumber6 = [NSMutableArray array];
+    NSMutableArray *holeNumber7 = [NSMutableArray array];
+    NSMutableArray *holeNumber8 = [NSMutableArray array];
+    NSMutableArray *holeNumber9 = [NSMutableArray array];
+    NSMutableArray *holeNumber10 = [NSMutableArray array];
+    NSMutableArray *holeNumber11 = [NSMutableArray array];
+    NSMutableArray *holeNumber12 = [NSMutableArray array];
+    NSMutableArray *holeNumber13 = [NSMutableArray array];
+    NSMutableArray *holeNumber14 = [NSMutableArray array];
+    NSMutableArray *holeNumber15 = [NSMutableArray array];
+    NSMutableArray *holeNumber16 = [NSMutableArray array];
+    NSMutableArray *holeNumber17 = [NSMutableArray array];
+    NSMutableArray *holeNumber18 = [NSMutableArray array];
+    int i = 1;
+    for (NSDictionary *dict in holeData) {
+        if ([dict[@"holeNumber"] isEqualToString:@"1"]) {
+            [holeNumber1 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"2"]) {
+            [holeNumber2 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"3"]) {
+            [holeNumber3 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"4"]) {
+            [holeNumber4 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"5"]) {
+            [holeNumber5 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"6"]) {
+            [holeNumber6 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"7"]) {
+            [holeNumber7 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"8"]) {
+            [holeNumber8 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"9"]) {
+            [holeNumber9 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"10"]) {
+            [holeNumber10 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"11"]) {
+            [holeNumber11 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"12"]) {
+            [holeNumber12 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"13"]) {
+            [holeNumber13 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"14"]) {
+            [holeNumber14 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"15"]) {
+            [holeNumber15 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"16"]) {
+            [holeNumber16 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"17"]) {
+            [holeNumber17 addObject:dict];
+        } else if ([dict[@"holeNumber"] isEqualToString:@"18"]) {
+            [holeNumber18 addObject:dict];
+        }
     }
+
+    allHolesData = [NSMutableArray arrayWithObjects:holeNumber1, holeNumber2, holeNumber3, holeNumber4, holeNumber5, holeNumber6, holeNumber7, holeNumber8, holeNumber9, holeNumber10, holeNumber11, holeNumber12, holeNumber13, holeNumber14, holeNumber15, holeNumber16, holeNumber17, holeNumber18, nil];
 }
-
-
-
-
-
-
 
 
 
@@ -146,15 +111,16 @@ NSMutableDictionary *lastTry;
 {
 
     // Return the number of sections.
-    return [allHolesData count];
+    return allHolesData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSDictionary *dictionary = [allHolesData objectAtIndex:section];
-    NSArray *array = [dictionary objectForKey:@"yum"];
-    return [array count];
+//    NSDictionary *dictionary = [allHolesData objectAtIndex:section];
+//    NSArray *array = [dictionary objectForKey:@"yum"];
+//    return [array count];
     // Return the number of rows in the section.
+    return [allHolesData [section] count];
 }
 
 
@@ -202,26 +168,112 @@ NSMutableDictionary *lastTry;
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+
+    NSString *bigLongSentence = [NSString stringWithFormat:@"#%@ Par:%@ Shots: %@ Gir:%@",
+                                 allHolesData[indexPath.section][indexPath.row][@"holeNumber"],
+                                 allHolesData[indexPath.section][indexPath.row][@"currentPar"],
+                                 allHolesData[indexPath.section][indexPath.row][@"totalShots"],
+                                 allHolesData[indexPath.section][indexPath.row][@"gir"]];
+    NSString *fairwayID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"fairwayHits"]integerValue] == 1) {
+        fairwayID = @"Fairway Hit";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"missRight"]integerValue] == 1) {
+        fairwayID = @"Miss Right";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"missLeft"]integerValue] == 1) {
+        fairwayID = @"Miss Left";
+    } else {
+        fairwayID = @"";
     }
 
-    NSDictionary *dictionary = [allHolesData objectAtIndex:indexPath.row];
-    NSArray *holes = [dictionary objectForKey:@"yum"];
-    NSLog(@"!!!!!!!!!!! %@",holes);
-//    NSString *holeI = [holes objectAtIndex:indexPath.row];
-//    NSLog(@"iiiiiiiiiiiiiiiiii  %@",holeI);
+    NSString *scrambleID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulScramble"]integerValue] == 1) {
+        scrambleID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"failedScramble"]integerValue] == 1) {
+        scrambleID = @"NO";
+    } else {
+        scrambleID = @"N/A";
+    }
 
-//    NSDictionary *detailDict = [allHoleDetails objectAtIndex:indexPath.row];
-//    NSArray *detailHole = [detailDict objectForKey:@"mmm"];
-//    NSString *holeD = [detailHole objectAtIndex:indexPath.row];
+    NSString *sandSaveID;
 
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0];
-    cell.textLabel.text = [holes objectAtIndex:indexPath.row];
-//
-//    cell.detailTextLabel.font = [UIFont italicSystemFontOfSize:10.0];
-//    cell.detailTextLabel.text = holeD;
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulSandSave"]integerValue] == 1) {
+        sandSaveID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"successfulSandSave"]integerValue] == 0 && [allHolesData[indexPath.section][indexPath.row][@"sandSavePossivility"]integerValue] == 1) {
+        sandSaveID = @"NO";
+    } else {
+        sandSaveID = @"N/A";
+    }
+    NSString *bogeyScrambleID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulBogeyScramble"]integerValue] == 1) {
+        bogeyScrambleID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"fairwayHits"]integerValue] == 1) {
+        bogeyScrambleID = @"NO";
+    } else {
+        bogeyScrambleID = @"N/A";
+    }
+    NSString *detailLongSentce = [NSString stringWithFormat:@"SS: %@ Drive Accu: %@ S: %@ B-S: %@", sandSaveID, fairwayID, scrambleID, bogeyScrambleID];
+
+
+
+
+
+    cell.textLabel.text = bigLongSentence;
+    cell.detailTextLabel.text = detailLongSentce;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *selectedCell = nil;
+    NSString *detailCell = nil;
+    selectedCell = [NSString stringWithFormat:@"#%@ Par:%@ Shots: %@ Gir:%@",
+                    allHolesData[indexPath.section][indexPath.row][@"holeNumber"],
+                    allHolesData[indexPath.section][indexPath.row][@"currentPar"],
+                    allHolesData[indexPath.section][indexPath.row][@"totalShots"],
+                    allHolesData[indexPath.section][indexPath.row][@"gir"]];
+
+    NSString *fairwayID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"fairwayHits"]integerValue] == 1) {
+        fairwayID = @"Fairway Hit";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"missRight"]integerValue] == 1) {
+        fairwayID = @"Miss Right";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"missLeft"]integerValue] == 1) {
+        fairwayID = @"Miss Left";
+    } else {
+        fairwayID = @"";
+    }
+
+    NSString *scrambleID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulScramble"]integerValue] == 1) {
+        scrambleID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"failedScramble"]integerValue] == 1) {
+        scrambleID = @"NO";
+    } else {
+        scrambleID = @"N/A";
+    }
+
+    NSString *sandSaveID;
+
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulSandSave"]integerValue] == 1) {
+        sandSaveID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"successfulSandSave"]integerValue] == 0 && [allHolesData[indexPath.section][indexPath.row][@"sandSavePossivility"]integerValue] == 1) {
+        sandSaveID = @"NO";
+    } else {
+        sandSaveID = @"N/A";
+    }
+    NSString *bogeyScrambleID;
+    if ([allHolesData[indexPath.section][indexPath.row][@"successfulBogeyScramble"]integerValue] == 1) {
+        bogeyScrambleID = @"YES";
+    } else if ([allHolesData[indexPath.section][indexPath.row][@"failedBogeyScramble"]integerValue] == 1) {
+        bogeyScrambleID = @"NO";
+    } else {
+        bogeyScrambleID = @"N/A";
+    }
+
+    detailCell = [NSString stringWithFormat:@"SS: %@ Drive Accu: %@ S: %@ B-S: %@", sandSaveID, fairwayID, scrambleID, bogeyScrambleID];
+    DLog(@"%@",selectedCell);
+    DLog(@"%@",detailCell);
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 /*

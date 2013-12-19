@@ -28,21 +28,21 @@
 
 @end
 NSString *parOfHole;
-NSNumber *totalShots;
-NSNumber *gir;
-NSNumber *fairwayHits;
-NSNumber *missLeft;
-NSNumber *missRight;
-NSNumber *successfulSandSave;
-NSNumber *sandSavePossibility;
-NSNumber *successfulScramble;
-NSNumber *failedScramble;
-NSNumber *successfulBogeyScramble;
-NSNumber *failedBogeyScramble;
+NSString *totalShots;
+NSString *gir;
+NSString *fairwayHits;
+NSString *missLeft;
+NSString *missRight;
+NSString *successfulSandSave;
+NSString *sandSavePossibility;
+NSString *successfulScramble;
+NSString *failedScramble;
+NSString *successfulBogeyScramble;
+NSString *failedBogeyScramble;
 NSString *currentPar;
-NSNumber *totalPenaltyStroke;
-NSNumber *totalPutts;
-NSNumber *holeNumber;
+NSString *totalPenaltyStroke;
+NSString *totalPutts;
+NSString *holeNumber;
 //    NSString *dateOfRound = _roundDate;
 
 
@@ -133,21 +133,21 @@ NSMutableDictionary *holeDict;
 }
 
 - (void)allocAndInnitStats {
-    totalShots = [[NSNumber alloc] initWithInt:_totalShotsTaken];
-    gir = [[NSNumber alloc] initWithInt:_gir];
-    fairwayHits = [[NSNumber alloc] initWithInt:_finalFairwayHit];
-    missLeft = [[NSNumber alloc] initWithInt:_finalMissLeft];
-    missRight = [[NSNumber alloc] initWithInt:_finalMissRight];
-    successfulSandSave = [[NSNumber alloc] initWithInt:_successfulSandSave];
-    sandSavePossibility = [[NSNumber alloc] initWithInt:_sandSavePossibility];
-    successfulScramble = [[NSNumber alloc] initWithInt:_successfulScramble];
-    failedScramble = [[NSNumber alloc] initWithInt:_failedScramble];
-    successfulBogeyScramble = [[NSNumber alloc] initWithInt:_successfulBogeyScramble];
-    failedBogeyScramble = [[NSNumber alloc] initWithInt:_failedBogeyScramble];
+    totalShots = [NSString stringWithFormat:@"%i", _totalShotsTaken];
+    gir =  [NSString stringWithFormat:@"%i",_gir];
+    fairwayHits = [NSString stringWithFormat:@"%i",_finalFairwayHit];
+    missLeft =  [NSString stringWithFormat:@"%i",_finalMissLeft];
+    missRight =  [NSString stringWithFormat:@"%i",_finalMissRight];
+    successfulSandSave =  [NSString stringWithFormat:@"%i",_successfulSandSave];
+    sandSavePossibility =  [NSString stringWithFormat:@"%i",_sandSavePossibility];
+    successfulScramble = [NSString stringWithFormat:@"%i",_successfulScramble];
+    failedScramble = [NSString stringWithFormat:@"%i",_failedScramble];
+    successfulBogeyScramble =  [NSString stringWithFormat:@"%i",_successfulBogeyScramble];
+    failedBogeyScramble =  [NSString stringWithFormat:@"%i",_failedBogeyScramble];
     currentPar = [NSString stringWithFormat:@"%@", _currentParOfHole];
-    totalPenaltyStroke = [[NSNumber alloc] initWithInt:_totalPenaltyStrokes];
-    totalPutts = [[NSNumber alloc] initWithInt:_totalPutts];
-    holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
+    totalPenaltyStroke = [NSString stringWithFormat:@"%i",_totalPenaltyStrokes];
+    totalPutts =  [NSString stringWithFormat:@"%i",_totalPutts];
+    holeNumber =  [NSString stringWithFormat:@"%i",_holeNumber];
     //    NSString *dateOfRound = _roundDate;
 
 
@@ -254,53 +254,31 @@ NSMutableDictionary *holeDict;
     NSUserDefaults *allHoles = [NSUserDefaults standardUserDefaults];
     NSString *courseName = [allHoles objectForKey:@"courseName"];
 
-    NSArray *holeOneDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole1Info"], nil];
-    NSArray *holeTwoDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole2Info"], nil];
-    NSArray *holeThreeDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole3Info"], nil];
-    NSArray *holeFourDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole4Info"], nil];
-    NSArray *holeFiveDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole5Info"], nil];
-    NSArray *holeSixDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole6Info"], nil];
-    NSArray *holeSevenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole7Info"], nil];
-    NSArray *holeEightDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole8Info"], nil];
-    NSArray *holeNineDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole9Info"], nil];
-    NSArray *holeTenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole10Info"], nil];
-    NSArray *holeElevenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole11Info"], nil];
-    NSArray *holeTwelveDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole12Info"], nil];
-    NSArray *holeThirteenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole13Info"], nil];
-    NSArray *holeFourteenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole14Info"], nil];
-    NSArray *holeFifthteenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole15Info"], nil];
-    NSArray *holeSixthteenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole16Info"], nil];
-    NSArray *holeSeventeenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole17Info"], nil];
-    NSArray *holeEightteenDic = [[NSArray alloc] initWithObjects:[allHoles objectForKey:@"hole18Info"], nil];
-    NSMutableDictionary *courseRoundStats = [[ NSMutableDictionary alloc] init];
-    [courseRoundStats setObject:holeOneDic forKey:@"holeOneFinal"];
-    [courseRoundStats setObject:holeTwoDic forKey:@"holeTwoFinal"];
-    [courseRoundStats setObject:holeThreeDic forKey:@"holeThreeFinal"];
-    [courseRoundStats setObject:holeFourDic forKey:@"holeFourFinal"];
-    [courseRoundStats setObject:holeFiveDic forKey:@"holeFiveFinal"];
-    [courseRoundStats setObject:holeSixDic forKey:@"holeSixFinal"];
-    [courseRoundStats setObject:holeSevenDic forKey:@"holeSevenFinal"];
-    [courseRoundStats setObject:holeEightDic forKey:@"holeEightFinal"];
-    [courseRoundStats setObject:holeNineDic forKey:@"holeNineFinal"];
-    [courseRoundStats setObject:holeTenDic forKey:@"holeTenFinal"];
-    [courseRoundStats setObject:holeElevenDic forKey:@"holeElevenFinal"];
-    [courseRoundStats setObject:holeTwelveDic forKey:@"holeTwelveFinal"];
-    [courseRoundStats setObject:holeThirteenDic forKey:@"holeThirteenFinal"];
-    [courseRoundStats setObject:holeFourteenDic forKey:@"holeFourteenFinal"];
-    [courseRoundStats setObject:holeFifthteenDic forKey:@"holeFifthteenFinal"];
-    [courseRoundStats setObject:holeSixthteenDic forKey:@"holeSixthteenFinal"];
-    [courseRoundStats setObject:holeSeventeenDic forKey:@"holeSeventeenFinal"];
-    [courseRoundStats setObject:holeEightteenDic forKey:@"holeEightteenFinal"];
+    NSArray *courseHoles = [NSArray arrayWithObjects:
+                            [allHoles objectForKey:@"hole1Info"],
+                            [allHoles objectForKey:@"hole2Info"],
+                            [allHoles objectForKey:@"hole3Info"],
+                            [allHoles objectForKey:@"hole4Info"],
+                            [allHoles objectForKey:@"hole5Info"],
+                            [allHoles objectForKey:@"hole6Info"],
+                            [allHoles objectForKey:@"hole7Info"],
+                            [allHoles objectForKey:@"hole8Info"],
+                            [allHoles objectForKey:@"hole9Info"],
+                            [allHoles objectForKey:@"hole10Info"],
+                            [allHoles objectForKey:@"hole11Info"],
+                            [allHoles objectForKey:@"hole12Info"],
+                            [allHoles objectForKey:@"hole13Info"],
+                            [allHoles objectForKey:@"hole14Info"],
+                            [allHoles objectForKey:@"hole15Info"],
+                            [allHoles objectForKey:@"hole16Info"],
+                            [allHoles objectForKey:@"hole17Info"],
+                            [allHoles objectForKey:@"hole18Info"], nil];
+
     
 
 
-    [allHoles setObject:courseRoundStats forKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName ]];
+    [allHoles setObject:courseHoles forKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName ]];
     [allHoles synchronize];
-
-    PFObject *myScore = [PFObject objectWithClassName:@"MyScores"];
-    myScore[@"totalRoundScore"] = [[NSDictionary alloc] initWithDictionary:courseRoundStats];
-
-
 }
 
 - (void) deleteHoleInfoAfterRoundComplete {

@@ -260,6 +260,7 @@ BOOL successSandSave;
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     inTheHole.delegate = nil;
+    DLog(@"Bye bye %@", _currentParOfHole);
 }
 - (IBAction)onTapHole:(id)sender {
     inTheHole = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
