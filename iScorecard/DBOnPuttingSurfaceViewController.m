@@ -8,6 +8,7 @@
 
 #import "DBOnPuttingSurfaceViewController.h"
 #import "DBGreenHitViewController.h"
+#import "DBGolfLogic.h"
 #import <Parse/Parse.h>
 
 @interface DBOnPuttingSurfaceViewController ()
@@ -80,56 +81,80 @@ NSMutableDictionary *holeDict;
     }
 }
 
-- (void) sandSaveLogic {
-    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken <= 3 && _sandSavePossibility == YES ) {
-        _successfulSandSave = YES;
+//- (void) sandSaveLogic {
+//    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken <= 3 && _sandSavePossibility == YES ) {
+//        _successfulSandSave = YES;
+//
+//    } else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken <= 4 && _sandSavePossibility == YES ){
+//        _successfulSandSave = YES;
+//    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken <= 5 && _sandSavePossibility == YES) {
+//        _successfulSandSave = YES;
+//    }
+//}
 
-    } else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken <= 4 && _sandSavePossibility == YES ){
-        _successfulSandSave = YES;
-    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken <= 5 && _sandSavePossibility == YES) {
-        _successfulSandSave = YES;
-    }
-}
 
+//- (void) scramblingLogic {
+//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken <= 3) {
+//        _successfulScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken <= 4) {
+//        _successfulScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken <= 5) {
+//        _successfulScramble = YES;
+//    }
+//}
+//
+//- (void) failedTooScrambleLogic {
+//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken > 3) {
+//        _failedScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken > 4) {
+//        _failedScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken > 5) {
+//        _failedScramble = YES;
+//    }
+//}
+//
+//- (void) bogeyScrambleLogic {
+//    if (_currentParOfHole.integerValue == 3 && _totalPutts == 1 && _totalShotsTaken == 4 && _gir == NO) {
+//        _successfulBogeyScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 4 && _totalPutts == 1 && _totalShotsTaken == 5 && _gir == NO) {
+//        _successfulBogeyScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 5 && _totalPutts == 1 && _totalShotsTaken == 6 && _gir == NO) {
+//        _successfulBogeyScramble = YES;
+//    }
+//}
+//
+//- (void) failedToBogeyScramble{
+//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken >= 5) {
+//        _failedBogeyScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken >= 6) {
+//        _failedBogeyScramble = YES;
+//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken >= 7) {
+//        _failedBogeyScramble = YES;
+//    }
+//}
 
-- (void) scramblingLogic {
-    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken <= 3) {
-        _successfulScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken <= 4) {
-        _successfulScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken <= 5) {
-        _successfulScramble = YES;
-    }
-}
+- (void) setUPgolfLogic {
+    int par = _currentParOfHole.integerValue;
 
-- (void) failedTooScrambleLogic {
-    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken > 3) {
-        _failedScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken > 4) {
-        _failedScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken > 5) {
-        _failedScramble = YES;
-    }
-}
+    DBGolfLogic *golfLogic = [[DBGolfLogic alloc] init];
+    NSNumber *tempShotsTake = [[NSNumber alloc] initWithInt:_totalShotsTaken];
+    NSNumber *tempPar = [[NSNumber alloc] initWithInt:par];
 
-- (void) bogeyScrambleLogic {
-    if (_currentParOfHole.integerValue == 3 && _totalPutts == 1 && _totalShotsTaken == 4 && _gir == NO) {
-        _successfulBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 4 && _totalPutts == 1 && _totalShotsTaken == 5 && _gir == NO) {
-        _successfulBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 5 && _totalPutts == 1 && _totalShotsTaken == 6 && _gir == NO) {
-        _successfulBogeyScramble = YES;
-    }
-}
+    //        _gir = YES;
 
-- (void) failedToBogeyScramble{
-    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken >= 5) {
-        _failedBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken >= 6) {
-        _failedBogeyScramble = YES;
-    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken >= 7) {
-        _failedBogeyScramble = YES;
-    }
+    [golfLogic sandSaveLogicTwo:tempPar totalShotsTaken:tempShotsTake sandSaveIsPossible:_sandSavePossibility];
+    [golfLogic scrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+    [golfLogic failScrambleLogic:tempPar totalShots:tempShotsTake greenInreg:_gir];
+    [golfLogic bogeyscrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+    [golfLogic failedBogeyScrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
+    [golfLogic totalShotsToFigureOutGir:tempShotsTake par:tempPar];
+
+    _failedBogeyScramble = golfLogic.bogeyScrambleNO;
+    _successfulBogeyScramble = golfLogic.bogeyScrambleYES;
+    _failedScramble = golfLogic.scrambleNO;
+    _successfulSandSave = golfLogic.successOnSandSave;
+    _successfulScramble = golfLogic.scrambleYES;
+
 }
 
 - (void)allocAndInnitStats {
@@ -201,12 +226,9 @@ NSMutableDictionary *holeDict;
     if (_holeNumber <= 17) {
         _totalShotsTaken++;
         _totalPutts++;
-        [self sandSaveLogic];
-        [self scramblingLogic];
-        [self failedTooScrambleLogic];
-        [self bogeyScrambleLogic];
-        [self failedToBogeyScramble];
+        [self setUPgolfLogic];
         [self allocAndInnitStats];
+
 
 
 
@@ -227,12 +249,9 @@ NSMutableDictionary *holeDict;
     else if (_holeNumber == 18) {
         _totalShotsTaken++;
         _totalPutts++;
-        [self sandSaveLogic];
-        [self scramblingLogic];
-        [self failedTooScrambleLogic];
-        [self bogeyScrambleLogic];
-        [self failedToBogeyScramble];
+        [self setUPgolfLogic];
         [self allocAndInnitStats];
+
 
         NSLog(@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility);
 

@@ -13,6 +13,8 @@
 #import <Parse/Parse.h>
 #import <AVFoundation/AVFoundation.h>
 
+#define SUBVIEW_TAG 9999
+
 @interface DBFairwayHitViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *fairwayHitButton;
 @property (weak, nonatomic) IBOutlet UIButton *missRightButton;
@@ -32,6 +34,64 @@
 NSString *title;
 
 @implementation DBFairwayHitViewController
+
+- (void) nineHoleAlert {
+    UIAlertView *nineAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                        message:@"You have selected Nine holes"
+                                                       delegate:self cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"I am sure", nil];
+    [nineAlert show];
+}
+
+- (void) eighteenHoleAlert {
+    UIAlertView *eighteenAler = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                           message:@"You have selected Eighteen holes"
+                                                          delegate:self cancelButtonTitle:@"cancel"
+                                                 otherButtonTitles:@"I am sure!", nil];
+    [eighteenAler show];
+}
+
+- (void) handleNineExit {
+    [self nineHoleAlert];
+
+}
+- (void) handleEighteenExit {
+    [self eighteenHoleAlert];
+
+}
+
+- (void)loadNineOr18 {
+    UIView *nineOrEighteenView = [[UIView alloc] initWithFrame:self.view.frame];
+    nineOrEighteenView.backgroundColor = [UIColor orangeColor];
+    UIButton *nineHoleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [nineHoleButton addTarget:self action:@selector(handleNineExit) forControlEvents:UIControlEventTouchUpInside];
+    [nineHoleButton setFrame:CGRectMake(25, 150, 90, 30)];
+    [nineHoleButton setBackgroundColor:[UIColor blackColor]];
+    [nineHoleButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+
+
+    [nineHoleButton setTitle:@"9 Holes" forState:UIControlStateNormal];
+
+    UIButton *eighteenHoleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [eighteenHoleButton addTarget:self action:@selector(handleEighteenExit) forControlEvents:UIControlEventTouchUpInside];
+    [eighteenHoleButton setFrame:CGRectMake(195, 150, 90, 30)];
+    [eighteenHoleButton setBackgroundColor:[UIColor blackColor]];
+    [eighteenHoleButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [eighteenHoleButton setTitle:@"18 Holes" forState:UIControlStateNormal];
+
+    [nineOrEighteenView addSubview:nineHoleButton];
+    [nineOrEighteenView addSubview:eighteenHoleButton];
+    [nineOrEighteenView setTag:SUBVIEW_TAG];
+    [self.view addSubview:nineOrEighteenView];
+}
+
+- (void) displayNineOrEighteenOnlyAtStart {
+    if (_holeNumber == 1) {
+        [self loadNineOr18];
+    } else {
+        // Do Nothing
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton *)sender {
     DBMissLeftOrRightViewController *missRightVC = (DBMissLeftOrRightViewController *) segue.destinationViewController;
@@ -54,6 +114,7 @@ NSString *title;
         greenHitVC.lastHoleSandSave = _passedLastHoleSandSave;
         greenHitVC.lastHoleShotTotal = _passedLastHoleShotTotal;
         greenHitVC.lastHoleScamble = _passedLastHoleScamble;
+        greenHitVC.howManyHoles = _howManyHoles;
 
 
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
@@ -62,7 +123,7 @@ NSString *title;
             _missLeft = YES;
             _shotTotalForHole++;
 
-
+        missRightVC.howManyHoles = _howManyHoles;
             missRightVC.totalShotsTaken = _shotTotalForHole;
             missRightVC.possibilityForSandSave = NO;
             missRightVC.numberOfPenaltyStrokes = 0;
@@ -100,6 +161,7 @@ NSString *title;
             missRightVC.lastHoleSandSave = _passedLastHoleSandSave;
             missRightVC.lastHoleShotTotal = _passedLastHoleShotTotal;
             missRightVC.lastHoleScamble = _passedLastHoleScamble;
+                    missRightVC.howManyHoles = _howManyHoles;
         } else if ([segue.identifier isEqualToString:@"onFeltVC"]) {
             _shotTotalForHole++;
             onFeltVc.gir = YES;
@@ -114,10 +176,13 @@ NSString *title;
             onFeltVc.lastHoleSandSave = _passedLastHoleSandSave;
             onFeltVc.lastHoleShotTotal = _passedLastHoleShotTotal;
             onFeltVc.lastHoleScamble = _passedLastHoleScamble;
-            
+            onFeltVc.howManyHoles = _howManyHoles;
+
+
         } else if ([segue.identifier isEqualToString:@"missShort"]) {
             _shotTotalForHole++;
             missRightVC.totalShotsTaken = _shotTotalForHole;
+                    missRightVC.howManyHoles = _howManyHoles;
             missRightVC.possibilityForSandSave = NO;
             missRightVC.numberOfPenaltyStrokes = 0;
             missRightVC.chanceToScramble = NO;
@@ -146,6 +211,7 @@ NSString *title;
     _holeInOneButton.hidden = YES;
     [self figureOutDateOfRoundStart];
     _holeNumber = 1;
+    [self displayNineOrEighteenOnlyAtStart];
     }
 
 
@@ -336,22 +402,19 @@ NSString *title;
 
         // save hole in one to parse / plist update hole number;
 
+    } else if ([title isEqualToString:@"I am sure"]) {
+        _howManyHoles = 9;
+        UIView *subview = [self.view viewWithTag:SUBVIEW_TAG];
+        [subview removeFromSuperview];
+
+    } else if ([title isEqualToString:@"I am sure!"]) {
+        _howManyHoles = 18;
+        UIView *subview = [self.view viewWithTag:SUBVIEW_TAG];
+        [subview removeFromSuperview];
+
     }
 }
 
-//- (void) lastHoleStatsView {
-//    if (_holeNumber == 1) {
-//        _entireLastHoleView.hidden = YES;
-//    } else {
-//        _lastHoleShotTotal = _lastHoleShotsLabel.text;
-//        _lastHoleScamble =_lastHoleScrambleLabel.text;
-//         _lastHolePuttTotal = _lastHolePuttsLabel.text;
-//         _lastHoleGIR = _lastHoleGIRLabel.text;
-//         _lastHoleBogeyScramble = _lastHoleBogeyScrambleLabel.text;
-//         _lastHoleFairwayHitorMiss =  _lastHoleFairwaysHitLabel.text;
-//         _lastHoleSandSave = _lastHoleSandSaveLabel.text;
-//    }
-//}
 - (void)showHoleScores {
     NSUserDefaults *lastHoleI = [NSUserDefaults standardUserDefaults];
     NSDictionary *lastHoleDic;
@@ -395,7 +458,7 @@ NSString *title;
         } else if (yesScramble.integerValue == 0 && chanceToScramble.integerValue == 0) {
             _lastHoleScamble = @"N/A";
 
-        } else {
+        } else if (yesScramble.integerValue == 1){
             _lastHoleScamble = @"NO";
         }
         _lastHoleScrambleLabel.text = _lastHoleScamble;
@@ -407,7 +470,7 @@ NSString *title;
             _lastHoleBogeyScramble = @"YES";
         } else if (yesBogeyScramble.integerValue == 0 && chanceToBogeyScamble.integerValue == 0) {
             _lastHoleBogeyScramble = @"N/A";
-        } else {
+        } else if (chanceToScramble.integerValue == 1){
             _lastHoleBogeyScramble = @"NO";
         }
         _lastHoleBogeyScrambleLabel.text = _lastHoleBogeyScramble;

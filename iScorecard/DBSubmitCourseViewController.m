@@ -186,13 +186,6 @@ BOOL enteredValidState;
     [myScore saveInBackground];
 
 
-    UIAlertView *startRoundAlert = [[UIAlertView alloc] initWithTitle:@"Start Round"
-                                                              message:@"Round will begin! "
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                                    otherButtonTitles:@"Start Round", nil];
-    [startRoundAlert show];
-
 
 }
 

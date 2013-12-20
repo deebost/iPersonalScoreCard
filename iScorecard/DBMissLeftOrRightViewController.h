@@ -22,6 +22,8 @@
 @property (strong, nonatomic) NSString *currentParOfHole;
 @property (strong, nonatomic) NSString *roundDate;
 
+@property (nonatomic) NSInteger howManyHoles;
+
 @property (weak, nonatomic) NSString *lastHoleShotTotal;
 @property (weak, nonatomic) NSString *lastHolePuttTotal;
 @property (weak, nonatomic) NSString *lastHoleGIR;

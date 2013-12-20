@@ -65,11 +65,11 @@
 }
 
 - (void) totalShotsToFigureOutGir:(NSNumber *) shotTotal par:(NSNumber *)parOfHole {
-    if (parOfHole.integerValue == 3 && shotTotal.integerValue <=1) {
+    if (parOfHole.integerValue == 3 && shotTotal.integerValue < 2) {
         _greenInRegulation = YES;
-    } else     if (parOfHole.integerValue == 4 && shotTotal.integerValue <=2) {
+    } else     if (parOfHole.integerValue == 4 && shotTotal.integerValue < 3) {
         _greenInRegulation = YES;
-    } else     if (parOfHole.integerValue == 5 && shotTotal.integerValue <=3) {
+    } else     if (parOfHole.integerValue == 5 && shotTotal.integerValue < 4) {
         _greenInRegulation = YES;
     }
 }

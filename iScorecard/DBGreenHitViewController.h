@@ -28,6 +28,7 @@
 @property (nonatomic) BOOL successBogeyScramble;
 @property (nonatomic) BOOL failBogeyScrabmle;
 
+@property (nonatomic) NSInteger howManyHoles;
 
 @property (weak, nonatomic) NSString *lastHoleShotTotal;
 @property (weak, nonatomic) NSString *lastHolePuttTotal;

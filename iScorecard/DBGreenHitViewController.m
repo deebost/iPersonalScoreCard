@@ -80,11 +80,11 @@ BOOL successSandSave;
 
 - (void)holeParLogic {
 
-    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken == 1) {
+    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken <= 1) {
         _gir = YES;
-    }else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken == 2) {
+    }else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken <= 2) {
         _gir = YES;
-    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken == 3) {
+    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken <= 3) {
         _gir = YES;
     }
 }
@@ -97,6 +97,8 @@ BOOL successSandSave;
 
     if ([segue.identifier isEqualToString:@"missShortSegue"]) {
         _totalShotsTaken++;
+                [self holeParLogic];
+        missHitVC.missGIR = _gir;
 
         missHitVC.totalShotsTaken = _totalShotsTaken;
         missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
@@ -113,8 +115,12 @@ BOOL successSandSave;
         missHitVC.lastHoleSandSave = _lastHoleSandSave;
         missHitVC.lastHoleShotTotal = _lastHoleShotTotal;
         missHitVC.lastHoleScamble = _lastHoleScamble;
+                missHitVC.howManyHoles = _howManyHoles;
     } else if ([segue.identifier isEqualToString:@"missLeftSegue"]) {
         _totalShotsTaken++;
+                [self holeParLogic];
+                missHitVC.missGIR = _gir;
+        missHitVC.howManyHoles = _howManyHoles;
         missHitVC.totalShotsTaken = _totalShotsTaken;
         missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
         missHitVC.missLeftVCMissLeft = _greenHitMissLeft;
@@ -132,11 +138,14 @@ BOOL successSandSave;
         missHitVC.lastHoleScamble = _lastHoleScamble;
     } else if ([segue.identifier isEqualToString:@"missRightSegue"]) {
         _totalShotsTaken++;
+                [self holeParLogic];
+                missHitVC.missGIR = _gir;
         missHitVC.totalShotsTaken = _totalShotsTaken;
         missHitVC.missLeftVCFairwayHit = _greenHitFairwayHit;
         missHitVC.missLeftVCMissLeft = _greenHitMissLeft;
         missHitVC.missLeftVCMissRight = _greenHitMissRight;
         missHitVC.holeNumber = _holeNumber;
+        missHitVC.howManyHoles = _howManyHoles;
         missHitVC.possibilityForSandSave = _sandSaveOpportunity;
         missHitVC.currentParOfHole = _currentParOfHole;
         missHitVC.roundDate = _roundDate;
@@ -149,8 +158,8 @@ BOOL successSandSave;
         missHitVC.lastHoleScamble = _lastHoleScamble;
     } else if ([segue.identifier isEqualToString:@"greenHitSegue"]) {
                 _totalShotsTaken++;
-                [self holeParLogic];
-
+        [self holeParLogic];
+        feltVC.howManyHoles = _howManyHoles;
         feltVC.gir = _gir;
         feltVC.totalPenaltyStrokes = _penaltyStrokes;
         feltVC.sandSavePossibility = _sandSaveOpportunity;
@@ -241,8 +250,8 @@ BOOL successSandSave;
         [golfLogic failScrambleLogic:tempPar totalShots:tempShotsTake greenInreg:_gir];
         [golfLogic bogeyscrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
         [golfLogic failedBogeyScrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
-        [golfLogic totalShotsToFigureOutGir:tempShotsTake par:tempPar];
-        _gir = golfLogic.greenInRegulation;
+
+
         _failBogeyScrabmle = golfLogic.bogeyScrambleNO;
         _successBogeyScramble = golfLogic.bogeyScrambleYES;
         _failScramble = golfLogic.scrambleNO;

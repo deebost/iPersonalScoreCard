@@ -36,19 +36,17 @@
         _possibilityForSandSave = YES;
     }
     else if ([segue.identifier isEqualToString:@"obSegue"]) {
-        _missGIR = NO;
-        _numberOfPenaltyStrokes++;
+
+        _totalShotsTaken++;
     }
     else if ([segue.identifier isEqualToString:@"roughSegue"]) {
     } else if ([segue.identifier isEqualToString:@"waterSegue"]) {
-        _missGIR = NO;
-        _numberOfPenaltyStrokes++;
-    } else if ([segue.identifier isEqualToString:@"inFairwaySegue"]) {
-        _missGIR = NO;
-    }
 
+        _totalShotsTaken++;
+    } else if ([segue.identifier isEqualToString:@"inFairwaySegue"]) {
+
+    }
     greenHitVC.totalShotsTaken = _totalShotsTaken + _numberOfPenaltyStrokes;
-    greenHitVC.penaltyStrokes = _numberOfPenaltyStrokes;
     greenHitVC.gir = _missGIR;
     greenHitVC.sandSaveOpportunity = _possibilityForSandSave;
     greenHitVC.greenHitFairwayHit = _missLeftVCFairwayHit;
@@ -56,7 +54,6 @@
     greenHitVC.greenHitMissRight = _missLeftVCMissRight;
     greenHitVC.currentParOfHole = _currentParOfHole;
     greenHitVC.holeNumber = _holeNumber;
-    greenHitVC.roundDate = _roundDate;
     greenHitVC.lastHoleBogeyScramble = _lastHoleBogeyScramble;
     greenHitVC.lastHoleFairwayHitorMiss = _lastHoleFairwayHitorMiss;
     greenHitVC.lastHoleGIR = _lastHoleGIR;
@@ -64,6 +61,7 @@
     greenHitVC.lastHoleSandSave = _lastHoleSandSave;
     greenHitVC.lastHoleShotTotal = _lastHoleShotTotal;
     greenHitVC.lastHoleScamble = _lastHoleScamble;
+    greenHitVC.howManyHoles = _howManyHoles;
 
 
     NSLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);
