@@ -44,12 +44,10 @@ NSString *currentPar;
 NSString *totalPenaltyStroke;
 NSString *totalPutts;
 NSString *holeNumber;
-//    NSString *dateOfRound = _roundDate;
-
 
 NSMutableDictionary *holeDict;
-@implementation DBOnPuttingSurfaceViewController
 
+@implementation DBOnPuttingSurfaceViewController
 
 - (void) lastHoleStatsView {
     if (_holeNumber == 1) {
@@ -67,9 +65,9 @@ NSMutableDictionary *holeDict;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [self lastHoleLogic];
     [self lastHoleStatsView];
-
 }
 
 - (void) lastHoleLogic {
@@ -81,66 +79,13 @@ NSMutableDictionary *holeDict;
     }
 }
 
-//- (void) sandSaveLogic {
-//    if (_currentParOfHole.integerValue == 3 && _totalShotsTaken <= 3 && _sandSavePossibility == YES ) {
-//        _successfulSandSave = YES;
-//
-//    } else if (_currentParOfHole.integerValue == 4 && _totalShotsTaken <= 4 && _sandSavePossibility == YES ){
-//        _successfulSandSave = YES;
-//    } else if (_currentParOfHole.integerValue == 5 && _totalShotsTaken <= 5 && _sandSavePossibility == YES) {
-//        _successfulSandSave = YES;
-//    }
-//}
-
-
-//- (void) scramblingLogic {
-//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken <= 3) {
-//        _successfulScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken <= 4) {
-//        _successfulScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken <= 5) {
-//        _successfulScramble = YES;
-//    }
-//}
-//
-//- (void) failedTooScrambleLogic {
-//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken > 3) {
-//        _failedScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken > 4) {
-//        _failedScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken > 5) {
-//        _failedScramble = YES;
-//    }
-//}
-//
-//- (void) bogeyScrambleLogic {
-//    if (_currentParOfHole.integerValue == 3 && _totalPutts == 1 && _totalShotsTaken == 4 && _gir == NO) {
-//        _successfulBogeyScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 4 && _totalPutts == 1 && _totalShotsTaken == 5 && _gir == NO) {
-//        _successfulBogeyScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 5 && _totalPutts == 1 && _totalShotsTaken == 6 && _gir == NO) {
-//        _successfulBogeyScramble = YES;
-//    }
-//}
-//
-//- (void) failedToBogeyScramble{
-//    if (_currentParOfHole.integerValue == 3 && _gir == NO && _totalShotsTaken >= 5) {
-//        _failedBogeyScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 4 && _gir == NO && _totalShotsTaken >= 6) {
-//        _failedBogeyScramble = YES;
-//    } else     if (_currentParOfHole.integerValue == 5 && _gir == NO && _totalShotsTaken >= 7) {
-//        _failedBogeyScramble = YES;
-//    }
-//}
-
 - (void) setUPgolfLogic {
     int par = _currentParOfHole.integerValue;
 
     DBGolfLogic *golfLogic = [[DBGolfLogic alloc] init];
+
     NSNumber *tempShotsTake = [[NSNumber alloc] initWithInt:_totalShotsTaken];
     NSNumber *tempPar = [[NSNumber alloc] initWithInt:par];
-
-    //        _gir = YES;
 
     [golfLogic sandSaveLogicTwo:tempPar totalShotsTaken:tempShotsTake sandSaveIsPossible:_sandSavePossibility];
     [golfLogic scrambleLogic:tempPar totalShots:tempShotsTake greenInReg:_gir];
@@ -154,7 +99,6 @@ NSMutableDictionary *holeDict;
     _failedScramble = golfLogic.scrambleNO;
     _successfulSandSave = golfLogic.successOnSandSave;
     _successfulScramble = golfLogic.scrambleYES;
-
 }
 
 - (void)allocAndInnitStats {
@@ -173,15 +117,10 @@ NSMutableDictionary *holeDict;
     totalPenaltyStroke = [NSString stringWithFormat:@"%i",_totalPenaltyStrokes];
     totalPutts =  [NSString stringWithFormat:@"%i",_totalPutts];
     holeNumber =  [NSString stringWithFormat:@"%i",_holeNumber];
-    //    NSString *dateOfRound = _roundDate;
-
-
     holeDict = [[NSMutableDictionary alloc] init];
 }
 
 - (void) saveHoleStatsToDictionary {
-
-//    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
 
     [holeDict setObject:gir forKey:@"gir"];
     [holeDict setObject:totalShots forKey:@"totalShots"];
@@ -216,10 +155,6 @@ NSMutableDictionary *holeDict;
     } else if ([segue.identifier isEqualToString:@"newHoleSegue"]) {
         [self holeLogic];
     }
-
-
-
-
 }
 
 - (void) holeLogic {
@@ -229,19 +164,12 @@ NSMutableDictionary *holeDict;
         [self setUPgolfLogic];
         [self allocAndInnitStats];
 
-
-
-
-        /// commit comment
         UIAlertView *holeFinished = [[UIAlertView alloc] initWithTitle:@"Hole complete!"
                                                                message:[NSString stringWithFormat:@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd successfulScramp = %hhd failed scramble = %hhd failed bogey scramble = %hhd succesful bogey scramble = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility,_successfulScramble, _failedScramble, _failedBogeyScramble, _successfulBogeyScramble]
                                                               delegate:nil
                                                      cancelButtonTitle:nil
                                                      otherButtonTitles:@"save", nil];
-
         [holeFinished show];
-
-        //        [self saveToParse];
         NSLog(@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility);
         [self saveHoleStatsToDictionary];
         [self saveCurrentHoleToPList];
@@ -251,10 +179,7 @@ NSMutableDictionary *holeDict;
         _totalPutts++;
         [self setUPgolfLogic];
         [self allocAndInnitStats];
-
-
         NSLog(@"shots = %i total penaltys = %i fairwayhit = %hhd missleft = %hhd missright = %hhd gir = %hhd total putts = %i hole number = %i sand save = %hhd par = %@ sandsaveopportunity = %hhd", _totalShotsTaken, _totalPenaltyStrokes, _finalFairwayHit, _finalMissLeft, _finalMissRight, _gir, _totalPutts, _holeNumber, _successfulSandSave,_currentParOfHole,_sandSavePossibility);
-
 
         UIAlertView *roundFinished = [[UIAlertView alloc] initWithTitle:@"Round Complete!"
                                                                 message:@"Now saving your results!"
@@ -293,7 +218,7 @@ NSMutableDictionary *holeDict;
                             [allHoles objectForKey:@"hole17Info"],
                             [allHoles objectForKey:@"hole18Info"], nil];
 
-    
+
 
 
     [allHoles setObject:courseHoles forKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName ]];
@@ -322,24 +247,6 @@ NSMutableDictionary *holeDict;
     [clearHoleInfo setObject:emptyDict forKey:@"hole17Info"];
     [clearHoleInfo setObject:emptyDict forKey:@"hole18Info"];
     [clearHoleInfo synchronize];
-}
-
-- (void) saveToParse {
-    PFObject *myScore = [PFObject objectWithClassName:@"MyScores"];
-    myScore[@"courseName"] =
-    myScore[@"shotTotal"] = [NSString stringWithFormat:@"%i", _totalShotsTaken];
-    myScore[@"totalScramble"] = [NSString stringWithFormat:@"%hhd", _successfulScramble];
-    myScore[@"totalFailedScramble"] = [NSString stringWithFormat:@"%hhd", _failedScramble];
-    myScore[@"totalBogeyScramble"] = [NSString stringWithFormat:@"%hhd", _successfulBogeyScramble];
-    myScore[@"totalFailedBogeyScramble"] = [NSString stringWithFormat:@"%hhd", _failedBogeyScramble];
-    myScore[@"gir"] = [NSString stringWithFormat:@"%hhd", _gir];
-    myScore[@"totalPutts"] = [NSString stringWithFormat:@"%i", _totalPutts];
-    myScore[@"totalPenaltyStrokes"] = [NSString stringWithFormat:@"%i", _totalPenaltyStrokes];
-    myScore[@"fairwayHit"] = [NSString stringWithFormat:@"%hhd", _finalFairwayHit];
-    myScore[@"missRight"] = [NSString stringWithFormat:@"%hhd", _finalMissRight];
-    myScore[@"missLeft"] = [NSString stringWithFormat:@"%hhd", _finalMissLeft];
-    myScore[@"holeNumber"] = [NSString stringWithFormat:@"%i", _holeNumber];
-    [myScore saveInBackground];
 }
 
 - (IBAction)missOnTap:(id)sender {

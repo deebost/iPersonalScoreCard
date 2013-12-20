@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface DBViewController () {
-    
+
 }
 @property (weak, nonatomic) IBOutlet UIButton *addCourseButton;
 @property (weak, nonatomic) IBOutlet UIButton *SavedCoursesButton;

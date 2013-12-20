@@ -31,17 +31,16 @@
 @implementation DBMissLeftOrRightViewController
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-        DBGreenHitViewController *greenHitVC = (DBGreenHitViewController *) segue.destinationViewController;
+    DBGreenHitViewController *greenHitVC = (DBGreenHitViewController *) segue.destinationViewController;
+
     if ([segue.identifier isEqualToString:@"sandSegue"]) {
         _possibilityForSandSave = YES;
     }
     else if ([segue.identifier isEqualToString:@"obSegue"]) {
-
         _totalShotsTaken++;
     }
     else if ([segue.identifier isEqualToString:@"roughSegue"]) {
     } else if ([segue.identifier isEqualToString:@"waterSegue"]) {
-
         _totalShotsTaken++;
     } else if ([segue.identifier isEqualToString:@"inFairwaySegue"]) {
 
@@ -63,8 +62,7 @@
     greenHitVC.lastHoleScamble = _lastHoleScamble;
     greenHitVC.howManyHoles = _howManyHoles;
 
-
-    NSLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);
+    DLog(@"shot takes =%i sand save = %i, miss left = %hhd miss right = %hhd", _totalShotsTaken, _numberOfPenaltyStrokes, _missLeftVCMissLeft, _missLeftVCMissRight);
 }
 
 - (void) lastHoleStatsView {
@@ -84,13 +82,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self lastHoleStatsView];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)onTapGoBackMistake:(id)sender {

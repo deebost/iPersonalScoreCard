@@ -59,7 +59,6 @@ NSDictionary *allHoleFinalDict;
     NSMutableArray *holeNumber16 = [NSMutableArray array];
     NSMutableArray *holeNumber17 = [NSMutableArray array];
     NSMutableArray *holeNumber18 = [NSMutableArray array];
-    int i = 1;
     for (NSDictionary *dict in holeData) {
         if ([dict[@"holeNumber"] isEqualToString:@"1"]) {
             [holeNumber1 addObject:dict];
@@ -99,8 +98,25 @@ NSDictionary *allHoleFinalDict;
             [holeNumber18 addObject:dict];
         }
     }
-
-    allHolesData = [NSMutableArray arrayWithObjects:holeNumber1, holeNumber2, holeNumber3, holeNumber4, holeNumber5, holeNumber6, holeNumber7, holeNumber8, holeNumber9, holeNumber10, holeNumber11, holeNumber12, holeNumber13, holeNumber14, holeNumber15, holeNumber16, holeNumber17, holeNumber18, nil];
+    allHolesData = [NSMutableArray arrayWithObjects:
+                    holeNumber1,
+                    holeNumber2,
+                    holeNumber3,
+                    holeNumber4,
+                    holeNumber5,
+                    holeNumber6,
+                    holeNumber7,
+                    holeNumber8,
+                    holeNumber9,
+                    holeNumber10,
+                    holeNumber11,
+                    holeNumber12,
+                    holeNumber13,
+                    holeNumber14,
+                    holeNumber15,
+                    holeNumber16,
+                    holeNumber17,
+                    holeNumber18, nil];
 }
 
 
@@ -116,10 +132,6 @@ NSDictionary *allHoleFinalDict;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    NSDictionary *dictionary = [allHolesData objectAtIndex:section];
-//    NSArray *array = [dictionary objectForKey:@"yum"];
-//    return [array count];
-    // Return the number of rows in the section.
     return [allHolesData [section] count];
 }
 
@@ -213,10 +225,6 @@ NSDictionary *allHoleFinalDict;
     }
     NSString *detailLongSentce = [NSString stringWithFormat:@"SS: %@ Drive Accu: %@ S: %@ B-S: %@", sandSaveID, fairwayID, scrambleID, bogeyScrambleID];
 
-
-
-
-
     cell.textLabel.text = bigLongSentence;
     cell.detailTextLabel.text = detailLongSentce;
     return cell;
@@ -275,56 +283,5 @@ NSDictionary *allHoleFinalDict;
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end
