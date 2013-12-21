@@ -496,7 +496,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="courseNameAction:" destination="CtF-1U-pCj" eventType="editingChanged" id="WCw-x6-8j6"/>
+                                    <action selector="courseNameAction:" destination="CtF-1U-pCj" eventType="editingDidEnd" id="w9n-mI-lnb"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="change individual hole for total par" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wn5-U4-VUN">
@@ -525,7 +525,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <action selector="courseCityAction:" destination="CtF-1U-pCj" eventType="editingChanged" id="Mp2-Zt-sn4"/>
+                                    <action selector="courseCityAction:" destination="CtF-1U-pCj" eventType="editingDidEnd" id="sPM-zh-sRQ"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter State!" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MPO-gj-eMf">
@@ -534,7 +534,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
-                                    <action selector="courseStateAction:" destination="CtF-1U-pCj" eventType="editingChanged" id="JJ6-Pw-fdC"/>
+                                    <action selector="courseCityAction:" destination="CtF-1U-pCj" eventType="editingDidEnd" id="jA2-4C-vKd"/>
+                                    <action selector="courseStateAction:" destination="CtF-1U-pCj" eventType="editingDidEnd" id="Oaf-C4-qAq"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZ6-Ks-X9l">
@@ -552,7 +553,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Av5-zk-xDE">
-                                <rect key="frame" x="6" y="9" width="103" height="30"/>
+                                <rect key="frame" x="19" y="6" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit Course">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -562,7 +563,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgA-6O-Fcs">
-                                <rect key="frame" x="-3" y="290" width="323" height="125"/>
+                                <rect key="frame" x="-3" y="317" width="323" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Par=" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1pI-MW-9lD">
@@ -697,7 +698,7 @@
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgH-gU-MBS">
-                                <rect key="frame" x="0.0" y="142" width="320" height="149"/>
+                                <rect key="frame" x="0.0" y="169" width="320" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Par=" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ctZ-Gd-Mmk">
@@ -863,6 +864,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaZ-OE-lb0">
+                                <rect key="frame" x="44" y="147" width="222" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -870,6 +878,7 @@
                         <outlet property="allHoleView" destination="PgA-6O-Fcs" id="ala-pW-1tV"/>
                         <outlet property="cityTextfield" destination="ZdO-Tq-vHq" id="Drs-fX-WK4"/>
                         <outlet property="courseNameTextField" destination="bu7-Ee-FNv" id="vnO-yJ-I8z"/>
+                        <outlet property="dateLabel" destination="FaZ-OE-lb0" id="hTW-ab-hAs"/>
                         <outlet property="enterStateTextField" destination="MPO-gj-eMf" id="X7E-7e-dju"/>
                         <outlet property="hole10TextField" destination="KuV-nF-Osg" id="4bQ-rn-ZEq"/>
                         <outlet property="hole11TextField" destination="lI6-rr-MBQ" id="mPp-OZ-dG6"/>

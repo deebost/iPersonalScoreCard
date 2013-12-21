@@ -28,6 +28,8 @@
 @property (nonatomic) BOOL successBogeyScramble;
 @property (nonatomic) BOOL failBogeyScrabmle;
 
+@property (strong, nonatomic) NSString *passRoundDate;
+
 @property (nonatomic) NSInteger howManyHoles;
 
 @property (weak, nonatomic) NSString *lastHoleShotTotal;

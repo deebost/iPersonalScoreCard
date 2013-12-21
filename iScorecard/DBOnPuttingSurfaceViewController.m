@@ -71,11 +71,22 @@ NSMutableDictionary *holeDict;
 }
 
 - (void) lastHoleLogic {
-    if (_holeNumber <= 17) {
-        _finalResultsButton.hidden = YES;
-    } else {
-        _finalResultsButton.hidden = NO;
-        _holeButton.hidden = YES;
+    if (_howManyHoles == 9) {
+
+        if (_holeNumber <=8) {
+            _finalResultsButton.hidden = YES;
+        } else {
+            _finalResultsButton.hidden = NO;
+            _holeButton.hidden = YES;
+        }
+    } else if (_howManyHoles == 18) {
+
+        if (_holeNumber <= 17) {
+            _finalResultsButton.hidden = YES;
+        } else {
+            _finalResultsButton.hidden = NO;
+            _holeButton.hidden = YES;
+        }
     }
 }
 
@@ -192,6 +203,29 @@ NSMutableDictionary *holeDict;
         [roundFinished show];
         [self deleteHoleInfoAfterRoundComplete];
     }
+}
+
+- (void)saveNineHolesToPlistWithOther9Empty {
+    NSUserDefaults *allHoles = [NSUserDefaults standardUserDefaults];
+    NSString *courseName = [allHoles objectForKey:@"courseName"];
+
+    NSArray *courseHoles = [NSArray arrayWithObjects:
+                            [allHoles objectForKey:@"hole1Info"],
+                            [allHoles objectForKey:@"hole2Info"],
+                            [allHoles objectForKey:@"hole3Info"],
+                            [allHoles objectForKey:@"hole4Info"],
+                            [allHoles objectForKey:@"hole5Info"],
+                            [allHoles objectForKey:@"hole6Info"],
+                            [allHoles objectForKey:@"hole7Info"],
+                            [allHoles objectForKey:@"hole8Info"],
+                            [allHoles objectForKey:@"hole9Info"], nil];
+
+
+
+
+    [allHoles setObject:courseHoles forKey:[NSString stringWithFormat:@"%@holeTotalStats", courseName ]];
+    [allHoles synchronize];
+
 }
 
 - (void) saveAllHolesDoneToPList {

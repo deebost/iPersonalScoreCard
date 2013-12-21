@@ -26,7 +26,7 @@
 @property (nonatomic) BOOL newCourseOrOldCourse;
 
 @property (nonatomic) NSInteger howManyHoles;
-
+@property (strong, nonatomic) NSString *passRoundDate;
 // last hole stats to pass to ALL VC
 @property (weak, nonatomic) IBOutlet UILabel *lastHoleShotsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastHolePuttsLabel;

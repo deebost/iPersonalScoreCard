@@ -10,4 +10,6 @@
 
 @interface DBSelectSavedCoursesViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (strong, nonatomic) NSString *passRoundDate;
+
 @end

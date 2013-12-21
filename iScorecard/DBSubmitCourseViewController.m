@@ -32,14 +32,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *hole17TextField;
 @property (weak, nonatomic) IBOutlet UITextField *hole18TextField;
 @property (weak, nonatomic) IBOutlet UIButton *submitCourseButton;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *cityTextfield;
 @property (weak, nonatomic) IBOutlet UIView *topHoleView;
 @property (weak, nonatomic) IBOutlet UITextField *enterStateTextField;
 @property (weak, nonatomic) IBOutlet UIView *allHoleView;
-- (IBAction)courseNameAction:(id)sender;
-- (IBAction)courseStateAction:(id)sender;
-- (IBAction)courseCityAction:(id)sender;
 
+- (IBAction)courseStateAction:(id)sender;
 - (IBAction)hole1EditAction:(id)sender;
 - (IBAction)hole2editAction:(id)sender;
 - (IBAction)hole3editAction:(id)sender;
@@ -103,6 +102,7 @@ BOOL enteredValidState;
         _allHoleView.backgroundColor = [UIColor whiteColor];
     statesArray = [[NSMutableArray alloc] init];
     bottomOrigin = _allHoleView.frame;
+    [self getTodaysDate];
 
     [statesArray addObjectsFromArray:@[@"Alabama", @"Alaska",  @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Flordia", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon",@"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming"]];
 }
@@ -189,9 +189,15 @@ BOOL enteredValidState;
 
 }
 
+- (void) getTodaysDate {
+    NSDate *roundDate = [NSDate date];
+    NSDateFormatter *dateF = [[NSDateFormatter alloc] init];
+    [dateF setDateFormat:@"MM-dd-yy hh:mm"];
+    _dateLabel.text = [dateF stringFromDate:roundDate];
+}
+
 
 - (void)moveViewUpForKeyBoard {
-
 
     [UIView animateWithDuration:1.0 animations:^{
         _allHoleView.backgroundColor = [UIColor whiteColor];
@@ -223,15 +229,15 @@ BOOL enteredValidState;
 
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
+    [self getTodaysDate];
+    _passRoundDate = _dateLabel.text;
+    
         [self getTextOfTextFields];
     DBFairwayHitViewController *fhVC = segue.destinationViewController;
+    fhVC.passRoundDate = _passRoundDate;
     fhVC.passedCourseName = _passCourseName;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
 
 - (IBAction)courseNameAction:(id)sender {
         [self addALLPar];

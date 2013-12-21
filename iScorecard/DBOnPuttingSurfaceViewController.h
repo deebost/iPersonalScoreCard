@@ -12,6 +12,8 @@
 
 @interface DBOnPuttingSurfaceViewController : UIViewController <UIAlertViewDelegate>
 
+@property (strong, nonatomic) NSString *passRoundDate;
+
 @property (nonatomic) int totalShotsTaken;
 @property (nonatomic) BOOL gir;
 @property (nonatomic) BOOL scramble;

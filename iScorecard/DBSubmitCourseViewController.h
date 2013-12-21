@@ -10,5 +10,6 @@
 
 @interface DBSubmitCourseViewController : UIViewController
 @property (strong, nonatomic) NSString *passCourseName;
+@property (strong, nonatomic) NSString *passRoundDate;
 
 @end

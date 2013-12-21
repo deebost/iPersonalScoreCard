@@ -52,6 +52,9 @@ NSString *title;
 }
 
 - (void) handleNineExit {
+    NSUserDefaults *dateStore = [NSUserDefaults standardUserDefaults];
+    [dateStore setObject:_passRoundDate forKey:@"startDateOfRound"];
+    [dateStore synchronize];
     [self nineHoleAlert];
 
 }
@@ -354,6 +357,7 @@ NSString *title;
     NSNumber *holeNumber = [[NSNumber alloc] initWithInt:_holeNumber];
 
 
+
     NSNumber *puts = [[NSNumber alloc] initWithInt:_totalPutts];
     NSMutableDictionary *holeDict = [[NSMutableDictionary alloc] init];
     //    [holeDict setObject:dateOfRound forKey:@"dateOfRound"];
@@ -365,8 +369,10 @@ NSString *title;
     [holeDict setObject:puts forKey:@"totalPutts"];
     [holeDict setObject:holeNumber forKey:@"holeNumber"];
 
+
     NSUserDefaults *saveHole = [NSUserDefaults standardUserDefaults];
     [saveHole setObject:holeDict forKey:[NSString stringWithFormat:@"hole%iInfo",_holeNumber]];
+    [saveHole setObject:_passRoundDate forKey:@"startDateOfRound"];
     [saveHole synchronize];
     
 }
